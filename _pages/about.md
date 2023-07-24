@@ -6,7 +6,7 @@ subtitle:
 
 profile:
   align: right
-  image: a052910d-1636-4474-845e-ac6e5203707e.jpg
+  image: WhatsApp Image 2023-07-23 at 22.22.08.jpeg
   image_circular: false # crops the image to make it circular
   address: >
     <p></p>
