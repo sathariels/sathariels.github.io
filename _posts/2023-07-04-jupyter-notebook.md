@@ -94,7 +94,7 @@ function CreateWeaponUI.searchBar()
 
 	end)
 end
-
+```
 {% endraw %}
 
 Introduction
