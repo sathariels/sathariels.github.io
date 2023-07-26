@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Levenshtein distance algorithm
-date: 7/25/2023
+date: "7/25/2023"
 description: "Enhancing User Experience in Space Nights Store: Leveraging the Elvenshtein Distance Algorithm for Precise Spell Check Solutions"
 tags: formatting jupyter
 categories: sample-posts
