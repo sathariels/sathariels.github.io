@@ -3,7 +3,7 @@ layout: post
 title: Levenshtein distance algorithm
 date: July 25, 2023
 description: "Enhancing User Experience in Space Nights Store: Leveraging the Elvenshtein Distance Algorithm for Precise Spell Check Solutions"
-tags: formatting jupyter
+tags: formatting lua algorithms
 categories: sample-posts
 giscus_comments: true
 related_posts: false
