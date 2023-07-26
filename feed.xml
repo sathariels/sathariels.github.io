@@ -1,73 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://sathariels.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://sathariels.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2023-07-26T06:04:18+00:00</updated><id>https://sathariels.github.io/feed.xml</id><title type="html">Nithilan Kumaran Website</title><subtitle></subtitle><entry><title type="html">Levenshtein distance algorithm</title><link href="https://sathariels.github.io/blog/2023/jupyter-notebook/" rel="alternate" type="text/html" title="Levenshtein distance algorithm"/><published>2023-07-25T00:00:00+00:00</published><updated>2023-07-25T00:00:00+00:00</updated><id>https://sathariels.github.io/blog/2023/jupyter-notebook</id><content type="html" xml:base="https://sathariels.github.io/blog/2023/jupyter-notebook/"><![CDATA[<p>To include a jupyter notebook in a post, you can use the following code:</p> <p>```lua local function levenshteinDistance(s1, s2) local m, n = #s1, #s2 local dp = {}</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i = 0, m do
-	dp[i] = {}
-	for j = 0, n do
-		if i == 0 then
-			dp[i][j] = j
-		elseif j == 0 then
-			dp[i][j] = i
-		else
-			local cost = s1:sub(i, i) ~= s2:sub(j, j) and 1 or 0
-			dp[i][j] = math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost)
-		end
-	end
-end
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://sathariels.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://sathariels.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2023-07-26T06:04:28+00:00</updated><id>https://sathariels.github.io/feed.xml</id><title type="html">Nithilan Kumaran Website</title><subtitle></subtitle><entry><title type="html">Levenshtein distance algorithm</title><link href="https://sathariels.github.io/blog/2023/jupyter-notebook/" rel="alternate" type="text/html" title="Levenshtein distance algorithm"/><published>2023-07-25T00:00:00+00:00</published><updated>2023-07-25T00:00:00+00:00</updated><id>https://sathariels.github.io/blog/2023/jupyter-notebook</id><content type="html" xml:base="https://sathariels.github.io/blog/2023/jupyter-notebook/"><![CDATA[<p>To include a jupyter notebook in a post, you can use the following code:</p> <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="k">function</span> <span class="nf">levenshteinDistance</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+	<span class="kd">local</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="o">#</span><span class="n">s1</span><span class="p">,</span> <span class="o">#</span><span class="n">s2</span>
+	<span class="kd">local</span> <span class="n">dp</span> <span class="o">=</span> <span class="p">{}</span>
 
-return dp[m][n] end
-</code></pre></div></div> <p>function CreateWeaponUI.searchBar() local SearchBox = LocalPlayer.PlayerGui:WaitForChild(“SearchBoxGui”):WaitForChild(“SearchBox”)</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
-	local text = string.lower(SearchBox.Text) -- Convert the search text to lowercase for case-insensitive comparison
+	<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span> <span class="k">do</span>
+		<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="k">do</span>
+			<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span>
+				<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+			<span class="k">elseif</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span>
+				<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+			<span class="k">else</span>
+				<span class="kd">local</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">s1</span><span class="p">:</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">~=</span> <span class="n">s2</span><span class="p">:</span><span class="n">sub</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">1</span> <span class="ow">or</span> <span class="mi">0</span>
+				<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">cost</span><span class="p">)</span>
+			<span class="k">end</span>
+		<span class="k">end</span>
+	<span class="k">end</span>
 
-	-- Check if the search text is empty or consists only of spaces
-	if text:match("^%s*$") then
-		-- Make all items visible since there is no search text
-		for rarity, frame in pairs(rarityFrames) do
-			for _, item in pairs(frame:GetChildren()) do
-				if item:IsA("Frame") then
-					item.Visible = true
-				end
-			end
-		end
-		return -- Exit the function early, no need to continue
-	end
+	<span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+<span class="k">end</span>
 
-	local anyVisible = false -- Flag to check if at least one item is visible
-	local threshold = 3 -- Set a threshold for fuzzy matching
+<span class="k">function</span> <span class="nc">CreateWeaponUI</span><span class="p">.</span><span class="nf">searchBar</span><span class="p">()</span>
+	<span class="kd">local</span> <span class="n">SearchBox</span> <span class="o">=</span> <span class="n">LocalPlayer</span><span class="p">.</span><span class="n">PlayerGui</span><span class="p">:</span><span class="n">WaitForChild</span><span class="p">(</span><span class="s2">"SearchBoxGui"</span><span class="p">):</span><span class="n">WaitForChild</span><span class="p">(</span><span class="s2">"SearchBox"</span><span class="p">)</span>
 
-	for rarity, frame in pairs(rarityFrames) do
-		for _, item in pairs(frame:GetChildren()) do
-			if item:IsA("Frame") then -- Check if the child is a frame
-				local madeVisible = false
+	<span class="n">SearchBox</span><span class="p">:</span><span class="n">GetPropertyChangedSignal</span><span class="p">(</span><span class="s2">"Text"</span><span class="p">):</span><span class="n">Connect</span><span class="p">(</span><span class="k">function</span><span class="p">()</span>
+		<span class="kd">local</span> <span class="n">text</span> <span class="o">=</span> <span class="nb">string.lower</span><span class="p">(</span><span class="n">SearchBox</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span> <span class="c1">-- Convert the search text to lowercase for case-insensitive comparison</span>
 
-				-- Check fuzzy match with the name of the frame
-				local frameName = string.lower(item.Name)
-				local nameDistance = levenshteinDistance(frameName, text)
-				if nameDistance &lt;= threshold then
-					madeVisible = true
-				else
-					-- If the frame name doesn't match, check the keywords with fuzzy matching
-					for _, keyword in pairs(item.KeyWordsFolder:GetChildren()) do
-						local keywordValue = string.lower(keyword.Value)
-						local keywordDistance = levenshteinDistance(keywordValue, text)
-						if keywordDistance &lt;= threshold then
-							madeVisible = true
-							break -- No need to continue checking other keywords for this item if we found a match
-						end
-					end
-				end
+		<span class="c1">-- Check if the search text is empty or consists only of spaces</span>
+		<span class="k">if</span> <span class="n">text</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">"^%s*$"</span><span class="p">)</span> <span class="k">then</span>
+			<span class="c1">-- Make all items visible since there is no search text</span>
+			<span class="k">for</span> <span class="n">rarity</span><span class="p">,</span> <span class="n">frame</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">rarityFrames</span><span class="p">)</span> <span class="k">do</span>
+				<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">item</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">())</span> <span class="k">do</span>
+					<span class="k">if</span> <span class="n">item</span><span class="p">:</span><span class="n">IsA</span><span class="p">(</span><span class="s2">"Frame"</span><span class="p">)</span> <span class="k">then</span>
+						<span class="n">item</span><span class="p">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="kc">true</span>
+					<span class="k">end</span>
+				<span class="k">end</span>
+			<span class="k">end</span>
+			<span class="k">return</span> <span class="c1">-- Exit the function early, no need to continue</span>
+		<span class="k">end</span>
 
-				if madeVisible then
-					item.Visible = true
-					anyVisible = true -- Set the flag to true if at least one item is visible
-				else
-					item.Visible = false
-				end
-			end
-		end
-	end
+		<span class="kd">local</span> <span class="n">anyVisible</span> <span class="o">=</span> <span class="kc">false</span> <span class="c1">-- Flag to check if at least one item is visible</span>
+		<span class="kd">local</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">-- Set a threshold for fuzzy matching</span>
 
-	-- Assuming you want to show/hide the entire rarity frame based on visibility of its items.
-	-- You can modify this part according to your UI structure if you want a different behavior.
+		<span class="k">for</span> <span class="n">rarity</span><span class="p">,</span> <span class="n">frame</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">rarityFrames</span><span class="p">)</span> <span class="k">do</span>
+			<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">item</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">())</span> <span class="k">do</span>
+				<span class="k">if</span> <span class="n">item</span><span class="p">:</span><span class="n">IsA</span><span class="p">(</span><span class="s2">"Frame"</span><span class="p">)</span> <span class="k">then</span> <span class="c1">-- Check if the child is a frame</span>
+					<span class="kd">local</span> <span class="n">madeVisible</span> <span class="o">=</span> <span class="kc">false</span>
 
-end) end
+					<span class="c1">-- Check fuzzy match with the name of the frame</span>
+					<span class="kd">local</span> <span class="n">frameName</span> <span class="o">=</span> <span class="nb">string.lower</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+					<span class="kd">local</span> <span class="n">nameDistance</span> <span class="o">=</span> <span class="n">levenshteinDistance</span><span class="p">(</span><span class="n">frameName</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+					<span class="k">if</span> <span class="n">nameDistance</span> <span class="o">&lt;=</span> <span class="n">threshold</span> <span class="k">then</span>
+						<span class="n">madeVisible</span> <span class="o">=</span> <span class="kc">true</span>
+					<span class="k">else</span>
+						<span class="c1">-- If the frame name doesn't match, check the keywords with fuzzy matching</span>
+						<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">keyword</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">KeyWordsFolder</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">())</span> <span class="k">do</span>
+							<span class="kd">local</span> <span class="n">keywordValue</span> <span class="o">=</span> <span class="nb">string.lower</span><span class="p">(</span><span class="n">keyword</span><span class="p">.</span><span class="n">Value</span><span class="p">)</span>
+							<span class="kd">local</span> <span class="n">keywordDistance</span> <span class="o">=</span> <span class="n">levenshteinDistance</span><span class="p">(</span><span class="n">keywordValue</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+							<span class="k">if</span> <span class="n">keywordDistance</span> <span class="o">&lt;=</span> <span class="n">threshold</span> <span class="k">then</span>
+								<span class="n">madeVisible</span> <span class="o">=</span> <span class="kc">true</span>
+								<span class="k">break</span> <span class="c1">-- No need to continue checking other keywords for this item if we found a match</span>
+							<span class="k">end</span>
+						<span class="k">end</span>
+					<span class="k">end</span>
+
+					<span class="k">if</span> <span class="n">madeVisible</span> <span class="k">then</span>
+						<span class="n">item</span><span class="p">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="kc">true</span>
+						<span class="n">anyVisible</span> <span class="o">=</span> <span class="kc">true</span> <span class="c1">-- Set the flag to true if at least one item is visible</span>
+					<span class="k">else</span>
+						<span class="n">item</span><span class="p">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="kc">false</span>
+					<span class="k">end</span>
+				<span class="k">end</span>
+			<span class="k">end</span>
+		<span class="k">end</span>
+
+		<span class="c1">-- Assuming you want to show/hide the entire rarity frame based on visibility of its items.</span>
+		<span class="c1">-- You can modify this part according to your UI structure if you want a different behavior.</span>
+
+	<span class="k">end</span><span class="p">)</span>
+<span class="k">end</span>
 </code></pre></div></div> <p>Introduction</p> <p>The creation of an immersive and seamless user experience lies at the heart of game development. In our pursuit of excellence for the Space Nights store, a critical challenge surfaced—the need for an efficient spell check mechanism to ensure effortless user interactions. This essay delves into the captivating journey of implementing the Levenshtein Distance Algorithm, a powerful tool that revolutionized the store’s search functionality and elevated customer satisfaction to new heights.</p> <p>The Space Nights Vision</p> <p>The inception of the Space Nights store sprang from a compelling vision—to provide gamers with a vibrant marketplace brimming with a diverse array of in-game assets and utilities. However, as we embarked on the journey of bringing this vision to life, we recognized the pivotal role of a user-friendly spell check feature. Accurate guidance for users to find their desired items emerged as a crucial aspect, compelling us to explore innovative solutions.</p> <p>The Spell Check Predicament</p> <p>Understanding the intricacies of the spell check challenge was the initial obstacle we faced. The multifaceted nature of the problem encompassed typographical errors, varied search inputs, and the need to accommodate multilingual queries. This called for an algorithmic solution capable of offering real-time, precise suggestions—a challenge that ignited our curiosity and determination.</p> <p>Introducing the Levenshtein Distance Algorithm</p> <p>In our quest for an impeccable spell check mechanism, the Levenshtein Distance Algorithm emerged as a guiding light. Rooted in the concept of edit distances, this algorithm quantified the similarity between two strings, laying the foundation for accurate search suggestions. Embracing the Levenshtein Distance Algorithm promised to significantly enhance the user experience within the Space Nights store.</p> <p>Bringing the Algorithm to Life</p> <p>Implementing the Levenshtein Distance Algorithm demanded persistent effort and skill. Through meticulous study and hands-on coding, we explored the nuances of the algorithm, identified the most efficient data structures, and honed dynamic programming principles. This concerted endeavor culminated in a responsive system capable of effortlessly handling extensive search datasets, ensuring a seamless user experience.</p> <p>Elevating the User Experience</p> <p>As the Levenshtein Distance Algorithm took root in the Space Nights store, its transformative impact became evident. Users now encountered spell check suggestions that gracefully accounted for their unintentional spelling errors. This subtle yet profound improvement resonated deeply with players, fostering a sense of satisfaction and seamless navigation throughout the store.</p> <p>Continuous Refinement through User Feedback</p> <p>The journey of implementation did not end with success. Embracing an iterative development approach, we actively sought and carefully considered user feedback. Armed with invaluable insights, the algorithm evolved to surpass expectations, continually adapting to meet the ever-changing demands of our players.</p> <p>Conclusion</p> <p>The integration of the Levenshtein Distance Algorithm into the Space Nights store stands as a testament to the boundless potential of innovation. This remarkable tool empowered us to conquer the spell check predicament, transforming our ambitious vision into a captivating reality—a thriving marketplace where users could fully immerse themselves in the enchanting world of Space Nights. As the realm of gaming continues to evolve, we remain steadfast in our commitment to elevating the user experience, exploring new frontiers, and harnessing the power of technology to redefine possibilities in the gaming domain.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="lua"/><category term="algorithms"/><summary type="html"><![CDATA[Enhancing User Experience in Space Nights Store: Leveraging the Elvenshtein Distance Algorithm for Precise Spell Check Solutions]]></summary></entry><entry><title type="html">Post Bibliography</title><link href="https://sathariels.github.io/blog/2023/post-bibliography/" rel="alternate" type="text/html" title="Post Bibliography"/><published>2023-07-12T00:00:00+00:00</published><updated>2023-07-12T00:00:00+00:00</updated><id>https://sathariels.github.io/blog/2023/post-bibliography</id><content type="html" xml:base="https://sathariels.github.io/blog/2023/post-bibliography/"><![CDATA[<p>&lt;!—– layout: post title: a post with bibliography date: 2023-07-12 09:56:00-0400 description: an example of a blog post with bibliography tags: formatting bib categories: sample-posts giscus_comments: true related_posts: false related_publications: einstein1950meaning, einstein1905movement — This post shows how to add bibliography to simple blog posts. If you would like something more academic, check the <a href="/blog/2021/distill/">distill style post</a>.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[&lt;!—– layout: post title: a post with bibliography date: 2023-07-12 09:56:00-0400 description: an example of a blog post with bibliography tags: formatting bib categories: sample-posts giscus_comments: true related_posts: false related_publications: einstein1950meaning, einstein1905movement — This post shows how to add bibliography to simple blog posts. If you would like something more academic, check the distill style post.]]></summary></entry><entry><title type="html">Custom Blockquotes</title><link href="https://sathariels.github.io/blog/2023/custom-blockquotes/" rel="alternate" type="text/html" title="Custom Blockquotes"/><published>2023-05-12T00:00:00+00:00</published><updated>2023-05-12T00:00:00+00:00</updated><id>https://sathariels.github.io/blog/2023/custom-blockquotes</id><content type="html" xml:base="https://sathariels.github.io/blog/2023/custom-blockquotes/"><![CDATA[<p>&lt;!—– layout: post title: a post with custom blockquotes date: 2023-05-12 15:53:00-0400 description: an example of a blog post with custom blockquotes tags: formatting blockquotes categories: sample-posts giscus_comments: true related_posts: true — This post shows how to add custom styles for blockquotes. Based on <a href="https://github.com/sighingnow/jekyll-gitbook">jekyll-gitbook</a> implementation.</p> <p>We decided to support the same custom blockquotes as in <a href="https://sighingnow.github.io/jekyll-gitbook/jekyll/2022-06-30-tips_warnings_dangers.html">jekyll-gitbook</a>, which are also found in a lot of other sites’ styles. The styles definitions can be found on the <a href="https://github.com/alshedivat/al-folio/blob/master/_sass/_base.scss">_base.scss</a> file, more specifically:</p> <div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Tips, warnings, and dangers */</span>
 <span class="nc">.post</span> <span class="nc">.post-content</span> <span class="nt">blockquote</span> <span class="p">{</span>
     <span class="k">&amp;</span><span class="nc">.block-tip</span> <span class="p">{</span>
