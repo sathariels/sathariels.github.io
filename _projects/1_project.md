@@ -1,7 +1,7 @@
 ---
 layout: page
-title: project 1
-description: a project with a background image
+title: Space Knights Shop
+description: The creation of a Shop for the Space Knights Roblox game that will be used to thousands of users
 img: assets/img/12.jpg
 importance: 1
 category: work
