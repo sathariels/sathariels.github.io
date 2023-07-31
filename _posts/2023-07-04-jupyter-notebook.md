@@ -14,86 +14,90 @@ To include a jupyter notebook in a post, you can use the following code:
 {% raw %}
 
 ```lua
+-- Function to calculate the Levenshtein distance between two strings
 local function levenshteinDistance(s1, s2)
-	local m, n = #s1, #s2
-	local dp = {}
+    local m, n = #s1, #s2
+    local dp = {}
 
-	for i = 0, m do
-		dp[i] = {}
-		for j = 0, n do
-			if i == 0 then
-				dp[i][j] = j
-			elseif j == 0 then
-				dp[i][j] = i
-			else
-				local cost = s1:sub(i, i) ~= s2:sub(j, j) and 1 or 0
-				dp[i][j] = math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost)
-			end
-		end
-	end
+    for i = 0, m do
+        dp[i] = {}
+        for j = 0, n do
+            if i == 0 then
+                dp[i][j] = j
+            elseif j == 0 then
+                dp[i][j] = i
+            else
+                -- Calculate the cost of substitution (0 if characters are the same, 1 if different)
+                local cost = s1:sub(i, i) ~= s2:sub(j, j) and 1 or 0
+                dp[i][j] = math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost)
+            end
+        end
+    end
 
-	return dp[m][n]
+    return dp[m][n]
 end
 
+-- Function to handle the search functionality for weapon UI
 function CreateWeaponUI.searchBar()
-	local SearchBox = LocalPlayer.PlayerGui:WaitForChild("SearchBoxGui"):WaitForChild("SearchBox")
+    local SearchBox = LocalPlayer.PlayerGui:WaitForChild("SearchBoxGui"):WaitForChild("SearchBox")
 
-	SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
-		local text = string.lower(SearchBox.Text) -- Convert the search text to lowercase for case-insensitive comparison
+    -- Connect a function to execute whenever the Text property of the SearchBox changes
+    SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
+        local text = string.lower(SearchBox.Text) -- Convert the search text to lowercase for case-insensitive comparison
 
-		-- Check if the search text is empty or consists only of spaces
-		if text:match("^%s*$") then
-			-- Make all items visible since there is no search text
-			for rarity, frame in pairs(rarityFrames) do
-				for _, item in pairs(frame:GetChildren()) do
-					if item:IsA("Frame") then
-						item.Visible = true
-					end
-				end
-			end
-			return -- Exit the function early, no need to continue
-		end
+        -- Check if the search text is empty or consists only of spaces
+        if text:match("^%s*$") then
+            -- Make all items visible since there is no search text
+            for rarity, frame in pairs(rarityFrames) do
+                for _, item in pairs(frame:GetChildren()) do
+                    if item:IsA("Frame") then
+                        item.Visible = true
+                    end
+                end
+            end
+            return -- Exit the function early, no need to continue
+        end
 
-		local anyVisible = false -- Flag to check if at least one item is visible
-		local threshold = 3 -- Set a threshold for fuzzy matching
+        local anyVisible = false -- Flag to check if at least one item is visible
+        local threshold = 3 -- Set a threshold for fuzzy matching
 
-		for rarity, frame in pairs(rarityFrames) do
-			for _, item in pairs(frame:GetChildren()) do
-				if item:IsA("Frame") then -- Check if the child is a frame
-					local madeVisible = false
+        for rarity, frame in pairs(rarityFrames) do
+            for _, item in pairs(frame:GetChildren()) do
+                if item:IsA("Frame") then -- Check if the child is a frame
+                    local madeVisible = false
 
-					-- Check fuzzy match with the name of the frame
-					local frameName = string.lower(item.Name)
-					local nameDistance = levenshteinDistance(frameName, text)
-					if nameDistance <= threshold then
-						madeVisible = true
-					else
-						-- If the frame name doesn't match, check the keywords with fuzzy matching
-						for _, keyword in pairs(item.KeyWordsFolder:GetChildren()) do
-							local keywordValue = string.lower(keyword.Value)
-							local keywordDistance = levenshteinDistance(keywordValue, text)
-							if keywordDistance <= threshold then
-								madeVisible = true
-								break -- No need to continue checking other keywords for this item if we found a match
-							end
-						end
-					end
+                    -- Check fuzzy match with the name of the frame
+                    local frameName = string.lower(item.Name)
+                    local nameDistance = levenshteinDistance(frameName, text)
+                    if nameDistance <= threshold then
+                        madeVisible = true
+                    else
+                        -- If the frame name doesn't match, check the keywords with fuzzy matching
+                        for _, keyword in pairs(item.KeyWordsFolder:GetChildren()) do
+                            local keywordValue = string.lower(keyword.Value)
+                            local keywordDistance = levenshteinDistance(keywordValue, text)
+                            if keywordDistance <= threshold then
+                                madeVisible = true
+                                break -- No need to continue checking other keywords for this item if we found a match
+                            end
+                        end
+                    end
 
-					if madeVisible then
-						item.Visible = true
-						anyVisible = true -- Set the flag to true if at least one item is visible
-					else
-						item.Visible = false
-					end
-				end
-			end
-		end
+                    if madeVisible then
+                        item.Visible = true
+                        anyVisible = true -- Set the flag to true if at least one item is visible
+                    else
+                        item.Visible = false
+                    end
+                end
+            end
+        end
 
-		-- Assuming you want to show/hide the entire rarity frame based on visibility of its items.
-		-- You can modify this part according to your UI structure if you want a different behavior.
+     
 
-	end)
+    end)
 end
+
 ```
 {% endraw %}
 
