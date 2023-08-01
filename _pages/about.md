@@ -19,12 +19,14 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Welcome to my website! I am delighted to share my passions with you, ranging from the exhilarating world of coding to the adrenaline-fueled experiences on the soccer field. My diverse interests include delving into captivating narratives found in books and anime, enriching my life with profound storytelling.
+Welcome to my website, where you can explore the diverse range of passions I've cultivated throughout my life. From the captivating realm of coding to the exhilarating experiences on the soccer field, I am excited to embark on this thrilling journey together.
 
-Soccer has always held a central place in my heart, as the sport's teamwork, competitive spirit, and refined skills continually fuel my passion. Exploring the intricacies of tactics and strategies while relishing the joy of playing the beautiful game is an absolute delight that I am eager to share with you.
+Soccer, as a sport, holds a special place in my heart, encapsulating the virtues of teamwork, competitiveness, and honed skills. Engaging with the intricacies of tactics and strategies while deriving joy from the beautiful game is an endlessly fulfilling experience I eagerly share.
 
-Beyond the soccer field, I find myself fully immersed in the digital realm, embracing the fascinating world of coding. I take pleasure in conquering complex problems, developing innovative applications, and staying at the forefront of emerging technologies. Come along on my coding journey as we unravel the mysteries of programming together, striving to create elegant and functional solutions.
+Within the digital domain, I've devoted significant time to the realm of coding, conquering intricate challenges, crafting innovative applications, and embracing the forefront of emerging technologies. This journey not only allows me to expand my technical skills but also fosters personal growth. I am currently involved in an internship, where I will apply the skills I've learned to solve real-world problems and, hopefully, contribute to the company's success.
 
-Moreover, I am an avid reader who finds solace in diverse genres, and an ardent anime enthusiast, appreciating the unique artistry and storytelling this medium offers. Embark on this journey of exploration with me as we delve into the vast worlds of literature and anime, engaging in thoughtful discussions about our favorite tales and characters.
+Moreover, I find solace in the diverse genres and immersive artistry of anime. As an avid reader and anime enthusiast, I wholeheartedly appreciate the unique narratives and artistic expressions these works offer. Beyond entertainment, they provide new perspectives on the past, present, and future, enriching my understanding of the world.
+As I prepare to enter college, I look forward to carrying these passions with me and exploring them further. I envision using my coding skills to address real-world challenges, develop innovative solutions, and make a positive impact on society. In my academic pursuits, I plan to delve into literature, analyzing thought-provoking narratives that offer valuable insights into the human experience.
 
-Thank you for joining me on this remarkable adventure, where we can celebrate our shared passions with professionalism and enthusiasm. Together, let us grow, learn, and make a meaningful impact in the realms of coding, soccer, literature, and anime. Stay tuned for an enriching experience filled with knowledge and excitement!
+
+
