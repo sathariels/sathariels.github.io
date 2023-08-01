@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://sathariels.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://sathariels.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2023-08-01T17:53:06+00:00</updated><id>https://sathariels.github.io/feed.xml</id><title type="html">Nithilan Kumaran Website</title><subtitle></subtitle><entry><title type="html">Levenshtein distance algorithm</title><link href="https://sathariels.github.io/blog/2023/jupyter-notebook/" rel="alternate" type="text/html" title="Levenshtein distance algorithm"/><published>2023-07-25T00:00:00+00:00</published><updated>2023-07-25T00:00:00+00:00</updated><id>https://sathariels.github.io/blog/2023/jupyter-notebook</id><content type="html" xml:base="https://sathariels.github.io/blog/2023/jupyter-notebook/"><![CDATA[<p>To include a jupyter notebook in a post, you can use the following code:</p> <p>Section 1: Setting Up the Search Functionality The script begins by defining a function called CreateWeaponUI.searchBar(), which handles the search functionality for the weapon user interface (UI). This function connects to the Text property of the SearchBox GUI element and sets up a callback function that will be executed whenever the search text changes.</p> <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nc">CreateWeaponUI</span><span class="p">.</span><span class="nf">searchBar</span><span class="p">()</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://sathariels.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://sathariels.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2023-08-01T18:10:16+00:00</updated><id>https://sathariels.github.io/feed.xml</id><title type="html">Nithilan Kumaran Website</title><subtitle></subtitle><entry><title type="html">Levenshtein distance algorithm</title><link href="https://sathariels.github.io/blog/2023/jupyter-notebook/" rel="alternate" type="text/html" title="Levenshtein distance algorithm"/><published>2023-07-25T00:00:00+00:00</published><updated>2023-07-25T00:00:00+00:00</updated><id>https://sathariels.github.io/blog/2023/jupyter-notebook</id><content type="html" xml:base="https://sathariels.github.io/blog/2023/jupyter-notebook/"><![CDATA[<p>To include a jupyter notebook in a post, you can use the following code:</p> <p>Section 1: Setting Up the Search Functionality The script begins by defining a function called CreateWeaponUI.searchBar(), which handles the search functionality for the weapon user interface (UI). This function connects to the Text property of the SearchBox GUI element and sets up a callback function that will be executed whenever the search text changes.</p> <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nc">CreateWeaponUI</span><span class="p">.</span><span class="nf">searchBar</span><span class="p">()</span>
     <span class="c1">-- Get reference to the SearchBox GUI element</span>
     <span class="kd">local</span> <span class="n">SearchBox</span> <span class="o">=</span> <span class="n">LocalPlayer</span><span class="p">.</span><span class="n">PlayerGui</span><span class="p">:</span><span class="n">WaitForChild</span><span class="p">(</span><span class="s2">"SearchBoxGui"</span><span class="p">):</span><span class="n">WaitForChild</span><span class="p">(</span><span class="s2">"SearchBox"</span><span class="p">)</span>
 
@@ -69,38 +69,87 @@
 <span class="k">end</span>
 
 <span class="c1">-- End of the search functionality</span>
-</code></pre></div></div> <p>Of course! Let’s replace the code comments with explanatory text under each section:</p> <p>Section 1: Setting Up the Search Functionality The script begins by defining a function called CreateWeaponUI.searchBar(), which handles the search functionality for the weapon user interface (UI). This function connects to the Text property of the SearchBox GUI element and sets up a callback function that will be executed whenever the search text changes.</p> <p>lua Copy code function CreateWeaponUI.searchBar() – Get reference to the SearchBox GUI element local SearchBox = LocalPlayer.PlayerGui:WaitForChild(“SearchBoxGui”):WaitForChild(“SearchBox”)</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- Connect a function to execute whenever the SearchBox text changes
-SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
-    -- Convert the search text to lowercase for case-insensitive comparison
-    local searchText = string.lower(SearchBox.Text)
-    
-    -- Perform search filtering based on the search text
-    -- (Explanation continues in the next section)
-end) end Section 2: Handling Empty Search The script checks if the search text is empty or consists only of spaces using the :match() function with the pattern ^%s*$. If the search text is empty or contains only spaces, the function makes all items in the UI visible. This ensures that when the user clears the search box, all items are displayed again.
-</code></pre></div></div> <p>lua Copy code – Continue with fuzzy search filtering for non-empty search text</p> <p>– Check if the search text is empty or consists only of spaces if searchText:match(“^%s*$”) then – Make all items visible since there is no search text for rarity, frame in pairs(rarityFrames) do for _, item in pairs(frame:GetChildren()) do if item:IsA(“Frame”) then item.Visible = true end end end return – Exit the function early, no need to continue end</p> <p>– Continue with fuzzy search filtering for non-empty search text Section 3: Implementing Fuzzy Matching For non-empty search text, the script proceeds with fuzzy search filtering based on the Levenshtein distance algorithm. It uses a threshold value (currently set to 3) to determine the maximum allowed edit distance for fuzzy matching.</p> <p>The script iterates through different rarity frames and their children to check for fuzzy matches with the search text. It first checks the frame names and then, if needed, proceeds to check the keywords associated with each item.</p> <p>lua Copy code – Continue with fuzzy search filtering for non-empty search text</p> <p>local anyVisible = false – Flag to check if at least one item is visible local threshold = 3 – Set a threshold for fuzzy matching</p> <p>– Iterate through the rarity frames and their children for rarity, frame in pairs(rarityFrames) do for _, item in pairs(frame:GetChildren()) do – Check if the child is a frame if item:IsA(“Frame”) then local madeVisible = false</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        -- Perform fuzzy match with the name of the frame
-        local frameName = string.lower(item.Name)
-        local nameDistance = levenshteinDistance(frameName, searchText)
-        if nameDistance &lt;= threshold then
-            madeVisible = true
-        else
-            -- If the frame name doesn't match, check the keywords with fuzzy matching
-            for _, keyword in pairs(item.KeyWordsFolder:GetChildren()) do
-                local keywordValue = string.lower(keyword.Value)
-                local keywordDistance = levenshteinDistance(keywordValue, searchText)
-                if keywordDistance &lt;= threshold then
-                    madeVisible = true
-                    break -- No need to continue checking other keywords for this item if we found a match
-                end
-            end
-        end
+</code></pre></div></div> <p>Section 4: Conclusion In conclusion, by incorporating fuzzy matching using the Levenshtein distance algorithm, the script significantly improves the user experience of the weapon UI. The search functionality becomes more user-friendly and forgiving, allowing players to find items even with small spelling mistakes or variations in their search queries. This approach can be adapted and utilized to enhance search functionalities in various Lua-based UI projects. Section 4: Conclusion In conclusion, by incorporating fuzzy matching using the Levenshtein distance algorithm, the script significantly improves the user experience of the weapon UI. The search functionality becomes more user-friendly and forgiving, allowing players to find items even with small spelling mistakes or variations in their search queries. This approach can be adapted and utilized to enhance search functionalities in various Lua-based UI projects.</p> <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Function to calculate the Levenshtein distance between two strings</span>
+<span class="kd">local</span> <span class="k">function</span> <span class="nf">levenshteinDistance</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">len1</span><span class="p">,</span> <span class="n">len2</span> <span class="o">=</span> <span class="o">#</span><span class="n">str1</span><span class="p">,</span> <span class="o">#</span><span class="n">str2</span>
+    <span class="kd">local</span> <span class="n">dp</span> <span class="o">=</span> <span class="p">{}</span>
 
-        -- Set the item's visibility based on fuzzy match results
-        if madeVisible then
-            item.Visible = true
-            anyVisible = true -- Set the flag to true if at least one item is visible
-        else
-            item.Visible = false
-        end
-    end
-end end
-</code></pre></div></div> <p>– End of the search functionality Section 4: Conclusion In conclusion, by incorporating fuzzy matching using the Levenshtein distance algorithm, the script significantly improves the user experience of the weapon UI. The search functionality becomes more user-friendly and forgiving, allowing players to find items even with small spelling mistakes or variations in their search queries. This approach can be adapted and utilized to enhance search functionalities in various Lua-based UI projects.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="lua"/><category term="algorithms"/><summary type="html"><![CDATA[Enhancing User Experience in Space Nights Store: Leveraging the Elvenshtein Distance Algorithm for Precise Spell Check Solutions]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://sathariels.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog"/><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://sathariels.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://sathariels.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len1</span> <span class="k">do</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len2</span> <span class="k">do</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">elseif</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">else</span>
+                <span class="c1">-- Calculate the cost of substitution (0 if characters are the same, 1 if different)</span>
+                <span class="kd">local</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">str1</span><span class="p">:</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">~=</span> <span class="n">str2</span><span class="p">:</span><span class="n">sub</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">1</span> <span class="ow">or</span> <span class="mi">0</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">cost</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">len1</span><span class="p">][</span><span class="n">len2</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="c1">-- Function to handle the search functionality for weapon UI</span>
+<span class="k">function</span> <span class="nc">CreateWeaponUI</span><span class="p">.</span><span class="nf">searchBar</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">searchBoxGui</span> <span class="o">=</span> <span class="n">LocalPlayer</span><span class="p">.</span><span class="n">PlayerGui</span><span class="p">:</span><span class="n">WaitForChild</span><span class="p">(</span><span class="s2">"SearchBoxGui"</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">searchBox</span> <span class="o">=</span> <span class="n">searchBoxGui</span><span class="p">:</span><span class="n">WaitForChild</span><span class="p">(</span><span class="s2">"SearchBox"</span><span class="p">)</span>
+
+    <span class="c1">-- Connect a function to execute whenever the Text property of the SearchBox changes</span>
+    <span class="n">searchBox</span><span class="p">:</span><span class="n">GetPropertyChangedSignal</span><span class="p">(</span><span class="s2">"Text"</span><span class="p">):</span><span class="n">Connect</span><span class="p">(</span><span class="k">function</span><span class="p">()</span>
+        <span class="kd">local</span> <span class="n">searchText</span> <span class="o">=</span> <span class="nb">string.lower</span><span class="p">(</span><span class="n">searchBox</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span> <span class="c1">-- Convert the search text to lowercase for case-insensitive comparison</span>
+
+        <span class="c1">-- Check if the search text is empty or consists only of spaces</span>
+        <span class="k">if</span> <span class="n">searchText</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">"^%s*$"</span><span class="p">)</span> <span class="k">then</span>
+            <span class="c1">-- Make all items visible since there is no search text</span>
+            <span class="k">for</span> <span class="n">rarity</span><span class="p">,</span> <span class="n">rarityFrame</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">rarityFrames</span><span class="p">)</span> <span class="k">do</span>
+                <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">itemFrame</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">rarityFrame</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">())</span> <span class="k">do</span>
+                    <span class="k">if</span> <span class="n">itemFrame</span><span class="p">:</span><span class="n">IsA</span><span class="p">(</span><span class="s2">"Frame"</span><span class="p">)</span> <span class="k">then</span>
+                        <span class="n">itemFrame</span><span class="p">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="kc">true</span>
+                    <span class="k">end</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+            <span class="k">return</span> <span class="c1">-- Exit the function early, no need to continue</span>
+        <span class="k">end</span>
+
+        <span class="kd">local</span> <span class="n">anyItemVisible</span> <span class="o">=</span> <span class="kc">false</span> <span class="c1">-- Flag to check if at least one item is visible</span>
+        <span class="kd">local</span> <span class="n">fuzzyMatchingThreshold</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">-- Set a threshold for fuzzy matching</span>
+
+        <span class="k">for</span> <span class="n">rarity</span><span class="p">,</span> <span class="n">rarityFrame</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">rarityFrames</span><span class="p">)</span> <span class="k">do</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">itemFrame</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">rarityFrame</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">())</span> <span class="k">do</span>
+                <span class="k">if</span> <span class="n">itemFrame</span><span class="p">:</span><span class="n">IsA</span><span class="p">(</span><span class="s2">"Frame"</span><span class="p">)</span> <span class="k">then</span> <span class="c1">-- Check if the child is a frame</span>
+                    <span class="kd">local</span> <span class="n">itemVisible</span> <span class="o">=</span> <span class="kc">false</span>
+
+                    <span class="c1">-- Check fuzzy match with the name of the itemFrame</span>
+                    <span class="kd">local</span> <span class="n">itemName</span> <span class="o">=</span> <span class="nb">string.lower</span><span class="p">(</span><span class="n">itemFrame</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+                    <span class="kd">local</span> <span class="n">nameDistance</span> <span class="o">=</span> <span class="n">levenshteinDistance</span><span class="p">(</span><span class="n">itemName</span><span class="p">,</span> <span class="n">searchText</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">nameDistance</span> <span class="o">&lt;=</span> <span class="n">fuzzyMatchingThreshold</span> <span class="k">then</span>
+                        <span class="n">itemVisible</span> <span class="o">=</span> <span class="kc">true</span>
+                    <span class="k">else</span>
+                        <span class="c1">-- If the itemFrame name doesn't match, check the keywords with fuzzy matching</span>
+                        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">keywordValue</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">itemFrame</span><span class="p">.</span><span class="n">KeyWordsFolder</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">())</span> <span class="k">do</span>
+                            <span class="kd">local</span> <span class="n">keyword</span> <span class="o">=</span> <span class="nb">string.lower</span><span class="p">(</span><span class="n">keywordValue</span><span class="p">.</span><span class="n">Value</span><span class="p">)</span>
+                            <span class="kd">local</span> <span class="n">keywordDistance</span> <span class="o">=</span> <span class="n">levenshteinDistance</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">searchText</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">keywordDistance</span> <span class="o">&lt;=</span> <span class="n">fuzzyMatchingThreshold</span> <span class="k">then</span>
+                                <span class="n">itemVisible</span> <span class="o">=</span> <span class="kc">true</span>
+                                <span class="k">break</span> <span class="c1">-- No need to continue checking other keywords for this itemFrame if we found a match</span>
+                            <span class="k">end</span>
+                        <span class="k">end</span>
+                    <span class="k">end</span>
+
+                    <span class="k">if</span> <span class="n">itemVisible</span> <span class="k">then</span>
+                        <span class="n">itemFrame</span><span class="p">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="kc">true</span>
+                        <span class="n">anyItemVisible</span> <span class="o">=</span> <span class="kc">true</span> <span class="c1">-- Set the flag to true if at least one item is visible</span>
+                    <span class="k">else</span>
+                        <span class="n">itemFrame</span><span class="p">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="kc">false</span>
+                    <span class="k">end</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+
+        <span class="c1">-- Rest of the code...</span>
+    <span class="k">end</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="lua"/><category term="algorithms"/><summary type="html"><![CDATA[Enhancing User Experience in Space Nights Store: Leveraging the Elvenshtein Distance Algorithm for Precise Spell Check Solutions]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://sathariels.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog"/><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://sathariels.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://sathariels.github.io/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[]]></content><author><name></name></author></entry></feed>
