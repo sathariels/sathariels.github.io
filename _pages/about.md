@@ -19,14 +19,16 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Welcome to my website, where you can explore the diverse range of passions I've cultivated throughout my life. From the captivating realm of coding to the exhilarating experiences on the soccer field, I am excited to embark on this thrilling journey together.
+Hi, I’m Nithilan, and this is my website where I share my passions with you. I have many different interests and achievements that I’m proud of, and I hope you will enjoy learning more about me.
 
-Soccer, as a sport, holds a special place in my heart, encapsulating the virtues of teamwork, competitiveness, and honed skills. Engaging with the intricacies of tactics and strategies while deriving joy from the beautiful game is an endlessly fulfilling experience I eagerly share.
+I love soccer. It’s a sport that teaches me teamwork, competitiveness, and skills. I like to learn and use the tactics and strategies of the game, and have fun with the beauty of the sport. I play soccer for my school team, and I also watch professional soccer matches whenever I can. My favorite soccer team is FC Barcelona, and my favorite player is Lionel Messi.
 
-Within the digital domain, I've devoted significant time to the realm of coding, conquering intricate challenges, crafting innovative applications, and embracing the forefront of emerging technologies. This journey not only allows me to expand my technical skills but also fosters personal growth. I am currently involved in an internship, where I will apply the skills I've learned to solve real-world problems and, hopefully, contribute to the company's success.
+I also like coding. I have spent a lot of time learning and making various applications and projects. I have faced and solved many problems, and learned new technologies. I’m proficient in Python, Lua, Java, HTML, PHP, and CSS. I have created some simple games such as Tic Tac Toe and am currently working at my internship on a shop that players will use to buy items. The internship has been a great learning experience for me and has helped me gain important fundamentals to computer science as well as life outside college.  
 
-Moreover, I find solace in the diverse genres and immersive artistry of anime. As an avid reader and anime enthusiast, I wholeheartedly appreciate the unique narratives and artistic expressions these works offer. Beyond entertainment, they provide new perspectives on the past, present, and future, enriching my understanding of the world.
-As I prepare to enter college, I look forward to carrying these passions with me and exploring them further. I envision using my coding skills to address real-world challenges, develop innovative solutions, and make a positive impact on society. In my academic pursuits, I plan to delve into literature, analyzing thought-provoking narratives that offer valuable insights into the human experience.
+I also enjoy anime. I find it relaxing and entertaining to watch different kinds of anime. I read a lot of books and watch a lot of anime, and I like the stories and expressions that anime has. I also learn from anime, as it shows me new ways of looking at the past, present, and future. Some of my favorite anime genres are action, comedy, romance, and fantasy. Some of my favorite anime titles are Naruto, One Piece, Kimetsu no Yaiba, and Kaguya-sama: Love is War.
+
+As I get ready to go to college, I hope to keep doing what I love and learn more about them. I want to use my coding skills to help the world, and learn more about literature and the stories it tells. I hope to continue my various passions in college as they have developed me into the person i am today. 
+
 
 
 
