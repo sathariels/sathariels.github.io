@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Levenshtein distance algorithm
-date: July 25, 2023
+date: August 25, 2023
 description: "Enhancing User Experience in Space Nights Store: Leveraging the Elvenshtein Distance Algorithm for Precise Spell Check Solutions"
 tags: formatting lua algorithms
 categories: sample-posts
@@ -13,7 +13,7 @@ related_posts: false
  Exploring the Levenshtein Distance: A Journey of Learning and Understanding
 
 The Levenshtein Distance is a simple yet powerful algorithm that measures the similarity between two strings. It can be used to solve many problems in computer science and natural language processing, such as spell-checking, DNA sequence alignment, and more. I was amazed by its versatility and elegance when I learned about it. 
-   The Levenshtein Distance is a way of comparing how similar two words are. It counts how many changes you need to make to one word to get the other word. For example, to change “cat” to “bat”, you only need to change one letter, so the Levenshtein Distance is 1. To change “cat” to “dog”, you need to change three letters, so the Levenshtein Distance is 3. This idea was invented by a Russian scientist named Vladimir Levenshtein. 
+   The Levenshtein Distance is a way of comparing how similar two words are. It counts how many changes you need to make to one word to get the other word. For example, to change “cat” to “bat”, you only need to change one letter, so the Levenshtein Distance is 1. To change “Sword” to “Sowrd”, you need to change two letters, so the Levenshtein Distance is 2. This idea was invented by a Russian scientist named Vladimir Levenshtein. 
    During my internship, I was tasked with creating a search function for my store. This was not an easy feat, as there were many edge cases that I needed to take into consideration. For example, since this game was mostly going to be played by 9-15 year olds, I needed to account for misspellings and missing letters in words. In the beginning, I would only match the string to the weapon name, but this would not solve the edge cases that I had to deal with. This prompted me to research other ways to implement the search function in my store. That’s when I stumbled across the Fuzzy Search and in particular the Levenshtein Distance. I decided to learn more about it and try to implement it in my code. This resulted in a greater understanding of the algorithm behind the Levenshtein Distance, as well as my introduction to the real-life applications of computer science. Below i will detail my attempt at implementing the levenshtein algorithm into my code:
 
 ```lua
