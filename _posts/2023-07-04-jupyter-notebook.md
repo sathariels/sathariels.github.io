@@ -10,7 +10,7 @@ related_posts: false
 ---
 
 
- Exploring the Levenshtein Distance: A Journey of Learning and Understanding
+Learning and Understanding the Levenshtein Distance
 
 
 Have you ever wondered how similar two words are? How many changes do you need to make to turn one word into another? For example how many letters do you need to swap to turn “Sword” into “Sowrd”? This a questions that the Levenshtein Distance can answer.
