@@ -14,7 +14,8 @@
     - title: High School
       institution: International East Academy
       year: 2024
-      description: Currently a high school senior in International East Academy Michigan.
+      description: 
+        - Currently a high school senior in International East Academy Michigan.
     
        
 - title: Experience
@@ -27,7 +28,8 @@
     - title: Executive Director/Content Developer
       institution: One Suryan Website (Volunteer)
       year: 2021 - Present 
-      description: As Executive Director and Content Developer of One Suryan https://suryan.org/, I developed the website content. In the span of a year, through my leadership we have developed 1000+ streams of our podcast, 100k+ total impressions on our Instagram page alone, published 40 works of literature, hosted webinars,and released multiple interviews.This website One Suryan is a youth-led, global 501(c)(3) that my peers and I initiated to uplift South Asian youth by promoting intersectional activism through digital advocacy, and strives to showcase diversity and representation in the South Asian community.
+      description: 
+        - As Executive Director and Content Developer of One Suryan https://suryan.org/, I developed the website content. In the span of a year, through my leadership we have developed 1000+ streams of our podcast, 100k+ total impressions on our Instagram page alone, published 40 works of literature, hosted webinars,and released multiple interviews.This website One Suryan is a youth-led, global 501(c)(3) that my peers and I initiated to uplift South Asian youth by promoting intersectional activism through digital advocacy, and strives to showcase diversity and representation in the South Asian community.
       
        
 
@@ -36,7 +38,8 @@
   contents:
     - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
       year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+      description: 
+        - A beautiful, simple, clean, and responsive Jekyll theme for academics.
 
 - title: Honors and Awards
   type: time_table
