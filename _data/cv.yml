@@ -14,8 +14,7 @@
     - title: High School
       institution: International East Academy
       year: 2024
-      description:
-      Currently a high school senior in International East Academy Michigan.
+      description: Currently a high school senior in International East Academy Michigan.
     
        
 - title: Experience
@@ -24,17 +23,13 @@
     - title: Software Engineering Intern
       institution: Neureal,LLC
       year: 06/01/2023 - Present
-      description:
-        Currently working as a Software Engineering Intern for Neureal ,LLC . During my internship ,I was responsible for creating an Items shop using Lua code for the Space knights game created in Roblox platform. 
-        I also worked on both the User experience and UI part of the game. I uploaded hundreds of animations and also participated in testing multiple games developed by the company in different gaming platforms prior to release to users . 
+      description: Currently working as a Software Engineering Intern for Neureal ,LLC . During my internship ,I was responsible for creating an Items shop using Lua code for the Space knights game created in Roblox platform. I also worked on both the User experience and UI part of the game. I uploaded hundreds of animations and also participated in testing multiple games developed by the company in different gaming platforms prior to release to users . 
     - title: Executive Director/Content Developer
       institution: One Suryan Website (Volunteer)
       year: 2021 - Present 
-      description:
-       As Executive Director and Content Developer of One Suryan https://suryan.org/, I developed the website content. In the span of a year, through my leadership we have developed 1000+ streams of our podcast, 100k+ total 
-       impressions on our Instagram page alone, published 40 works of literature, hosted webinars,and released multiple interviews.This website One Suryan is a youth-led, global 501(c)(3) that my peers and I initiated 
-       to uplift South Asian youth by promoting intersectional activism through digital advocacy, and strives to showcase diversity and representation in the South Asian community.
+      description: As Executive Director and Content Developer of One Suryan https://suryan.org/, I developed the website content. In the span of a year, through my leadership we have developed 1000+ streams of our podcast, 100k+ total impressions on our Instagram page alone, published 40 works of literature, hosted webinars,and released multiple interviews.This website One Suryan is a youth-led, global 501(c)(3) that my peers and I initiated to uplift South Asian youth by promoting intersectional activism through digital advocacy, and strives to showcase diversity and representation in the South Asian community.
       
+       
 
 - title: Open Source Projects
   type: time_table
@@ -47,23 +42,18 @@
   type: time_table
   contents:
     - year: 2022
-      items: 
-        Presidential Volunteer Service Award 
+      items: Presidential Volunteer Service Award 
     - year: 2022
-      items: 
-        -MVP Defensive player Award for High School Varsity Soccer
+      items: -MVP Defensive player Award for High School Varsity Soccer
 
 - title: Academic Interests
   type: nested_list
   contents:
     - title: Programming Language
-      items: 
-        - Java , Python , Lua
-      items:
-        - Description 1.
-        - Description 2.
+      items: - Java  Python  Lua
+      items: -Banna
+        
 
 - title: Other Interests
   type: list
-  contents:
-    - Soccer , 
+  contents: - Soccer  
