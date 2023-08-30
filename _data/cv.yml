@@ -2,64 +2,96 @@
   type: map
   contents:
     - name: Full Name
-      value: Nithilan Kumaran
+      value: Albert Einstein
     - name: Date of Birth
-      value: 4th March 2006
+      value: 14th March 1879
     - name: Languages
-      value: English, Spanish, Tamil
+      value: English, German
 
 - title: Education
   type: time_table
   contents:
-    - title: High School
-      institution: International East Academy
-      year: 2024
-      description: 
-        - Currently a high school senior in International East Academy Michigan.
-    
-       
+    - title: PhD
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1905
+      description:
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Federal teaching diploma
+      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
+      year: 1900
+      description:
+        - Description 1.
+        - Description 2.
+
 - title: Experience
   type: time_table
   contents:
-    - title: Software Engineering Intern
-      institution: Neureal,LLC
-      year: 06/01/2023 - Present
-      description: Currently working as a Software Engineering Intern for Neureal ,LLC . During my internship ,I was responsible for creating an Items shop using Lua code for the Space knights game created in Roblox platform. I also worked on both the User experience and UI part of the game. I uploaded hundreds of animations and also participated in testing multiple games developed by the company in different gaming platforms prior to release to users . 
-    - title: Executive Director/Content Developer
-      institution: One Suryan Website (Volunteer)
-      year: 2021 
-      description: 
-        - As Executive Director and Content Developer of One Suryan https://suryan.org/, I developed the website content. In the span of a year, through my leadership we have developed 1000+ streams of our podcast, 100k+ total impressions on our Instagram page alone, published 40 works of literature, hosted webinars,and released multiple interviews.This website One Suryan is a youth-led, global 501(c)(3) that my peers and I initiated to uplift South Asian youth by promoting intersectional activism through digital advocacy, and strives to showcase diversity and representation in the South Asian community.
-      
-       
+    - title: Professor of Theoretical Physics
+      institution: Institute for Advanced Study, Princeton University
+      year: 1933 - 1955
+      description:
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Visiting Professor
+      institution: California Institute of Technology, Pasadena, California, US
+      year: 1933
+      description:
+        - Description 1.
+        - Description 2.
+
+    - title: Director
+      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
+      year: 1917-1933
+
+    - title: Professor of Theoretical Physics
+      institution: Karl-Ferdinand University, Prague, Czechoslovakia
+      year: 1911 - 1917
+      description:
+
+    - title: Associate Professor of Theoretical Physics
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1909 - 1911
 
 - title: Open Source Projects
   type: time_table
   contents:
     - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
       year: 2015-now
-      description: 
-        - A beautiful, simple, clean, and responsive Jekyll theme for academics.
+      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
 
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 2022
+    - year: 1921
       items: 
-        - Presidential Volunteer Service Award 
-    - year: 2022
+        - Nobel Prize in Physics 
+        - Matteucci Medal
+    - year: 2029
       items: 
-        - MVP Defensive player Award for High School Varsity Soccer
+        - Max Planck Medal
 
 - title: Academic Interests
   type: nested_list
   contents:
-    - title: Programming Language
+    - title: Topic 1.
       items: 
-        - Java  Python  Lua
-      
-        
+        - Description 1.
+        - Description 2.
+    - title: Topic 2.
+      items:
+        - Description 1.
+        - Description 2.
 
 - title: Other Interests
   type: list
-  contents: - Soccer  
+  contents:
+    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
