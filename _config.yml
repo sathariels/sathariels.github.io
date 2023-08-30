@@ -414,8 +414,6 @@ jekyll_get_json:
     json: assets/json/resume.json # it can also be an url
 jsonresume:
   - basics
-  First Name : Nithilan
-  Last name : Kumaran
   - work
   - education
   - publications
