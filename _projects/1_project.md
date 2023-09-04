@@ -1,29 +1,30 @@
 ---
 layout: page
 title: Space Knights Shop
-description: The creation of a Shop for the Space Knights Roblox game that will be used to thousands of users
+description: A view of my Space Knights Shop project images and features.
 img: assets/img/12.jpg
 importance: 1
 category: work
 ---
 
 
-I was tasked with building a shop for users to buy weapons from for the game Space Knights
-I used the roblox studio platform in order to design the UX and UI component of the shop
-It was an arduous task but in the end i learned a lot of about computer science and design
+Space Kinghts is a game built on Roblox platform .It's targeted to be released to end users by end of this year .My contribution was to build an Item shop for users to buy weapons.
+I used the roblox studio platform in order to design the UX and UI component of the shop. I uploaded hundreds of animations, wrotes the requirements and utilized lua code to develop 
+the features and did testing.
+
 Below are some pictures of my work
 
 
 <div class="row">
-    <div class="col-sm-4 mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-00">
         {% include figure.html path="assets/img/Second.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="assets/img/Third.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    The middle picture shows cases the use of the Levenshtein distance algortihm as a serach function. The left and right images showcase the wepons in diffrent raritys
+    The left and right images showcase the weapons in different raritys
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -31,7 +32,7 @@ Below are some pictures of my work
     </div>
 </div>
 <div class="caption">
-     This picture shows cases the use of the Levenshtein distance algortihm as a serach function
+     This picture shows the use of the Levenshtein distance algortihm as a search function.Please check out my blog for more details.
 </div>
 
 
