@@ -15,9 +15,6 @@ Below are some pictures of my work
 
 
 <div class="row">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/First.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
     <div class="col-sm-4 mt-3 mt-md-0">
         {% include figure.html path="assets/img/Second.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
@@ -30,11 +27,11 @@ Below are some pictures of my work
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/First.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    This image can also have a caption. It's like magic.
+     This picture shows cases the use of the Levenshtein distance algortihm as a serach function
 </div>
 
 
