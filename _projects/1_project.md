@@ -7,7 +7,11 @@ importance: 1
 category: work
 ---
 
- 
+
+I was tasked with building a shop for users to buy weapons from for the game Space Knights
+I used the roblox studio platform in order to design the UX and UI component of the shop
+It was an arduous task but in the end i learned a lot of about computer science and design
+Below are some pictures of my work
 
 
 <div class="row">
@@ -33,9 +37,7 @@ category: work
     This image can also have a caption. It's like magic.
 </div>
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal its glory in the next row of images.
+
 
 
 <div class="row justify-content-sm-center">
