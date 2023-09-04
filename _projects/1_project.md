@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Space Knights Shop
+title: Space Knights Items Shop
 description: A view of my Space Knights Shop project images and features.
 img: assets/img/12.jpg
 importance: 1
@@ -8,8 +8,8 @@ category: work
 ---
 
 
-Space Kinghts is a game built on Roblox platform .It's targeted to be released to end users by end of this year .My contribution was to build an Item shop for users to buy weapons.
-I used the roblox studio platform in order to design the UX and UI component of the shop. I uploaded hundreds of animations, wrotes the requirements and utilized lua code to develop 
+Space Kinghts is a game built on Roblox platform .It's targeted to be released to end users by end of this year 2023 .My contribution was to build an Item shop for users to buy weapons.
+I used the roblox studio platform in order to design the UX and User Interface component of the shop. I uploaded hundreds of animations, wrote the requirements and utilized lua code to develop 
 the features and did testing.
 
 Below are some pictures of my work
@@ -44,8 +44,8 @@ Below are some pictures of my work
     </div>
 </div>
 <div class="caption">
-    Above is me uploading various animations as part of my work. This taught me patience and that good things come to those that work hard. 
+    Above is a view of uploading various animations as part of my work. 
 </div>
 
 
- This internship gave me the opportunity to be creative,work with experienced professionals, learn new concepts and solve real world business problems. I am very excited that I played a role in the creation of a product that is going to be used by millions of users .
+This project was so important to me as I got an opportunity to implement my learnings , be creative,work with experienced professionals who mentored me along the way,learn new Computer Science concepts,receive and incorporate feedback, and solve real world business problems. 
