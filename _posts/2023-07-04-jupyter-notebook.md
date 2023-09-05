@@ -47,7 +47,7 @@ local cost = str1:sub(i, i) ~= str2:sub(j, j) and 1 or 0
     return dp[len1][len2]
 end
 ```
-  To conclude, I would like to say that this project was a great opportunity for me to learn more about Levenshtein Distance Algorithm and its practical applications. I gained a lot of insight into how algorithms work and how they can solve complex problems. I also realized the limitations of my own abilities and the challenges of dealing with edge cases. I learned that using AI tools like chatgpt can be helpful, but they cannot replace my own understanding and creativity. I had to dig deeper into the fundamentals of the algorithm and learn how to implement it correctly. This was a rewarding experience that taught me valuable lessons about computer science and myself. I hope you enjoyed reading about my journey and learned something new along the way.
+  To conclude, I would like to say that this project was a great opportunity for me to learn more about Levenshtein Distance Algorithm and its practical applications. It gave me insight into how algorithms work and how they can solve complex problems. I had to dig deeper into the fundamentals of the algorithm tp deal with edge cases and learned how to implement it correctly.I hope you enjoyed reading about my journey and learned something new along the way.
 
 
 
