@@ -2,7 +2,7 @@
 layout: post
 title: Levenshtein distance algorithm
 date: July 25, 2023
-description: "Enhancing User Experience in Space Nights Store: Leveraging the Elvenshtein Distance Algorithm for Precise Spell Check Solutions"
+description: "Enhancing User Experience in Space Nights Store: Leveraging the Levenshtein Distance Algorithm for Precise Spell Check Solutions"
 tags: formatting lua algorithms
 categories: algorithms
 giscus_comments: true
@@ -17,7 +17,7 @@ Have you ever wondered how similar two words are? How many changes do you need t
 
    The Levenshtein Distance is a way of comparing how similar two words are. It counts how many changes you need to make to one word to get the other word. For example, to change “Male” to “Mace”, you only need to change one letter, so the Levenshtein Distance is 1. To change “Sword” to “Sowrd”, you need to change two letters, so the Levenshtein Distance is 2. This idea was invented by a Russian scientist named Vladimir Levenshtein. 
    
-   One of the most challenging and rewarding projects that I worked on during my internship was developing a search function for my store. The store was part of a game that was aimed at 9-15 year olds, so I had to make sure that the search function was robust and user-friendly. This meant that I had to handle cases where the users would misspell or omit letters in the words they were looking for.  At first, I tried to simply match the input string with the weapon names in the store, but this approach was too rigid and failed to account for the variations in spelling. I realized that I needed a more sophisticated way to measure the similarity between two strings, and that’s when I discovered the Fuzzy Search and the Levenshtein Distance algorithm. The lower the Levenshtein Distance, the more similar the two strings are. I decided to use this algorithm as the basis for my search function, and I learned how to implement it in my code. This was a great opportunity for me to apply my computer science knowledge to a real-world problem and to improve my coding skills. Below I will detail my attempt at implementing the Levenshtein distance algorithm into my code:
+   One of the most challenging and rewarding projects that I worked on during my internship was developing a search function for my store. The store was part of a game that was aimed for 9-15 year olds, so I had to make sure that the search function was robust and user-friendly. This meant that I had to handle cases where the users would misspell or omit letters in the words they were looking for.  At first, I tried to simply match the input string with the weapon names in the store, but this approach was too rigid and failed to account for the variations in spelling. I realized that I needed a more sophisticated way to measure the similarity between two strings, and that’s when I discovered the Fuzzy Search and the Levenshtein Distance algorithm. The lower the Levenshtein Distance, the more similar the two strings are. I decided to use this algorithm as the basis for my search function, and I learned how to implement it in my code. This was a great opportunity for me to apply my computer science knowledge to a real-world problem and to improve my coding skills. Below I will detail my attempt at implementing the Levenshtein distance algorithm into my code:
 
 ```lua
 local function levenshteinDistance(str1, str2)
@@ -47,7 +47,7 @@ local cost = str1:sub(i, i) ~= str2:sub(j, j) and 1 or 0
     return dp[len1][len2]
 end
 ```
-  To conclude, I would like to say that this project was a great opportunity for me to learn more about Levenshtein Distance Algorithm and its practical applications. It gave me insight into how algorithms work and how they can solve complex problems. I had to dig deeper into the fundamentals of the algorithm tp deal with edge cases and learned how to implement it correctly.I hope you enjoyed reading about my journey and learned something new along the way.
+  To conclude, I would like to say that this project was a great opportunity for me to learn more about Levenshtein Distance Algorithm and its practical applications. It gave me insight into how algorithms work and how they can solve complex problems. I had to dig deeper into the fundamentals of the algorithm to deal with edge cases and learned how to implement it correctly.I hope you enjoyed reading about my journey and learned something new along the way.
 
 
 
