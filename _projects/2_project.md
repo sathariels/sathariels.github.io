@@ -1,6 +1,6 @@
 ---
 layout: page
-title: One Suryan Webiste Creation
+title: One Suryan Website Creation
 description: A view of what i have worked on for the One Suryan Webstie
 img: assets/img/OneSuryan.jpg
 importance: 1
@@ -19,7 +19,7 @@ Below are some pictures of my work
     </div>
 </div>
 <div class="caption">
-    This image showcases how i have orgnized the atricles using HTML in a grid format allowing veiwrs to browse multiple articles at the same time.
+    This image showcases how i have orginized the articles using HTML in a grid format allowing viewers to browse multiple articles at the same time.
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -27,7 +27,7 @@ Below are some pictures of my work
     </div>
 </div>
 <div class="caption">
-    This image showcases how i have creates a "What We Do" part of our webiste allowing viewrs to uderstand what the purpose of our orgnization is. I used HTML and PHP in order to create a grid in order to shocase the pcitures and text. 
+    This image showcases how i have creates a "What We Do" part of our website allowing viewers to uderstand what the purpose of our orginzation is. I used HTML and PHP in order to create a grid in order to showcase the pictures and text. 
 </div>
 
 
@@ -39,7 +39,7 @@ Below are some pictures of my work
     </div>
 </div>
 <div class="caption">
-    Above showcases how i have linked our social media to our webstie as well as how i have used a loop in order to count how many articles we have.  
+    Above showcases how i have linked our social media to our website as well as how i have used a loop in order to count how many articles we have.  
 </div>
 
 
