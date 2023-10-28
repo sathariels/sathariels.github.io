@@ -1,16 +1,14 @@
 ---
 layout: page
-title: Space Knights Items Shop
-description: A view of my Space Knights Shop project images and features.
+title: One Suryan Webiste Creation
+description: A view of what i have worked on for the One Suryan Webstie
 img: assets/img/12.jpg
 importance: 1
 category: work
 ---
 
 
-Space Kinghts is a game built on Roblox platform .It's targeted to be released to end users by end of this year 2023 .My contribution was to build an Item shop for users to buy weapons.
-I used the roblox studio platform in order to design the UX and User Interface component of the shop. I uploaded hundreds of animations, wrote the requirements and utilized lua code to develop 
-the features and did testing.
+As the Executive Director of Management for One Suryan, a student organization that empowers the South Asian community worldwide, I was responsible for overseeing the overall operations and strategy of the organization. I led a team of talented and passionate students who worked on various aspects of the organization, such as graphic design, research, writing, and podcasting. I also created and maintained the website for One Suryan using HTML, CSS, and PHP. I ensured that the website is dynamic, responsive, and secure, and that it showcases the mission, vision, resources, and projects of the organization.
 
 Below are some pictures of my work
 
