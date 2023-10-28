@@ -2,7 +2,7 @@
 layout: page
 title: One Suryan Webiste Creation
 description: A view of what i have worked on for the One Suryan Webstie
-img: assets/img/12.jpg
+img: assets/img/OneSuryan.jpg
 importance: 1
 category: work
 ---
