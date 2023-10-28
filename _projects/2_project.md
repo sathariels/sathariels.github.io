@@ -17,22 +17,19 @@ Below are some pictures of my work
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-00">
-        {% include figure.html path="assets/img/Second.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/Third.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/Articles.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    The left and right images showcase the weapons in different raritys
+    This image showcases how i have orgnized the atricles using HTML in a grid format allowing veiwrs to browse multiple articles at the same time.
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/First.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/WeDo.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-     This picture shows the use of the Levenshtein distance algortihm as a search function.Please check out my blog for more details.
+    This image showcases how i have creates a "What We Do" part of our webiste allowing viewrs to uderstand what the purpose of our orgnization is. I used HTML and PHP in order to create a grid in order to shocase the pcitures and text. 
 </div>
 
 
@@ -40,12 +37,12 @@ Below are some pictures of my work
 
 <div class="row justify-content-sm-center">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/Fourth.jpeg.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/Connection.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    Above is a view of uploading various animations as part of my work. 
+    Above showcases how i have linked our social media to our webstie as well as how i have used a loop in order to count how many articles we have.  
 </div>
 
 
-This project was so important to me as I got an opportunity to implement my learnings , be creative,work with experienced professionals who mentored me along the way,learn new Computer Science concepts,receive and incorporate feedback, and solve real world business problems. 
+Working on the website and being with One Suryan has taught me alot. I have learned a lot about web development, social justice, and South Asian culture. I have also improved my skills in leadership, communication, and collaboration. I am grateful for the opportunity to contribute to the organization and to the community. I hope that the website I created will inspire and inform others about the issues and opportunities that South Asians face around the world.
