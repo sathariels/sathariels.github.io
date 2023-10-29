@@ -42,5 +42,4 @@ Below are some pictures of my work
     Above showcases how i have linked our social media to our website as well as how i have used a loop in order to count how many articles we have.  
 </div>
 
-
-Working on the website and being with One Suryan has taught me alot. I have learned a lot about web development, social justice, and South Asian culture. I have also improved my skills in leadership, communication, and collaboration. I am grateful for the opportunity to contribute to the organization and to the community. I hope that the website I created will inspire and inform others about the issues and opportunities that South Asians face around the world.
+ I hope that the website I created will inspire and inform others about the issues and opportunities that South Asians face around the world.
