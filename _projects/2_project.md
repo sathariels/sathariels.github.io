@@ -1,4 +1,4 @@
----
+f---
 layout: page
 title: One Suryan Website Creation
 description: A view of what i have worked on for the One Suryan Webstie
@@ -19,7 +19,7 @@ Below are some pictures of my work
     </div>
 </div>
 <div class="caption">
-    This image showcases how i have orginized the articles using HTML in a grid format allowing viewers to browse multiple articles at the same time.
+    This image showcases how i have organized the articles using HTML in a grid format allowing viewers to browse multiple articles at the same time.
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -27,7 +27,7 @@ Below are some pictures of my work
     </div>
 </div>
 <div class="caption">
-    This image showcases how i have creates a "What We Do" part of our website allowing viewers to uderstand what the purpose of our orginzation is. I used HTML and PHP in order to create a grid in order to showcase the pictures and text. 
+    This image showcases how i have creates a "What We Do" part of our website allowing viewers to uderstand what the purpose of our organization is. I used HTML and PHP in order to create a grid in order to showcase the pictures and text. 
 </div>
 
 
