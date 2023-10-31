@@ -10,7 +10,7 @@ related_posts: false
 ---
 
 
-Fuzzy Search and Levenshtein Algorithm
+My Journey to Levenshtein Algorithm 
 
 
 Have you ever wondered how similar two words are? How many changes do you need to make to turn one word into another? For example, how many letters do you need to swap to turn “Sowrd” into “Sword”? That’s the question that the Levenshtein Distance can answer.
