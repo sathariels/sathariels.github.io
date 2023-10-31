@@ -2,7 +2,7 @@
 layout: post
 title: How do you code a Search feature using Levenshtein Algorithm
 date: July 25, 2023
-description: Precise Spell Check Solution
+description: Precise Spell Check Search Solution option
 tags: formatting lua algorithms
 categories: algorithms
 giscus_comments: true
