@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Fuzzy Search using Levenshtein
+title: How do you code a Search feature using Levenshtein Algorithm
 date: July 25, 2023
-description: "Enhancing User Experience in Space Nights Store: Leveraging the Levenshtein Distance Algorithm for Precise Spell Check Solutions"
+description: Precise Spell Check Solution
 tags: formatting lua algorithms
 categories: algorithms
 giscus_comments: true
@@ -27,7 +27,7 @@ local function levenshteinDistance(str1, str2)
     local dp = {}
 ```
 
-First, I define a function levenshteinDistance that takes in two parameters str1, and str2 which are both strings. It then assigns the variables len1 and len2 to the number of characters each string has. The # modifier calculates how many characters are within the strings that go through the function. 
+First, define a function levenshteinDistance that takes in two parameters str1, and str2 which are both strings. It then assigns the variables len1 and len2 to the number of characters each string has. The # modifier calculates how many characters are within the strings that go through the function. 
 For example, if the string sword was passed through the function, it would calculate that the length of that string is 5 The function then defines a table call dp which is a common variable name used in the establishment of the Levenshtein algorithm.
 
 ```lua
