@@ -19,7 +19,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hi, I'm Nithilan, and welcome to my website. This is where I share my passions and achievements with you. I'm a passionate and talented person who loves soccer, coding, and anime. I play club soccer and for my school team, and I truly admire FC Barcelona and Lionel Messi. I'm proficient in various programming languages, and I've had the pleasure of creating some simple games and applications. Currently, I'm working at an internship that's helping me gain important skills and valuable experience. I also thoroughly enjoy watching and reading different kinds of anime, and I learn so much from the stories and expressions they offer. My goal is to continue pursuing my passions in college and hopefully make a positive impact in this world.
+Hi, I'm Nithilan, and welcome to my website. This is where I share my passions with you,I am a person who loves soccer, coding,anime and board games. I play club soccer and for my High school team, and I truly admire FC Barcelona team and Lionel Messi. I know various programming languages, and I've had the pleasure of creating some games and web applications. I also thoroughly enjoy playing board games with family/friends and watching and reading different kinds of anime. Check out my blogs and projects....
 
 
 
