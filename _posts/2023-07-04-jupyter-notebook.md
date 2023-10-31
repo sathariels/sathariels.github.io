@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Levenshtein distance algorithm
+title: Fuzzy Search using Levenshtein
 date: July 25, 2023
 description: "Enhancing User Experience in Space Nights Store: Leveraging the Levenshtein Distance Algorithm for Precise Spell Check Solutions"
 tags: formatting lua algorithms
@@ -16,7 +16,7 @@ Fuzzy Search and Levenshtein Algorithm
 Have you ever wondered how similar two words are? How many changes do you need to make to turn one word into another? For example, how many letters do you need to swap to turn “Sowrd” into “Sword”? That’s the question that the Levenshtein Distance can answer.
 
 The Levenshtein Distance is a way of comparing how similar two words are. It counts how many changes you need to make to one word to get the other word. For example, to change “Male” to “Mace”, you only need to change one letter, so the Levenshtein Distance is 1. To change “Sowrd” to “Sword”, you need to change two letters, so the Levenshtein Distance is 2. This algorithm was invented by a Russian scientist named Vladimir Levenshtein.
-The store was part of a game that was aimed for 9–15-year-olds, so I had to make sure that the search function was robust and user-friendly. This meant that I had to handle cases where the users would misspell or omit letters in the words they were looking for. At first, I tried to simply match the input string with the weapon names in the store, but this approach was too rigid and failed to account for the variations in spelling. I realized that I needed a more sophisticated way to measure the similarity between two strings, and that’s when I discovered the Fuzzy Search and the Levenshtein Distance algorithm. 
+The Weapons store we were building is part of a game that is aimed for 9–15-year-olds, so I had to make sure that the search function was robust and user-friendly. This meant that I had to handle cases where the users would misspell or omit letters in the words they were looking for. At first, I tried to simply match the input string with the weapon names in the store, but this approach was too rigid and failed to account for the variations in spelling. I realized that I needed a more sophisticated way to measure the similarity between two strings, and that’s when I discovered the Fuzzy Search and the Levenshtein Distance algorithm. 
 
 Fuzzy search is a technique used in information retrieval and text searching to find results that are approximately, rather than exactly, matching a search query. It is particularly useful when dealing with data that may contain errors, misspellings, or variations in spelling and formatting. One of the fundamental algorithms used for fuzzy search is Levenshtein distance algorithm. The benefits of using Levenshtein distance algorithm is search result precision, customization of search and simplicity. When you compare two strings, the lower the Levenshtein Distance, the more similar the two strings are. I decided to use this algorithm as the basis for my search function, and I learned how to implement it in my code. This was a great opportunity for me to apply my computer science knowledge to a real-world problem and to improve my coding skills. 
 Below I will detail my attempt at implementing the Levenshtein distance algorithm into my code:
