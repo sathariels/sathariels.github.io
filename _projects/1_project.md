@@ -2,7 +2,7 @@
 layout: page
 title: Space Knights Items Shop
 description: A view of my Space Knights Shop project images and features.
-img: assets/img/12.jpg
+img: assets/img/SpaceKnights.jpg
 importance: 1
 category: work
 ---
