@@ -2,7 +2,7 @@
 layout: page
 title: Space Knights Items Shop
 description: A view of my Space Knights Shop project images and features.
-img: assets/img/SpaceKnights.jpg
+img: assets/img/SpaceKnights.jpg 
 importance: 1
 category: work
 ---
@@ -12,7 +12,7 @@ Space Kinghts is a game built on Roblox platform .It's targeted to be released t
 I used the roblox studio platform in order to design the UX and User Interface component of the shop. I uploaded hundreds of animations, wrote the requirements and utilized lua code to develop 
 the features and did testing.
 
-Below are some pictures of my work
+Below are some pictures of my work:
 
 
 <div class="row">
