@@ -25,7 +25,7 @@ pyautogui.write('Hello, World!', interval=0.1)
 ```
 This simple script types "Hello, World!" with a 0.1-second interval between each character. It demonstrated how straightforward and powerful pyautogui can be for automating keyboard inputs.
 
-##Tkinter: Building the GUI
+Tkinter: Building the GUI
 
 Next, I delved into Tkinter, Python’s standard GUI (Graphical User Interface) library. Tkinter allows you to create windows, buttons, text boxes, and other GUI components. Here’s a basic example of creating a window with Tkinter:
 
@@ -156,6 +156,6 @@ This function retrieves the user inputs, calculates the typing intervals, and st
 
 Conclusion
 Creating the AutoTyper was a fantastic learning experience. It taught me how to use pyautogui for automation and enhanced my skills in GUI development with Tkinter. The project required careful handling of threading and synchronization to ensure smooth operation. Here’s the complete code for reference and further experimentation:
-###I hope this blog inspires you to explore pyautogui and Tkinter for your own automation and GUI projects. Happy coding!
+I hope this blog inspires you to explore pyautogui and Tkinter for your own automation and GUI projects. Happy coding!
 
 ```
