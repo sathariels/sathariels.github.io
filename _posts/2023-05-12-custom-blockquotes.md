@@ -11,7 +11,7 @@ related_posts: false
 
 Have you ever wondered how you can automate the process of typing? How you can create a tool that types text at a set speed, makes deliberate mistakes, and pauses randomly to mimic human typing? This blog post details my experience in creating an AutoTyper using Python, a task that introduced me to the pyautogui library and enhanced my knowledge of GUI development with Tkinter. This journey was both challenging and rewarding, and I’m excited to share my insights and the code snippets that helped me along the way.
 
-###Getting Started: Understanding pyautogui and Tkinter
+Getting Started: Understanding pyautogui and Tkinter
 ##pyautogui: Automating Keyboard Actions
 
 The first tool I used was pyautogui, a Python library that allows you to control the keyboard and mouse. This library is particularly useful for creating automation scripts that can type text, move the mouse, or take screenshots. Since I was new to pyautogui, I started by exploring its basic functions.
@@ -46,9 +46,9 @@ root.mainloop()
 ```
 This script creates a window with a label that says "Hello, Tkinter!". It served as the foundation for building a more complex GUI for my AutoTyper.
 
-###Building the AutoTyper
+Building the AutoTyper
 
-##Creating the GUI
+Creating the GUI
 
 I started by designing the GUI, which included text boxes for inputting the text to type, the words-per-minute (WPM), the number of mistakes to make, and the frequency of those mistakes. Here’s a snippet of the code used to create the GUI:
 
@@ -77,7 +77,7 @@ root.mainloop()
 
 
 ```
-##Implementing the AutoTyper Logic
+Implementing the AutoTyper Logic
 
 With the GUI in place, I moved on to the core functionality. The AutoTyper needed to type the text at a specific interval, pause randomly, and make deliberate mistakes. Here’s how I approached it:
 
@@ -154,7 +154,7 @@ startButton.pack()
 ```
 This function retrieves the user inputs, calculates the typing intervals, and starts the typing and mistake-making threads.
 
-###Conclusion
+Conclusion
 Creating the AutoTyper was a fantastic learning experience. It taught me how to use pyautogui for automation and enhanced my skills in GUI development with Tkinter. The project required careful handling of threading and synchronization to ensure smooth operation. Here’s the complete code for reference and further experimentation:
 ###I hope this blog inspires you to explore pyautogui and Tkinter for your own automation and GUI projects. Happy coding!
 
