@@ -1,14 +1,13 @@
 ---
 layout: post
-title: My Journey in Creating an AutoTyper 
-date: July 25, 2023
-description: Precise Spell Check Search Solution option
+title: My Journey in Creating an AutoTyper: Exploring pyautogui and Tkinter for GUI Development
+date: May 22, 2024
+description: A simple program that allows you to input text and a WPM count and types it for you in a document
 tags: formatting lua algorithms
 categories: algorithms
 giscus_comments: true
 related_posts: false
 ---
-
 
 Have you ever wondered how you can automate the process of typing? How you can create a tool that types text at a set speed, makes deliberate mistakes, and pauses randomly to mimic human typing? This blog post details my experience in creating an AutoTyper using Python, a task that introduced me to the pyautogui library and enhanced my knowledge of GUI development with Tkinter. This journey was both challenging and rewarding, and I’m excited to share my insights and the code snippets that helped me along the way.
 
