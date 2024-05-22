@@ -1,6 +1,6 @@
 ---
 layout: post
-title: My Journey in Creating an AutoTyper: Exploring
+title: My Journey in Creating an AutoTyper 
 date: July 25, 2023
 description: Precise Spell Check Search Solution option
 tags: formatting lua algorithms
