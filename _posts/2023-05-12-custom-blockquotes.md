@@ -1,7 +1,7 @@
 ---
 layout: post
 title: My Journey in Creating an AutoTyper: Exploring pyautogui and Tkinter for GUI Development
-date: May 22, 2024
+date: July 22, 2024
 description: A simple program that allows you to input text and a WPM count and types it for you in a document
 tags: formatting lua algorithms
 categories: algorithms
