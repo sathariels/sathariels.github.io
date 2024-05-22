@@ -1,8 +1,8 @@
 ---
 layout: post
-title: My Journey in Creating an AutoTyper: Exploring pyautogui and Tkinter for GUI Development
-date: May 22, 2024
-description: A simple program that allows you to input text and a WPM count and types it for you in a document
+title: How do you code a Search feature using Levenshtein Algorithm
+date: July 25, 2023
+description: Precise Spell Check Search Solution option
 tags: formatting lua algorithms
 categories: algorithms
 giscus_comments: true
