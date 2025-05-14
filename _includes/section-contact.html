@@ -25,21 +25,10 @@
 
   {% if site.codepen_username != null %}
   <a class="social-link black" aria-label="My Codepen" target="_blank" rel="noreferrer"
-    href="https://codepen.io/{{site.codepen_username}}">
+    href="https://medium.com/@{{site.codepen_username}}">
     <div class="social">
       <svg class="social-svg" viewBox="0 0 48 48">
-        <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#codepen" | prepend: site.baseurl }}"></use>
-      </svg>
-    </div>
-  </a>
-  {% endif %}
-
-  {% if site.dev_username != null %}
-  <a class="social-link black" aria-label="My DEV" target="_blank" rel="noreferrer"
-    href="https://dev.to/{{site.dev_username}}">
-    <div class="social">
-      <svg class="social-svg" viewBox="0 0 48 48">
-        <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#dev" | prepend: site.baseurl }}"></use>
+        <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#medium" | prepend: site.baseurl }}"></use>
       </svg>
     </div>
   </a>
@@ -56,14 +45,4 @@
   </a>
   {% endif %}
 
-  {% if site.twitter_username != null %}
-  <a class="social-link twitter" aria-label="My Twitter" target="_blank" rel="noreferrer"
-    href="https://twitter.com/{{site.twitter_username}}">
-    <div class="social">
-      <svg class="social-svg" viewBox="0 0 48 48">
-        <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#twitter" | prepend: site.baseurl }}"></use>
-      </svg>
-    </div>
-  </a>
-  {% endif %}
 </div>
