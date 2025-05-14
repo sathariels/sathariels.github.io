@@ -18,7 +18,7 @@
 #   timeline-side: right
 
 - title: Carrier
-  title-url: https://example.com/
+  title-url: https://www.carrier.com/carrier/en/worldwide/
   date: May 2025 - Present
   subtitle: Enterprise Buisness Intern
   tags:
@@ -28,7 +28,7 @@
   timeline-side: right
 
 - title: Univeristy of Wisconsin-Madison
-  title-url: https://example.com/
+  title-url: https://www.wisc.edu/
   date: August 2024 - Present
   subtitle: B.S. Computer Engineering
   timeline-side: right
@@ -55,7 +55,7 @@
   timeline-side: right
 
 - title: International Academy East
-  title-url: https://example.com/
+  title-url: https://www.iatoday.org/ia-east
   date: August 2020 - June 2024
   subtitle: High school Diploma
   timeline-side: left
