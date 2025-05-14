@@ -13,21 +13,23 @@
 #     - tag: AngularJS
 #     - tag: Node
 
-- name: project X
-  descr: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam"
-  demo: https://example.com/
+- name: Space Knights Items Shop
+  descr: "Space Knights is an upcoming Roblox game launching in late 2025, and I had the opportunity to develop the in-game item shop where players can purchase weapons of varying rarities. Using Roblox Studio, I designed the shop's user interface and experience, uploaded hundreds of animations, and implemented key features using Lua—including a search function powered by the Levenshtein distance algorithm to improve usability. This project was a major milestone in my development journey, allowing me to apply computer science concepts, collaborate with experienced mentors, receive and incorporate feedback, and bring creative solutions to real-world game design challenges. Check out my blog for more insights and visuals from the project."
+  demo: https://medium.com/@Sathariels/space-knights-items-shop-d3bd2bae76d1
   tags:
-    - tag: MongoDB
-    - tag: Express
-    - tag: AngularJS
-    - tag: Node
+    - tag: Lua
+    - tag: Roblox
+    - tag: User Interface
+    - tag: User Experience
 
-- name: project Y
-  descr: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam"
-  demo: https://example.com/
+- name: One Suryan Website Creation
+  descr: "As the Executive Director of Management for One Suryan, a student-led organization focused on empowering the global South Asian community, I led strategic operations and oversaw a diverse, creative team. One of my key contributions was designing and developing the organization’s website using HTML, CSS, and PHP. I built a dynamic, responsive platform that highlights our mission, showcases articles in a structured grid layout, explains our purpose through a “What We Do” section, integrates social media links, and uses PHP loops to dynamically count published content. This project allowed me to blend technical skills with meaningful impact, creating a platform to inform and inspire others."
+  demo: https://medium.com/@Sathariels/one-suryan-website-creation-project-4efac8204e6b
   tags:
-    - tag: Python
-    - tag: Django
+    - tag: HTML
+    - tag: CSS
+    - tag: PHP
 
-- name: project Z
-  descr: "You can also set a project without demo link and no tags"
+- name: 2D Game Engine
+  descr: A custom-built 2D game engine written in C++, designed from the ground up to handle core gameplay systems such as rendering, input handling, entity management, and real-time collision detection. This project emphasizes performance, modularity, and low-level systems architecture, incorporating features like custom memory management and a lightweight game loop. Developed as a learning and portfolio piece to deepen my understanding of game engine architecture and C++ systems programming.
+  Coming soon: https://github.com/sathariels/simpleGameEngine
