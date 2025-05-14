@@ -2,7 +2,7 @@
 
 # GENERAL SITE SETTINGS
 # title: This will be displayed as the website's name in your browser tab.
-title: Nithilan
+title: Nithilans personal website
 # description: This will be meta HTML tag content. This can be ignored.
 description: Nithilans personal website
 # baseurl: The subpath of your site
@@ -23,7 +23,7 @@ email: nithilan.p.kumaran@gmail.com
 github_username: sathariels
 codepen_username: exampleUser
 dev_username: exampleUser
-linkedin_username: www.linkedin/in/nithilan-kumaran
+linkedin_username: www.linkedin.com/in/nithilan-kumaran
 twitter_username: exampleUser
 
 # ABOUT ME SECTION
@@ -34,7 +34,11 @@ show_aboutme_card: true
 # about_me_title: The will be displayed as the title in the About Me section
 about_me_title: About Me
 # about_me_description: This will be displayed under the title.
-about_me_description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. If you like this theme and want to use it for yourself, checkout the source code and the documentation at <a class="highlight-link" href="https://github.com/longpdo/neumorphism" target="_blank" rel="noreferrer"> Github </a>. You can also find me on <a class="highlight-link" href="https://jamstackthemes.dev/theme/jekyll-neumorphism/" target="_blank" rel="noreferrer">JAMstack Themes</a> and on <a class="highlight-link" href="https://jekyll-themes.com/neumorphism/" target="_blank" rel="noreferrer">Jekyll Themes</a>.
+about_me_description: Hi, I’m Nithilan Kumaran.
+
+I’m a software engineering intern at Neureal, where I began as a summer intern and have continued to grow my skills through real-world development projects. My passion for technology, programming, and problem-solving has driven me to explore a wide range of tools and languages, and I enjoy sharing my experiences through technical blogs and tutorials.
+
+This fall, I’ve started an exciting new chapter at the University of Wisconsin–Madison, where I’m pursuing a degree in Computer Engineering. Outside of academics and work, I’m an avid gamer — a hobby that often sparks ideas for my side projects and fuels my curiosity for how technology shapes interactive experiences.
 
 # SKILLS SECTION
 # show_skills_card:
