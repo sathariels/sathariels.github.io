@@ -14,7 +14,7 @@ baseurl: ""
 username: Nithilan Kumaran
 # typing_text: This will be typed before 'scroll down for more'.
 # > set this to your job title, e.g. Fullstack Developer
-typing_text: Sathariels
+typing_text: Welcome to my website
 # email: Your E-Mail address for the email button.
 email: nithilan.p.kumaran@gmail.com
 # For every social button you want to display, set your username or userid
@@ -82,7 +82,7 @@ show_contact_card: true
 # contact_title: The will be displayed as the title in the Contact section
 contact_title: Contact
 # contact_description: This will be displayed under the title.
-contact_description: Feel free to explore my work and connect with me! You can reach me via email at <a class="highlight-link" href="nithilan.p.kumaran" target="_blank" rel="noreferrer">. I’m also active on <a class="highlight-link" href="www.linkedin.com/in/nithilan-kumaran" target="_blank" rel="noreferrer">, where I share updates on my projects and experiences, and on <a class="highlight-link" href="https://github.com/sathariels" target="_blank" rel="noreferrer">, where you can find the code behind many of my personal and collaborative endeavors.
+contact_description: Feel free to explore my work and connect with me! You can reach me via email at <a class="highlight-link" href="nithilan.p.kumaran" target="_blank" rel="noreferrer">.
 # GITHUB-METADATA
 # Set this to your forked repository
 # > e.g. <user>/<user>.github.io
