@@ -17,45 +17,45 @@
 #     - tag: Rails
 #   timeline-side: right
 
-- title: airbnb
+- title: Carrier
   title-url: https://example.com/
-  date: Sep 2019 - Present
-  subtitle: Fullstack Developer
+  date: May 2025 - Present
+  subtitle: Enterprise Buisness Intern
   tags:
     - tag: React
-    - tag: Javascript
-    - tag: Ruby
-    - tag: Rails
+    - tag: SAP
+    - tag: Python
   timeline-side: right
 
-- title: Google
+- title: Univeristy of Wisconsin-Madison
   title-url: https://example.com/
-  date: Mar 2019 - Sep 2019
-  subtitle: Software Engineer as Intern
+  date: August 2024 - present
+  subtitle: B.S. Computer Engineering
+  timeline-side: right
+
+- title: Neureal
+  title-url: https://example.com/
+  date: May 2024 - August 2024
+  subtitle: Software Engineering Intern
   tags:
-    - tag: Flutter
-    - tag: Dart
-    - tag: Keycloak
-  timeline-side: right
-
-- title: Super University
-  title-url: https://example.com/
-  date: 2017 - 2019
-  subtitle: M.Sc. Computer Science
+    - tag: Lua
+    - tag: Roblox
+    - tag: Roblox Studio
+    - tag: UI/UX development
   timeline-side: left
 
-- title: Facebook
+- title: Neureal
   title-url: https://example.com/
-  date: Sep 2017 - Mar 2019
-  subtitle: Front-End Developer as Intern
+  date: May 2023 - August 2023
+  subtitle: Software Engineering Intern
   tags:
-    - tag: React
-    - tag: Node
-    - tag: Javascript
+    - tag: Lua
+    - tag: Game Design
+    - tag: Game Devlopment
   timeline-side: right
 
-- title: Super University
+- title: International Academy easy
   title-url: https://example.com/
-  date: 2014 - 2017
-  subtitle: B.A. Computer Science
+  date: 2020 - 2024
+  subtitle: Highschool Diploma
   timeline-side: left
