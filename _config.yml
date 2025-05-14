@@ -82,8 +82,7 @@ show_contact_card: true
 # contact_title: The will be displayed as the title in the Contact section
 contact_title: Contact
 # contact_description: This will be displayed under the title.
-contact_description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. If you like this theme and want to use it for yourself, checkout the source code and the documentation at <a class="highlight-link" href="https://github.com/longpdo/neumorphism" target="_blank" rel="noreferrer"> Github </a>.
-
+contact_description: Feel free to explore my work and connect with me! You can reach me via email at <a class="highlight-link" href="nithilan.p.kumaran" target="_blank" rel="noreferrer">. I’m also active on <a class="highlight-link" href="www.linkedin.com/in/nithilan-kumaran" target="_blank" rel="noreferrer">, where I share updates on my projects and experiences, and on <a class="highlight-link" href="https://github.com/sathariels" target="_blank" rel="noreferrer">, where you can find the code behind many of my personal and collaborative endeavors.
 # GITHUB-METADATA
 # Set this to your forked repository
 # > e.g. <user>/<user>.github.io
