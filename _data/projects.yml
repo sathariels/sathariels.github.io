@@ -32,4 +32,8 @@
 
 - name: 2D Game Engine
   descr: A custom-built 2D game engine written in C++, designed from the ground up to handle core gameplay systems such as rendering, input handling, entity management, and real-time collision detection. This project emphasizes performance, modularity, and low-level systems architecture, incorporating features like custom memory management and a lightweight game loop. Developed as a learning and portfolio piece to deepen my understanding of game engine architecture and C++ systems programming. COMING SOON!!
-  
+  tags:
+    - tag: C++
+    - tag: Physics
+    - tag: Game Engine
+
