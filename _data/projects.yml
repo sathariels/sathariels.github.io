@@ -37,4 +37,12 @@
     - tag: C++
     - tag: Physics
     - tag: Game Engine
+  
+- name: GeminiCLI Context Framework
+  descr: A developer-focused context engineering template tailored for Gemini CLI, built to streamline AI-assisted development workflows. This project structures essential context files—including INITIAL.md with modular example patterns—to optimize Gemini’s understanding of feature requests, goals, and implementation strategies. It supports rapid generation of context-rich PRPs (Project Requirement Plans), enabling precise, consistent AI code generation across projects. Designed to be plug-and-play, the template prioritizes clarity, modularity, and extensibility for integration into any software repo. Built as both a learning tool and a practical enhancement for next-gen AI coding environments. LIVE ON GITHUB
+  tags:
+    - tag: Gemini
+    - tag: CLI
+    - tag: Python
+    - tag: Template
 
