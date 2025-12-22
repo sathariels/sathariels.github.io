@@ -17,10 +17,20 @@
 #     - tag: Rails
 #   timeline-side: right
 
+- title: Sentari AI
+  title-url: https://withsentari.com/
+  date: Sep 2025 - Dec 2025
+  subtitle: Software Engineering Intern
+  tags:
+    - tag: n8n
+    - tag: AI
+    - tag: App development
+  timeline-side: left
+  
 - title: Carrier
   title-url: https://www.carrier.com/carrier/en/worldwide/
-  date: May 2025 - Present
-  subtitle: Enterprise Business Systems Intern
+  date: May 2025 - Aug 2025
+  subtitle: Software Systems Intern
   tags:
     - tag: Amazon Bedrock
     - tag: SAP
