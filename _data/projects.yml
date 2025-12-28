@@ -46,4 +46,13 @@
     - tag: CLI
     - tag: Python
     - tag: Template
+    
+- name: Shadow Index
+  descr: Shadow Index is a C++ roguelike that combines procedural dungeon generation with a branching narrative system where every choice permanently alters the game world.
+  demo: https://github.com/sathariels/shadowIndex
+  tags:
+    - tag: C++
+    - tag: Game
+    - tag: Terminal Dungeon Crawlet
+    - tag: Algorithms
 
