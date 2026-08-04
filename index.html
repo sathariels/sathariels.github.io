@@ -261,6 +261,30 @@ a:hover { color: #FFE0A3; }
 .hand .fan::-webkit-scrollbar { display: none; }
 .hand .hint { text-align: center; margin-top: 12px; font-size: 10.5px; color: #6F7B71; letter-spacing: 0.14em; }
 
+/* narrow screens trade the fan for a row of chips — see the 560px block */
+.hand .chips {
+  display: none; flex-wrap: wrap; align-items: flex-start; justify-content: center;
+  gap: 10px 12px; padding: 6px 2px 0;
+}
+.chip-btn {
+  flex: 0 0 auto; appearance: none; cursor: pointer; background: none; border: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 5px; width: 64px;
+  transform: var(--chip-tf); transition: transform 0.16s ease; outline: none;
+}
+.chip-btn .disc {
+  position: relative; width: 48px; height: 48px; border-radius: 50%; border: 2px solid #000;
+  background: repeating-conic-gradient(from 0deg, var(--cd) 0deg 22.5deg, #F4EEE0 22.5deg 45deg);
+  box-shadow: var(--chip-sh); display: block;
+}
+.chip-btn .core {
+  position: absolute; inset: 7px; border-radius: 50%;
+  background: linear-gradient(165deg, var(--c) 0%, var(--cd) 100%); border: 2px solid #000;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; line-height: 1; color: #12100A;
+}
+.chip-btn .name { font-size: 10px; line-height: 1; letter-spacing: 0.02em; color: var(--chip-ink); text-align: center; }
+.chip-btn:focus-visible .disc { box-shadow: 0 0 0 3px #FFC24A, 0 4px 0 #000; }
+
 .card-btn {
   flex: 0 0 auto; scroll-snap-align: center; appearance: none; cursor: pointer;
   margin: 0 -9px; padding: 5px; width: 132px;
@@ -315,10 +339,9 @@ a:hover { color: #FFE0A3; }
   .section-plate { padding: 16px 12px 0; }
   .played { padding: 12px 12px 18px; }
   .played .surface { padding: 14px; }
-  .hand { padding: 8px 6px 14px; }
-  .hand .fan { padding-top: 46px; }
-  .card-btn { width: 108px; margin: 0 -6px; }
-  .card-btn .face { height: 142px; padding: 7px; }
+  .hand { padding: 10px 10px 12px; }
+  .hand .fan { display: none; }
+  .hand .chips { display: flex; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.01ms !important; animation: none !important; }
@@ -430,7 +453,8 @@ a:hover { color: #FFE0A3; }
     <!-- ══ THE HAND ══ -->
     <div class="hand">
       <div class="fan" id="hand" role="tablist" aria-label="Portfolio sections"></div>
-      <div class="hint mono">◄ ► TAP OR SWIPE A CARD TO OPEN A SECTION · ALL LINKS LIVE IN THE RUN PANEL</div>
+      <div class="chips" id="chips" role="tablist" aria-label="Portfolio sections"></div>
+      <div class="hint mono">◄ ► TAP A CARD OR CHIP TO OPEN A SECTION · ALL LINKS LIVE IN THE RUN PANEL</div>
     </div>
   </main>
 </div>
@@ -734,6 +758,22 @@ a:hover { color: #FFE0A3; }
     return btn;
   });
 
+  // Narrow screens get chips instead of cards; the CSS decides which list is live.
+  const chipsEl = $("#chips");
+  const chips = CARDS.map((c) => {
+    const btn = el("button", {
+      class: "chip-btn", type: "button", role: "tab",
+      id: `chip-${c.id}`, "aria-controls": `sec-${c.id}`,
+      "aria-label": c.label, vars: { "--c": c.color, "--cd": c.colorDark }
+    },
+      el("span", { class: "disc" }, el("span", { class: "core", text: c.glyph })),
+      el("span", { class: "name pixel", text: c.label })
+    );
+    btn.addEventListener("click", () => pick(c.id));
+    chipsEl.append(btn);
+    return btn;
+  });
+
   // ─── state ────────────────────────────────────────────────────────
   let sel = "projects";
   let plays = 0;
@@ -781,6 +821,16 @@ a:hover { color: #FFE0A3; }
         void pop.offsetWidth; // reflow so the animation replays
         pop.classList.add(plays % 2 ? "a" : "b");
       }
+
+      const chip = chips[i];
+      chip.style.setProperty("--chip-tf", on ? "translateY(-6px) scale(1.08)" : "none");
+      chip.style.setProperty("--chip-sh", on
+        ? `0 0 0 3px #FFC24A, 0 4px 0 #000, 0 0 18px ${hexA("#FFC24A", 0.5 * GLOW_INTENSITY + 0.2)}`
+        : "0 3px 0 #000");
+      chip.style.setProperty("--chip-ink", on ? "#FFC24A" : "#8E9A90");
+      chip.setAttribute("aria-selected", on ? "true" : "false");
+      chip.setAttribute("aria-pressed", on ? "true" : "false");
+      chip.tabIndex = on ? 0 : -1;
     });
   }
 
@@ -795,8 +845,12 @@ a:hover { color: #FFE0A3; }
     if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
     const ids = CARDS.map((c) => c.id);
     const i = ids.indexOf(sel);
-    if (e.key === "ArrowRight") { pick(ids[(i + 1) % ids.length]); buttons[ids.indexOf(sel)].focus(); }
-    else if (e.key === "ArrowLeft") { pick(ids[(i - 1 + ids.length) % ids.length]); buttons[ids.indexOf(sel)].focus(); }
+    if (e.key === "ArrowRight") pick(ids[(i + 1) % ids.length]);
+    else if (e.key === "ArrowLeft") pick(ids[(i - 1 + ids.length) % ids.length]);
+    else return;
+    // follow focus onto whichever picker the viewport is showing
+    const j = ids.indexOf(sel);
+    (buttons[j].offsetParent ? buttons[j] : chips[j]).focus();
   });
 
   // ─── boot ─────────────────────────────────────────────────────────
