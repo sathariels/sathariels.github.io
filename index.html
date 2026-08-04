@@ -416,7 +416,7 @@ a:hover { color: #FFE0A3; }
           <span class="kicker mono" id="plate-kicker"></span>
         </div>
       </div>
-      <div class="counter pixel">CARD <b id="plate-index"></b>/6</div>
+      <div class="counter pixel">CARD <b id="plate-index"></b>/<span id="plate-total"></span></div>
     </div>
 
     <!-- played panel -->
@@ -791,6 +791,7 @@ a:hover { color: #FFE0A3; }
     $("#plate-title").textContent = active.title;
     $("#plate-kicker").textContent = active.kicker;
     $("#plate-index").textContent = String(CARDS.indexOf(active) + 1);
+    $("#plate-total").textContent = String(n);
 
     // sections
     for (const c of CARDS) $(`#sec-${c.id}`).hidden = c.id !== sel;
