@@ -91,13 +91,6 @@ Adding a section means adding an entry to `CARDS` and a matching
 `<section id="sec-{id}">` in the played panel. The card counter, the plate, and
 the arrow-key wraparound all read from `CARDS`, so they pick it up on their own.
 
-## Design source
-
-The visual design was built as a component in Claude Design and ported here by
-hand. The port swaps that runtime's dynamic inline styles for CSS classes with
-per-item custom properties, which is what lets the hover and focus rules read
-each card's own color.
-
 ## Deployment
 
 GitHub Pages builds from `main`. Push and it deploys; there is no action or
