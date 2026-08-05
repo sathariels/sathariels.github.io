@@ -48,13 +48,13 @@ render cost to switching and no flash of unstyled content.
 
 | Width | Layout |
 | --- | --- |
-| ≥ 821px | Sidebar is a full-height sticky column beside the board |
-| ≤ 820px | Sidebar goes full width and sits above the board |
-| ≤ 560px | The fanned card hand is replaced by a wrapped row of poker chips |
+| ≥ 821px | Sidebar is a full-height sticky column beside the board; card fan |
+| ≤ 820px | Sidebar goes full width above the board; chip nav replaces the fan |
+| ≤ 560px | Padding tightens throughout |
 
-The fanned cards need horizontal room to read as a hand — below 560px they'd
-overlap into mush, so the nav becomes chips instead. Same six targets, same
-selected-state treatment, laid out to wrap.
+The fanned cards need horizontal room to read as a hand — narrower than that
+they'd overlap into mush, so the nav becomes a wrapped row of poker chips. Same
+six targets, same selected-state treatment.
 
 ### Keyboard and motion
 
@@ -62,6 +62,17 @@ Left and right arrows move through the sections and follow focus onto whichever
 picker is currently visible. Under `prefers-reduced-motion` all transitions and
 animations are disabled, and the pointer-tracked tilt on project cards is
 skipped entirely rather than just shortened.
+
+### Sound
+
+The SFX and the looping backing track are both synthesized at runtime with Web
+Audio — oscillators, filtered noise, and a step sequencer — so there are no
+audio files in the repo and the page stays a single document.
+
+Browsers won't start an `AudioContext` before a user gesture, so nothing is
+constructed until the first click or keypress. The toggle in the section plate
+persists to `localStorage` under `nk-sound`, and a visitor who has muted never
+instantiates any audio at all.
 
 ## Editing content
 
@@ -86,6 +97,9 @@ A handful of feel knobs sit just above the data:
 | `CARD_TILT` | `true` | Pointer-tracked tilt on project cards |
 | `GLOW_INTENSITY` | `0.6` | Strength of the selected-card and hover glows |
 | `SCANLINES` | `true` | CRT scanline overlay |
+| `SOUND_ON` | `true` | Master switch for the whole audio layer |
+| `VOLUME` | `0.15` | Master gain |
+| `AMBIENCE` | `true` | The looping backing track; SFX stay on without it |
 
 Adding a section means adding an entry to `CARDS` and a matching
 `<section id="sec-{id}">` in the played panel. The card counter, the plate, and
