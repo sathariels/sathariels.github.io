@@ -81,3 +81,7 @@ Static homepage plus four case-study routes. The established GitHub Pages struct
 - Chronological figure: six illustrative interactions; first four train, fifth validation, sixth test.
 - Typography: original 5×7 bitmap glyphs rendered as SVG paths; Making Software and the user-provided screenshot inform the visual style only.
 - Motion is explanatory and finite: engine stages enter in input/physics/render order; cache requests and memory cells pulse schematically; graph edges trace the selected adjacency; narrative flags highlight the eligible branch. These are illustrations, not execution traces or timing measurements.
+
+## Owner correction · September 9, 2026
+
+The owner corrected the current Neureal title to Software Engineering Intern. The homepage current-role summary, experience entry, and Person structured data use this title.
