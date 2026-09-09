@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SageRec — Nithilan Kumaran</title>
+<meta name="description" content="Inside an in-progress MovieLens recommender: train-only C++ CSR graphs, seeded neighbor sampling, a pybind11 boundary, and a measured matrix-factorization baseline.">
+<meta name="theme-color" content="#fcfcfa">
+<link rel="canonical" href="https://nithilan.dev/projects/sagerec/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Nithilan Kumaran">
+<meta property="og:title" content="SageRec — Nithilan Kumaran">
+<meta property="og:description" content="Inside an in-progress MovieLens recommender: train-only C++ CSR graphs, seeded neighbor sampling, a pybind11 boundary, and a measured matrix-factorization baseline.">
+<meta property="og:url" content="https://nithilan.dev/projects/sagerec/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SageRec — Nithilan Kumaran">
+<meta name="twitter:description" content="Inside an in-progress MovieLens recommender: train-only C++ CSR graphs, seeded neighbor sampling, a pybind11 boundary, and a measured matrix-factorization baseline.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;450;500;550;600;650;700;750;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script src="/assets/site.js" defer>
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+<div class="wrap nav-row">
+<a class="wordmark" href="/" aria-label="Nithilan Kumaran, home">
+<span class="monogram" aria-hidden="true">n<span>k</span>
+<i>
+</i>
+</span>
+<span>nithilan.dev</span>
+</a>
+<nav aria-label="Main navigation">
+<a href="/#work">Work</a>
+<a href="/#experience">Experience</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a>
+</nav>
+<a class="resume-link" href="/resume.pdf">Résumé <span aria-hidden="true">↗</span>
+</a>
+</div>
+</header>
+<main id="main" class="wrap">
+<header class="case-header">
+<a class="back-link" href="/#work">← All selected work</a>
+<p class="eyebrow"><span class="blue">Project 02</span> / Recommendation infrastructure <span class="work-in-progress">In progress</span></p>
+<h1>SageRec<span class="blue">.</span></h1>
+<p class="case-deck">Before a model can learn, its graph has to be right. Building a MovieLens recommender from a native sampling core to an inspectable Python baseline.</p>
+<div class="case-meta"><div class="tags"><span>C++17</span><span>pybind11</span><span>CSR graphs</span><span>Python / NumPy</span></div><a class="text-link" href="https://github.com/sathariels/SageRec">Explore the repository <span aria-hidden="true">↗</span></a></div>
+</header>
+<div class="case-layout">
+<nav class="case-toc" aria-label="On this page"><p class="eyebrow">In this case study</p><a href="#problem">Build the experiment from the data up</a>
+<a href="#split">Keep the future out of the training graph</a>
+<a href="#csr">A graph in two flat arrays</a>
+<a href="#sampling">Make randomness a repeatable contract</a>
+<a href="#boundary">Crossing the C++ / Python boundary</a>
+<a href="#baseline">Establish a baseline you can inspect</a>
+<a href="#next">What comes next</a>
+<a href="#source">Follow the implementation</a></nav>
+<div class="case-content">
+<section id="problem" class="case-section">
+<h2>Build the experiment from the data up</h2>
+<p>SageRec is an in-progress recommendation system for MovieLens 100K. I’m using it to explore the infrastructure underneath a graph-based recommender: how interactions become a graph, how native code exposes a repeatable sampling operation, and how a shared evaluator makes experiments comparable.</p>
+<p>The implemented pieces are a C++17 bipartite graph and neighbor sampler, pybind11 bindings, chronological data preparation, and a NumPy implicit-feedback matrix-factorization baseline. GraphSAGE is the planned model; its training path is still ahead.</p>
+<div class="callout"><p>The central engineering choice is to establish the data and evaluation contracts first. A model’s score is only useful if its training graph, held-out interactions, and ranking candidates are well defined.</p></div>
+</section>
+<section id="split" class="case-section">
+<h2>Keep the future out of the training graph</h2>
+<p>The preparation step sorts each user’s interactions chronologically, using user and movie IDs to break timestamp ties. For users with at least three interactions, the latest becomes the test target and the previous one becomes validation. Earlier interactions become training data.</p>
+<figure class="diagram split-diagram reveal-figure">
+<div class="figure-label"><span>One user / chronological split</span><span>ADR-003</span></div>
+<div class="split-timeline" aria-label="Illustrative user history: the first four of six interactions go to training, the fifth to validation, and the sixth to test.">
+<div class="split-event"><span>t₁</span><b>Train</b></div><div class="split-event"><span>t₂</span><b>Train</b></div><div class="split-event"><span>t₃</span><b>Train</b></div><div class="split-event"><span>t₄</span><b>Train</b></div><div class="split-event held-out"><span>t₅</span><b>Validate</b></div><div class="split-event held-out"><span>t₆</span><b>Test</b></div>
+</div>
+<figcaption class="diagram-caption"><b>Only training edges enter the CSR graph.</b> Six interactions shown as an example. The split is deterministic; it does not shuffle a user’s timeline.</figcaption>
+</figure>
+<p>Users with fewer than three interactions stay entirely in training and are excluded from validation and test ranking. This keeps the policy explicit instead of silently treating them as normal evaluation users.</p>
+<p>The graph constructor accepts pairs; it does not perform the split itself. Python passes training-positive local IDs into <code>BipartiteCSR</code>, and split tests check that held-out pairs are disjoint. Training negatives exclude known training positives without consulting future validation or test interactions.</p>
+</section>
+<section id="csr" class="case-section">
+<h2>A graph in two flat arrays</h2>
+<p>Users and movies occupy separate ranges in one node-ID space. With three users, user IDs are 0–2 and the first movie’s global ID is 3. The constructor accepts local user/movie pairs, offsets movie IDs into the global range, and stores every unique interaction in both directions.</p>
+<figure class="diagram sage-diagram reveal-figure" data-sage>
+<div class="figure-label"><span>FIG. 03 / A graph, packed into memory</span><span>SageRec</span></div>
+<div class="diagram-controls" role="group" aria-label="Inspect a user’s training neighbors" hidden><button type="button" data-user="0" aria-pressed="false" aria-controls="case-sage-graph">User 0</button>
+<button type="button" data-user="1" aria-pressed="true" aria-controls="case-sage-graph">User 1</button>
+<button type="button" data-user="2" aria-pressed="false" aria-controls="case-sage-graph">User 2</button></div>
+<div id="case-sage-graph">
+<svg class="sage-svg" viewBox="0 0 480 284" role="img" aria-label="Illustrative bipartite graph: three users and four movies. Blue edges connect the selected user to their training neighbors. Numbers inside nodes are global IDs." xmlns="http://www.w3.org/2000/svg">
+<text class="sage-column-label" x="96" y="16" text-anchor="middle">USERS</text><text class="sage-column-label" x="376" y="16" text-anchor="middle">MOVIES</text>
+<path class="sage-edge" data-user="0" data-movie="3" data-active="false" pathLength="1" d="M112 62 C212 62, 260 38, 360 38"/>
+<path class="sage-edge" data-user="0" data-movie="4" data-active="false" pathLength="1" d="M112 62 C212 62, 260 106, 360 106"/>
+<path class="sage-edge" data-user="1" data-movie="4" data-active="true" pathLength="1" d="M112 142 C212 142, 260 106, 360 106"/>
+<path class="sage-edge" data-user="1" data-movie="5" data-active="true" pathLength="1" d="M112 142 C212 142, 260 174, 360 174"/>
+<path class="sage-edge" data-user="1" data-movie="6" data-active="true" pathLength="1" d="M112 142 C212 142, 260 242, 360 242"/>
+<path class="sage-edge" data-user="2" data-movie="3" data-active="false" pathLength="1" d="M112 222 C212 222, 260 38, 360 38"/>
+<path class="sage-edge" data-user="2" data-movie="6" data-active="false" pathLength="1" d="M112 222 C212 222, 260 242, 360 242"/>
+<g class="sage-user" data-user="0" data-active="false"><circle cx="96" cy="62" r="16"/><text x="62" y="67" text-anchor="end">u0</text><text class="sage-node-id" x="96" y="67" text-anchor="middle">0</text></g>
+<g class="sage-user" data-user="1" data-active="true"><circle cx="96" cy="142" r="16"/><text x="62" y="147" text-anchor="end">u1</text><text class="sage-node-id" x="96" y="147" text-anchor="middle">1</text></g>
+<g class="sage-user" data-user="2" data-active="false"><circle cx="96" cy="222" r="16"/><text x="62" y="227" text-anchor="end">u2</text><text class="sage-node-id" x="96" y="227" text-anchor="middle">2</text></g>
+<g class="sage-movie" data-movie="3" data-active="false"><rect x="360" y="22" width="32" height="32"/><text class="sage-node-id" x="376" y="43" text-anchor="middle">3</text><text x="410" y="43">m0</text></g>
+<g class="sage-movie" data-movie="4" data-active="true"><rect x="360" y="90" width="32" height="32"/><text class="sage-node-id" x="376" y="111" text-anchor="middle">4</text><text x="410" y="111">m1</text></g>
+<g class="sage-movie" data-movie="5" data-active="true"><rect x="360" y="158" width="32" height="32"/><text class="sage-node-id" x="376" y="179" text-anchor="middle">5</text><text x="410" y="179">m2</text></g>
+<g class="sage-movie" data-movie="6" data-active="true"><rect x="360" y="226" width="32" height="32"/><text class="sage-node-id" x="376" y="247" text-anchor="middle">6</text><text x="410" y="247">m3</text></g>
+</svg>
+<div class="csr-readout"><span class="eyebrow">One contiguous range</span><code data-sage-range>neighbors[2:5] → [4, 5, 6]</code></div>
+<p class="diagram-result" data-sage-status role="status" aria-live="polite">User 1 has 3 training neighbors.</p>
+</div>
+<figcaption class="diagram-caption"><b>Follow the edges. Read the array.</b> An illustrative graph of seven training interactions. Each edge is stored in both directions; the native sampler reads a user’s contiguous neighbor range.</figcaption>
+</figure>
+<p>The final graph uses compressed sparse row storage: <code>offsets</code> identifies the start of each node’s neighbors, while <code>neighbors</code> stores the adjacency lists back to back. Construction sorts each list and removes duplicate edges before flattening it.</p>
+<pre class="code-block"><code><span class="comment"># Arrays for the illustrative graph above</span>
+offsets   = [0, 2, 5, 7, 9, 11, 12, 14]
+neighbors = [3, 4, 4, 5, 6, 3, 6,
+             0, 2, 0, 1, 1, 1, 2]
+
+<span class="comment"># User 1: offsets[1] to offsets[2]</span>
+neighbors[2:5] = [4, 5, 6]</code></pre>
+<p>Seven training interactions produce fourteen stored neighbor entries. A node’s range is <code>[offsets[node], offsets[node + 1])</code>; its degree is the difference between those offsets. Empty ranges naturally represent isolated nodes.</p>
+<p>This layout gives the sampler a contiguous range to read and keeps storage ownership inside the graph. It is a concrete memory-layout decision; a measured C++-versus-Python speedup is still future work.</p>
+</section>
+<section id="sampling" class="case-section">
+<h2>Make randomness a repeatable contract</h2>
+<p><code>sample_neighbors(node, k, seed)</code> samples uniformly without replacement. The same graph, node, sample size, and seed produce the same output. A local <code>std::mt19937_64</code> generator keeps one call from consuming another call’s random state.</p>
+<div class="table-scroll"><table class="technical-table"><caption>Native sampling contract · ADR-005</caption><thead><tr><th scope="col">Input</th><th scope="col">Behavior</th></tr></thead><tbody>
+<tr><td>Invalid node or negative k</td><td>Reject the request.</td></tr>
+<tr><td>k = 0 or an isolated node</td><td>Return an empty vector.</td></tr>
+<tr><td>k ≥ degree</td><td>Return the full neighborhood in stored order.</td></tr>
+<tr><td>0 &lt; k &lt; degree</td><td>Copy the range, partially shuffle, return k distinct neighbors.</td></tr>
+</tbody></table></div>
+<p>For a partial sample, the implementation copies the neighborhood into a working vector and runs the first <code>k</code> steps of Fisher–Yates. A rejection-sampling helper avoids modulo bias when choosing each swap position.</p>
+<p>The copy matters: total work includes O(degree) copying as well as O(k) shuffle steps. The implementation is not an O(k)-only sampler. A Python reference implementation follows the same seeded contract, and parity tests compare its output with the native extension.</p>
+</section>
+<section id="boundary" class="case-section">
+<h2>Crossing the C++ / Python boundary</h2>
+<p>C++ owns graph storage, parsing, and sampling. Python owns the preparation workflow, experiment configuration, baseline training, and ranking metrics. The pybind11 module <code>graph_sampler</code> connects the two.</p>
+<div class="pipeline" aria-label="Implemented native sampling path"><div class="pipeline-step"><b>Train pairs</b><small>Python prep</small></div><span class="pipeline-arrow" aria-hidden="true">→</span><div class="pipeline-step"><b>CSR graph</b><small>C++ storage</small></div><span class="pipeline-arrow" aria-hidden="true">→</span><div class="pipeline-step"><b>Sample</b><small>seeded C++ call</small></div><span class="pipeline-arrow" aria-hidden="true">→</span><div class="pipeline-step"><b>Python list</b><small>pybind11 result</small></div></div>
+<p>The bindings release Python’s global interpreter lock during native construction, parsing, and sampling work. Python argument and result conversion happen with the GIL held. The parser also owns its input string before releasing the lock.</p>
+<p>Ownership is deliberately straightforward: the graph owns its vectors, and Python accessors return copies through pybind11’s STL conversion. There is no zero-copy buffer interface here. Invalid graph inputs surface as <code>GraphError</code>, a Python <code>ValueError</code> subclass.</p>
+<p>The extension is callable and tested. Wiring it into a GraphSAGE mini-batch loader is a separate, unfinished step.</p>
+</section>
+<section id="baseline" class="case-section">
+<h2>Establish a baseline you can inspect</h2>
+<p>The current model is implicit-feedback matrix factorization. NumPy logistic SGD learns user and movie factors plus biases from training positives and sampled negatives. A shared pair-scoring interface lets the evaluator rank movies independently of the model implementation.</p>
+<p>For test ranking, candidate movies exclude that user’s training and validation positives while retaining the test target. Scores sort from highest to lowest, with movie ID breaking ties. Recall@10 measures whether relevant items appear in the first ten results; NDCG@10 also rewards placing them nearer the top. Scores are averaged over eligible users.</p>
+<figure class="baseline-result reveal-figure">
+<figcaption class="figure-label"><span>Recorded baseline / MovieLens 100K</span><span>Implicit MF</span></figcaption>
+<dl class="result-pair"><div><dt>Recall@10</dt><dd>0.0382</dd></div><div><dt>NDCG@10</dt><dd>0.0203</dd></div></dl>
+<p class="source-note">One seed (7), one epoch, 16 factors, 2 negatives per positive. Test ranking over 943 users and 1,682 movies. Rounded from the <a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/results/mf_movielens_100k.json">recorded run ↗</a>.</p>
+</figure>
+<p>The split contains 98,114 training interactions, 943 validation interactions, and 943 test interactions. The result file records the dataset checksum, split-policy version, seed, hyperparameters, environment, and code commit alongside the metrics.</p>
+<div class="callout"><p>This is an initial, single-seed MF baseline. It establishes a reproducible evaluation checkpoint; it does not establish GraphSAGE quality or a comparison against other recommenders.</p></div>
+</section>
+<section id="next" class="case-section">
+<h2>What comes next</h2>
+<p>The next model is GraphSAGE. That requires a Python mini-batch path that consumes the native sampler, a training implementation, and an evaluation run under the same split and scoring rules as the MF baseline.</p>
+<p>A separate systems experiment will compare native and Python sampler timings under a stated workload. Until those measurements exist, the case for C++ rests on the implemented storage and sampling contracts, not a claimed latency improvement.</p>
+<p>The repository already includes native graph and parser tests, binding tests, sampler parity checks, split checks, preparation fixtures, and an MF ranking smoke test in CI. Those checks provide a foundation for the next stage without implying the unfinished training path is complete.</p>
+</section>
+<section id="source" class="case-section">
+<h2>Follow the implementation</h2>
+<p>This case study reflects the source snapshot reviewed on September 9, 2026. The links below are pinned to that snapshot so the implementation behind each explanation stays inspectable.</p>
+<ul class="source-list"><li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/cpp/src/bipartite_csr.cpp">cpp/src/bipartite_csr.cpp ↗</a><br>ID validation, sorted CSR construction, seeded sampling, and the partial shuffle.</li>
+<li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/cpp/src/bindings.cpp">cpp/src/bindings.cpp ↗</a><br>pybind11 API, GIL boundaries, result conversion, and error translation.</li>
+<li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/python/sagerec_prep.py">python/sagerec_prep.py ↗</a><br>Chronological leave-one-out splitting and training-positive pairs.</li>
+<li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/python/sagerec_reference_sampler.py">python/sagerec_reference_sampler.py ↗</a><br>Python reference implementation for native parity checks.</li>
+<li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/python/sagerec_baseline.py">python/sagerec_baseline.py ↗</a><br>Implicit MF scoring and seeded logistic-SGD training.</li>
+<li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/python/sagerec_metrics.py">python/sagerec_metrics.py ↗</a><br>Candidate filtering, deterministic ranking, Recall@K, and NDCG@K.</li>
+<li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/results/mf_movielens_100k.json">results/mf_movielens_100k.json ↗</a><br>Single-seed MovieLens 100K metrics and run provenance.</li>
+<li><a href="https://github.com/sathariels/SageRec/blob/884159d373b986510b1d25b428b883c3c3d63e60/docs/decisions.md">docs/decisions.md ↗</a><br>Recorded choices for the dataset, split, baseline, model, and sampling policy.</li>
+</ul></section></div></div>
+<a class="next-project" href="/projects/2d-game-engine/"><div><p class="eyebrow">Next project</p><h3>2D Game Engine</h3></div><span class="blue" aria-hidden="true">→</span></a>
+</main><footer class="footer wrap">
+<a href="/" class="footer-name">Nithilan Kumaran<span class="blue">.</span>
+</a>
+<span class="mono">Built to be understood.</span>
+<a href="#main">Back to top <span aria-hidden="true">↑</span>
+</a>
+<span class="copyright">© 2026</span>
+</footer>
+</body>
+</html>

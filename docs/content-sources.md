@@ -62,4 +62,22 @@ Verified 2026-09-09. The existing portfolio, original résumé, and public proje
 
 ## Architecture and design
 
-Static homepage plus three case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, restrained one-time motion, and explicit source links. No raster assets are needed for these technical diagrams.
+Static homepage plus four case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, finite on-view motion with replay controls and reduced-motion support, and explicit source links. No raster assets are needed for these technical diagrams.
+
+
+## SageRec addition · September 9, 2026
+
+- Public source: https://github.com/sathariels/SageRec
+- Source tree reviewed: `884159d373b986510b1d25b428b883c3c3d63e60`. Case-study source links are pinned to this snapshot.
+- CSR construction and native sampling: `cpp/include/sagerec/bipartite_csr.hpp`, `cpp/src/bipartite_csr.cpp`.
+- Python conversion, ownership, GIL release, and error behavior: `cpp/src/bindings.cpp`.
+- Chronological per-user split and cold-start policy: `python/sagerec_prep.py`, ADR-003 in `docs/decisions.md`.
+- Sampling policy: ADR-005; uniform without replacement, full stored neighborhood when k >= degree, local mt19937_64 state. Partial sampling copies O(degree) entries before O(k) shuffle work.
+- MF implementation and ranking policy: `python/sagerec_baseline.py`, `python/sagerec_metrics.py`.
+- Recorded Recall@10 0.03817603393425239 and NDCG@10 0.020303175177886473: `results/mf_movielens_100k.json`. One seed (7), one epoch, 16 factors, 2 negatives, 943 evaluated users, 1,682 movies. Result file records code commit `00940b6489d2d9fac1cee6950df580935d1e939f`. Display values are rounded, not new measurements.
+- Implemented/planned boundary: current README and `docs/architecture.md`. GraphSAGE training, mini-batch integration, native/Python timing charts, and GNN/MF comparison are not implemented. No speedup, zero-copy, trained-GNN, or production-usage claims are made.
+- The README's broad statement about held-out data never entering candidate filtering is narrower in the code: test ranking filters validation positives as well as training positives. The case study describes `sagerec_metrics.py` behavior. Training negative sampling filters training positives only.
+- Interactive graph: original synthetic example, not MovieLens data or model output. Three users, four movies, seven undirected training edges, fourteen CSR entries. User adjacency is [3,4], [4,5,6], [3,6]. The browser computes offsets and neighbors from the drawn edges; controls inspect adjacency, not random sampling.
+- Chronological figure: six illustrative interactions; first four train, fifth validation, sixth test.
+- Typography: original 5×7 bitmap glyphs rendered as SVG paths; Making Software and the user-provided screenshot inform the visual style only.
+- Motion is explanatory and finite: engine stages enter in input/physics/render order; cache requests and memory cells pulse schematically; graph edges trace the selected adjacency; narrative flags highlight the eligible branch. These are illustrations, not execution traces or timing measurements.

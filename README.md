@@ -1,6 +1,6 @@
 # nithilan.dev
 
-An editorial portfolio for Nithilan Kumaran, centered on game engines, concurrent systems, and procedural narrative. The homepage supports a quick scan; three project case studies explain the implementation and its tradeoffs.
+An editorial portfolio for Nithilan Kumaran, centered on game engines, concurrent systems, recommendation infrastructure, and procedural narrative. The homepage supports a quick scan; four project case studies explain the implementation and its tradeoffs.
 
 The site is plain HTML, CSS, and a small progressively enhanced JavaScript file. It has no runtime dependencies, framework, or package installation step. All content and technical figures are available without JavaScript. Inter and IBM Plex Mono load with `font-display: swap` from Google Fonts, with system fallbacks.
 
@@ -18,10 +18,11 @@ Open [localhost:8000](http://localhost:8000). Use HTTP rather than opening HTML 
 
 - `index.html`: homepage, experience, skills, selected writing, and contact.
 - `projects/meridian/index.html`: cache concurrency, routing, benchmark context, and replication.
+- `projects/sagerec/index.html`: train-only CSR construction, seeded sampling, Python bindings, and the recorded MF baseline.
 - `projects/2d-game-engine/index.html`: engine loop, collision broadphase, object lifetime, and layout tradeoffs.
 - `projects/shadow-index/index.html`: actual event dependencies, candidate selection, ASCII renderer, and save/load boundaries.
 - `assets/styles.css`: shared design tokens, layout, diagrams, responsive rules, print styles, and reduced motion.
-- `assets/site.js`: keyboard-accessible collision comparison and brief entrance motion.
+- `assets/site.js`: keyboard-accessible collision and CSR interactions, on-view figure sequences, and replay controls.
 - `resume.pdf`: original résumé, preserved without modification.
 - `docs/content-sources.md`: evidence inventory and claims deliberately omitted or corrected.
 
@@ -44,7 +45,7 @@ A private Sites deployment uses the same static public files in `dist/`, configu
 
 ## Accessibility and motion
 
-Semantic landmarks and headings, a skip link, visible focus outlines, native links and buttons, status announcements for the collision comparison, and `prefers-reduced-motion` support. JS-only controls stay hidden if scripts are unavailable. Technical content stays visible; there are no hover-only facts, autoplay sounds, or persistent animation loops.
+Semantic landmarks and headings, a skip link, visible focus outlines, native links and buttons, status announcements for the collision and graph interactions, and `prefers-reduced-motion` support. JS-only controls stay hidden if scripts are unavailable. Figure sequences run once on entry and finish in under four seconds; optional replay buttons are hidden when reduced motion is requested. The blue pixel heading is an original inline SVG with an accessible text equivalent. Technical content stays visible; there are no hover-only facts, autoplay sounds, or persistent animation loops.
 
 ## License
 
