@@ -22,7 +22,7 @@ Open [localhost:8000](http://localhost:8000). Use HTTP rather than opening HTML 
 - `projects/2d-game-engine/index.html`: engine loop, collision broadphase, object lifetime, and layout tradeoffs.
 - `projects/shadow-index/index.html`: actual event dependencies, candidate selection, ASCII renderer, and save/load boundaries.
 - `assets/styles.css`: shared design tokens, layout, diagrams, responsive rules, print styles, and reduced motion.
-- `assets/site.js`: keyboard-accessible collision and CSR interactions, on-view figure sequences, and replay controls.
+- `assets/site.js`: keyboard-accessible collision and CSR interactions, visible figure loops, background pausing, and shared pause/resume controls.
 - `resume.pdf`: original résumé, preserved without modification.
 - `docs/content-sources.md`: evidence inventory and claims deliberately omitted or corrected.
 
@@ -45,7 +45,7 @@ A private Sites deployment uses the same static public files in `dist/`, configu
 
 ## Accessibility and motion
 
-Semantic landmarks and headings, a skip link, visible focus outlines, native links and buttons, status announcements for the collision and graph interactions, and `prefers-reduced-motion` support. JS-only controls stay hidden if scripts are unavailable. Figure sequences run once on entry and finish in under four seconds; optional replay buttons are hidden when reduced motion is requested. The blue pixel heading is an original inline SVG with an accessible text equivalent. Technical content stays visible; there are no hover-only facts, autoplay sounds, or persistent animation loops.
+Semantic landmarks and headings, a skip link, visible focus outlines, native links and buttons, status announcements for the collision and graph interactions, and `prefers-reduced-motion` support. JS-only controls stay hidden if scripts are unavailable. Illustrations and the pixel heading loop in six-second cycles with a settled interval. Animations pause offscreen and in background tabs. Pause/resume controls stop all motion and remember the choice for the current browser tab across page navigation; controls are hidden when reduced motion is requested. The blue pixel heading is an original inline SVG with an accessible text equivalent. Technical content stays visible; there are no hover-only facts or autoplay sounds.
 
 ## License
 

@@ -62,7 +62,7 @@ Verified 2026-09-09. The existing portfolio, original résumé, and public proje
 
 ## Architecture and design
 
-Static homepage plus four case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, finite on-view motion with replay controls and reduced-motion support, and explicit source links. No raster assets are needed for these technical diagrams.
+Static homepage plus four case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, visible motion loops with pause/resume controls and reduced-motion support, and explicit source links. No raster assets are needed for these technical diagrams.
 
 
 ## SageRec addition · September 9, 2026
@@ -80,8 +80,12 @@ Static homepage plus four case-study routes. The established GitHub Pages struct
 - Interactive graph: original synthetic example, not MovieLens data or model output. Three users, four movies, seven undirected training edges, fourteen CSR entries. User adjacency is [3,4], [4,5,6], [3,6]. The browser computes offsets and neighbors from the drawn edges; controls inspect adjacency, not random sampling.
 - Chronological figure: six illustrative interactions; first four train, fifth validation, sixth test.
 - Typography: original 5×7 bitmap glyphs rendered as SVG paths; Making Software and the user-provided screenshot inform the visual style only.
-- Motion is explanatory and finite: engine stages enter in input/physics/render order; cache requests and memory cells pulse schematically; graph edges trace the selected adjacency; narrative flags highlight the eligible branch. These are illustrations, not execution traces or timing measurements.
+- Motion is explanatory: engine stages enter in input/physics/render order; cache requests and memory cells pulse schematically; graph edges trace the selected adjacency; narrative flags highlight the eligible branch. These are illustrations, not execution traces or timing measurements.
 
 ## Owner correction · September 9, 2026
 
 The owner corrected the current Neureal title to Software Engineering Intern. The homepage current-role summary, experience entry, and Person structured data use this title.
+
+## Repeating motion · September 9, 2026
+
+At the owner’s request, the pixel title and internal diagram sequences repeat on six-second cycles. Layout entrances still run once. Loops pause when offscreen or in background tabs; shared pause controls retain a per-tab preference across navigation. Reduced-motion users receive static diagrams. Illustrated data, graph selection, and reported metrics do not change between cycles.

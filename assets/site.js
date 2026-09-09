@@ -61,49 +61,63 @@ for (const figure of document.querySelectorAll("[data-sage]")) {
   });
 }
 
-// Every sequence finishes in under four seconds. Content is visible before
-// enhancement, and motion never changes the meaning or data in a figure.
+// Loop visible illustrations, with a shared pause preference across pages.
+// Offscreen/background animations pause; reduced motion keeps a static view.
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const figures = [...document.querySelectorAll(".reveal-figure, .hero-figure, .benchmark, .baseline-result")];
-const replayButtons = [];
-function playFigure(figure) {
-  if (reducedMotion.matches) return;
-  figure.classList.remove("is-entering", "motion-active");
-  // Restart the finite CSS sequence only on entry or an explicit replay.
-  void figure.offsetWidth;
-  figure.classList.add("is-entering", "motion-active");
-}
+const figures = [...document.querySelectorAll(".reveal-figure, .hero-grid, .benchmark, .baseline-result")];
+const loopingFigures = new Set();
+const visibleFigures = new Set();
+const motionButtons = [];
+let motionPaused = false;
+try {
+  motionPaused = sessionStorage.getItem("portfolio-motion-paused") === "true";
+} catch { /* Motion controls also work when browser storage is unavailable. */ }
 for (const figure of figures) {
-  if (!figure.matches(".hero-figure, .sage-diagram, .narrative") && !figure.querySelector(".cache-flow")) continue;
+  if (!figure.matches(".hero-grid, .sage-diagram, .narrative, .split-diagram, .benchmark") && !figure.querySelector(".cache-flow")) continue;
+  loopingFigures.add(figure);
   const button = document.createElement("button");
   button.type = "button";
-  button.className = "motion-replay";
-  button.textContent = "Replay motion ↻";
-  const label = [...figure.querySelectorAll(".figure-label > span")]
-    .map((span) => span.textContent.trim().replace(/\s+/g, " ")).join(" / ") || "this figure";
-  button.setAttribute("aria-label", `Replay motion: ${label}`);
-  button.hidden = reducedMotion.matches;
-  button.addEventListener("click", () => playFigure(figure));
-  figure.append(button);
-  replayButtons.push(button);
+  button.className = "motion-toggle";
+  button.addEventListener("click", () => {
+    motionPaused = !motionPaused;
+    try {
+      sessionStorage.setItem("portfolio-motion-paused", String(motionPaused));
+    } catch { /* The in-memory preference remains usable. */ }
+    updateMotionState();
+  });
+  (figure.querySelector(".hero-figure") || figure).append(button);
+  motionButtons.push(button);
 }
-let observer;
-function updateMotionPreference() {
-  observer?.disconnect();
-  for (const button of replayButtons) button.hidden = reducedMotion.matches;
-  if (reducedMotion.matches) {
-    for (const figure of figures) figure.classList.remove("is-entering", "motion-active");
-    return;
+function updateMotionState() {
+  document.documentElement.dataset.motionPaused = String(motionPaused);
+  for (const button of motionButtons) {
+    button.hidden = reducedMotion.matches;
+    button.textContent = motionPaused ? "Resume motion ▶" : "Pause motion Ⅱ";
+    button.setAttribute("aria-label", motionPaused ? "Resume all animations" : "Pause all animations");
   }
-  if (!("IntersectionObserver" in window)) return;
-  observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      playFigure(entry.target);
-      observer.unobserve(entry.target);
+  for (const figure of figures) {
+    const visible = visibleFigures.has(figure);
+    if (reducedMotion.matches) {
+      figure.classList.remove("is-entering", "motion-active");
+    } else if (visible && !motionPaused) {
+      figure.classList.add("is-entering");
+      if (loopingFigures.has(figure)) figure.classList.add("motion-active");
     }
+    figure.classList.toggle("motion-paused", !visible || document.hidden);
+  }
+}
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.15) visibleFigures.add(entry.target);
+      else visibleFigures.delete(entry.target);
+    }
+    updateMotionState();
   }, { threshold: 0.15 });
   for (const figure of figures) observer.observe(figure);
+} else {
+  for (const figure of figures) visibleFigures.add(figure);
 }
-updateMotionPreference();
-reducedMotion.addEventListener("change", updateMotionPreference);
+updateMotionState();
+reducedMotion.addEventListener("change", updateMotionState);
+document.addEventListener("visibilitychange", updateMotionState);
