@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shadow Index — Nithilan Kumaran</title>
+<meta name="description" content="A terminal roguelike where narrative prerequisites and persistent story flags connect one encounter to the next.">
+<meta name="theme-color" content="#fcfcfa">
+<link rel="canonical" href="https://nithilan.dev/projects/shadow-index/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Nithilan Kumaran">
+<meta property="og:title" content="Shadow Index — Nithilan Kumaran">
+<meta property="og:description" content="A terminal roguelike where narrative prerequisites and persistent story flags connect one encounter to the next.">
+<meta property="og:url" content="https://nithilan.dev/projects/shadow-index/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shadow Index — Nithilan Kumaran">
+<meta name="twitter:description" content="A terminal roguelike where narrative prerequisites and persistent story flags connect one encounter to the next.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;450;500;550;600;650;700;750;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script src="/assets/site.js" defer>
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+<div class="wrap nav-row">
+<a class="wordmark" href="/" aria-label="Nithilan Kumaran, home">
+<span class="monogram" aria-hidden="true">n<span>k</span>
+<i>
+</i>
+</span>
+<span>nithilan.dev</span>
+</a>
+<nav aria-label="Main navigation">
+<a href="/#work">Work</a>
+<a href="/#experience">Experience</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a>
+</nav>
+<a class="resume-link" href="/resume.pdf">Résumé <span aria-hidden="true">↗</span>
+</a>
+</div>
+</header>
+<main id="main" class="wrap">
+<header class="case-header">
+<a class="back-link" href="/#work">← All selected work</a>
+<p class="eyebrow">
+<span class="blue">Project 03</span> / Procedural narrative</p>
+<h1>Shadow Index<span class="blue">.</span>
+</h1>
+<p class="case-deck">A terminal roguelike where narrative prerequisites and persistent story flags connect one encounter to the next.</p>
+<div class="case-meta">
+<div class="tags">
+<span>C++17</span>
+<span>Narrative state</span>
+<span>Text serialization</span>
+<span>Make</span>
+</div>
+<a class="text-link" href="https://github.com/sathariels/shadowIndex">Explore the repository <span aria-hidden="true">↗</span>
+</a>
+</div>
+</header>
+<div class="case-layout">
+<nav class="case-toc" aria-label="On this page">
+<p class="eyebrow">In this case study</p>
+<a href="#problem">Procedural doesn’t have to mean disconnected</a>
+<a href="#flags">A real choice, traced through the data</a>
+<a href="#selection">Filter first. Then sample.</a>
+<a href="#terminal">Let the terminal expose the state</a>
+<a href="#boundaries">What the current system does—and leaves open</a>
+<a href="#source">Inspect the event engine</a>
+</nav>
+<div class="case-content">
+<section id="problem" class="case-section">
+<h2>Procedural doesn’t have to mean disconnected</h2>
+<p>Shadow Index is a C++17 terminal roguelike built around narrative events and player state. Its central problem is simple: how can encounters vary between runs while still responding to earlier choices?</p>
+<p>The event system uses prerequisites and state-changing flags. An encounter can introduce an object, a choice can record that the player kept it, and a later event can require that state before it is allowed into the selection pool.</p>
+</section>
+<section id="flags" class="case-section">
+<h2>A real choice, traced through the data</h2>
+<figure class="diagram narrative reveal-figure">
+<div class="figure-label">
+<span>FIG. 04 / A choice becomes state</span>
+<span>Shadow Index</span>
+</div>
+<div class="diagram-stage">
+<div class="story-node">
+<span class="mono">EVENT device_found</span>
+<strong>A Strange Device</strong>
+</div>
+<div class="story-branches">
+<div class="story-branch">
+<span class="choice">Pick it up</span>
+<span class="flag">+ has_device</span>
+<div class="story-node">
+<span class="mono">REQ has_device</span>
+<strong>The Device Awakens</strong>
+</div>
+<span class="outcome">Eligible for selection</span>
+</div>
+<div class="story-branch muted">
+<span class="choice">Leave it alone</span>
+<span class="flag">+ ignored_device</span>
+<div class="story-node">
+<span class="mono">has_device missing</span>
+<strong>The Device Awakens</strong>
+</div>
+<span class="outcome">Excluded from selection</span>
+</div>
+</div>
+</div>
+<figcaption class="diagram-caption">A real event chain from <b>core_events.txt</b>. Flags determine which events may appear; the RNG chooses from the eligible set.</figcaption>
+</figure>
+<p>In <code>device_found</code>, picking up the box adds <code>has_device</code>. Leaving it adds <code>ignored_device</code>. The follow-up, <code>device_activation</code>, declares <code>REQ has_device</code>.</p><pre class="code-block"><code>EVENT device_found
+TITLE A Strange Device
+<span class="comment"># Choice excerpt</span>
+CHOICE Pick it up (+1 Curiosity)
+ADDFLAG has_device
+EFFECT clarity 1
+
+EVENT device_activation
+REQ has_device
+TITLE The Device Awakens</code></pre><p class="source-note">Excerpts from core_events.txt; the comment is an annotation. The choice’s display label says “Curiosity”; its implemented effect updates Clarity.</p>
+<p>This dependency makes the follow-up eligible after that choice. It does not force it to be the next event: the random selection still operates over all currently eligible encounters.</p>
+</section>
+<section id="selection" class="case-section">
+<h2>Filter first. Then sample.</h2>
+<div class="pipeline" aria-label="Narrative event selection">
+<div class="pipeline-step">
+<b>Event library</b>
+<small>external text<br>content</small>
+</div>
+<span class="pipeline-arrow" aria-hidden="true">→</span>
+<div class="pipeline-step">
+<b>Check REQ</b>
+<small>all required<br>flags present?</small>
+</div>
+<span class="pipeline-arrow" aria-hidden="true">→</span>
+<div class="pipeline-step">
+<b>Candidate set</b>
+<small>eligible events<br>only</small>
+</div>
+<span class="pipeline-arrow" aria-hidden="true">→</span>
+<div class="pipeline-step">
+<b>RNG choice</b>
+<small>select one<br>encounter</small>
+</div>
+</div>
+<p>
+<code>EventLibrary::GetRandomEvent</code> scans the loaded events, checks each prerequisite against <code>GameState</code>, and collects valid candidates. The RNG selects an index from that vector. If the vector is empty, the function returns no event.</p>
+<p>IDs are indexed through an <code>unordered_map</code> for direct lookups. Random selection still scans the event collection; it is not a constant-time graph traversal. The current implementation also does not track a visited-event set.</p>
+<div class="callout">
+<p>The flag dependencies express a branching narrative. The implementation does not perform general DAG validation or guarantee non-repeating encounters.</p>
+</div>
+</section>
+<section id="terminal" class="case-section">
+<h2>Let the terminal expose the state</h2>
+<p>The renderer builds its own ASCII borders and text wrapping. It receives a <code>ViewModel</code> containing room text, options, stats, inventory information, and recent log entries, keeping presentation separate from game state.</p><pre class="code-block" aria-label="Condensed reconstruction of the game’s ASCII menu"><code>+----------------------------------+
+| SHADOW INDEX                     |
++----------------------------------+
+| 1. New Run                       |
+| 2. Load Run                      |
+| 3. Quit                          |
++----------------------------------+
+&gt; </code></pre><p class="source-note">Condensed reconstruction of the menu in Renderer.cpp; line width is adapted for this page.</p>
+<p>The game’s stat fields are Resolve, Dread, Clarity, Pride, and Compassion. Narrative choices apply effects to those fields and may add flags or equipment rewards.</p>
+</section>
+<section id="boundaries" class="case-section">
+<h2>What the current system does—and leaves open</h2>
+<p>External event files let narrative content change without recompiling. The seeded generator makes new runs reproducible from an initial seed under the same sequence of actions.</p>
+<p>The current save format stores the seed, depth, stats, inventory, and story flags. On load, the RNG is re-seeded; its full internal state is not serialized. That means loading a run does not guarantee an identical continuation of the random sequence.</p>
+<p>A visited-event policy, graph validation, and full RNG-state persistence would each strengthen different guarantees. Those are possible extensions, not features claimed by this implementation.</p>
+</section>
+<section id="source" class="case-section">
+<h2>Inspect the event engine</h2>
+<p>Build with a C++17 compiler and Make, then run from the repository root so the event data can be found:</p><pre class="code-block"><code>make
+./shadow_index</code></pre><ul class="source-list">
+<li>
+<a href="https://github.com/sathariels/shadowIndex/blob/main/data/events/core_events.txt">data/events/core_events.txt ↗</a>
+<br>Actual narrative nodes, choices, flags, and effects.</li>
+<li>
+<a href="https://github.com/sathariels/shadowIndex/blob/main/src/EventLibrary.cpp">src/EventLibrary.cpp ↗</a>
+<br>Prerequisite filtering and random event selection.</li>
+<li>
+<a href="https://github.com/sathariels/shadowIndex/blob/main/src/ContentLoader.cpp">src/ContentLoader.cpp ↗</a>
+<br>The external event format parser.</li>
+<li>
+<a href="https://github.com/sathariels/shadowIndex/blob/main/src/Game.cpp">src/Game.cpp ↗</a>
+<br>Applying choices and assembling the view model.</li>
+<li>
+<a href="https://github.com/sathariels/shadowIndex/blob/main/src/GameState.cpp">src/GameState.cpp ↗</a>
+<br>Save/load behavior and RNG re-seeding.</li>
+<li>
+<a href="https://github.com/sathariels/shadowIndex/blob/main/src/Renderer.cpp">src/Renderer.cpp ↗</a>
+<br>ASCII borders, wrapping, and terminal presentation.</li>
+</ul>
+</section>
+</div>
+</div>
+<a class="next-project" href="/projects/meridian/">
+<div>
+<p class="eyebrow">Next project</p>
+<h3>Meridian</h3>
+</div>
+<span class="blue" aria-hidden="true">→</span>
+</a>
+</main>
+<footer class="footer wrap">
+<a href="/" class="footer-name">Nithilan Kumaran<span class="blue">.</span>
+</a>
+<span class="mono">Built to be understood.</span>
+<a href="#main">Back to top <span aria-hidden="true">↑</span>
+</a>
+<span class="copyright">© 2026</span>
+</footer>
+</body>
+</html>

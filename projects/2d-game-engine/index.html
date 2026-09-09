@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2D Game Engine — Nithilan Kumaran</title>
+<meta name="description" content="A small engine with visible internals: fixed-step physics, spatial-hash collision detection, explicit ownership, and interpolated rendering.">
+<meta name="theme-color" content="#fcfcfa">
+<link rel="canonical" href="https://nithilan.dev/projects/2d-game-engine/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Nithilan Kumaran">
+<meta property="og:title" content="2D Game Engine — Nithilan Kumaran">
+<meta property="og:description" content="A small engine with visible internals: fixed-step physics, spatial-hash collision detection, explicit ownership, and interpolated rendering.">
+<meta property="og:url" content="https://nithilan.dev/projects/2d-game-engine/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2D Game Engine — Nithilan Kumaran">
+<meta name="twitter:description" content="A small engine with visible internals: fixed-step physics, spatial-hash collision detection, explicit ownership, and interpolated rendering.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;450;500;550;600;650;700;750;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script src="/assets/site.js" defer>
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+<div class="wrap nav-row">
+<a class="wordmark" href="/" aria-label="Nithilan Kumaran, home">
+<span class="monogram" aria-hidden="true">n<span>k</span>
+<i>
+</i>
+</span>
+<span>nithilan.dev</span>
+</a>
+<nav aria-label="Main navigation">
+<a href="/#work">Work</a>
+<a href="/#experience">Experience</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a>
+</nav>
+<a class="resume-link" href="/resume.pdf">Résumé <span aria-hidden="true">↗</span>
+</a>
+</div>
+</header>
+<main id="main" class="wrap">
+<header class="case-header">
+<a class="back-link" href="/#work">← All selected work</a>
+<p class="eyebrow">
+<span class="blue">Project 02</span> / Engine architecture</p>
+<h1>2D Game Engine<span class="blue">.</span>
+</h1>
+<p class="case-deck">A small engine with visible internals: fixed-step physics, spatial-hash collision detection, explicit ownership, and interpolated rendering.</p>
+<div class="case-meta">
+<div class="tags">
+<span>C++20</span>
+<span>SDL2</span>
+<span>SDL2_ttf</span>
+<span>CMake</span>
+</div>
+<a class="text-link" href="https://github.com/sathariels/2DGameEngine">Explore the repository <span aria-hidden="true">↗</span>
+</a>
+</div>
+</header>
+<div class="case-layout">
+<nav class="case-toc" aria-label="On this page">
+<p class="eyebrow">In this case study</p>
+<a href="#problem">Own the path from input to pixels</a>
+<a href="#loop">A fixed step, an interpolated frame</a>
+<a href="#collision">Reduce the collision search space</a>
+<a href="#ownership">Make ownership and lifetime explicit</a>
+<a href="#layout">Component objects are a choice</a>
+<a href="#source">Run it and inspect the source</a>
+</nav>
+<div class="case-content">
+<section id="problem" class="case-section">
+<h2>Own the path from input to pixels</h2>
+<p>I built this engine to understand the layers between a keypress and a rendered frame. It owns input handling, scene objects, physics, collision callbacks, rendering, and the lifetime of the resources those systems use.</p>
+<p>The result is a C++20 / SDL2 engine with two complete examples: <strong>Pong and Breakout</strong>. They exercise the same component model and engine loop, rather than embedding all behavior in separate game-specific loops.</p>
+</section>
+<section id="loop" class="case-section">
+<h2>A fixed step, an interpolated frame</h2>
+<div class="pipeline" aria-label="Engine frame sequence">
+<div class="pipeline-step">
+<b>Frame boundary</b>
+<small>flush queued<br>spawns / destroys</small>
+</div>
+<span class="pipeline-arrow" aria-hidden="true">→</span>
+<div class="pipeline-step">
+<b>Input + physics</b>
+<small>capture input<br>N fixed steps</small>
+</div>
+<span class="pipeline-arrow" aria-hidden="true">→</span>
+<div class="pipeline-step">
+<b>Game logic</b>
+<small>update once<br>per frame</small>
+</div>
+<span class="pipeline-arrow" aria-hidden="true">→</span>
+<div class="pipeline-step">
+<b>Render</b>
+<small>interpolate<br>previous → current</small>
+</div>
+</div>
+<p>The engine accumulates elapsed time and advances physics in fixed increments, configured to <strong>120 Hz by default</strong>. A rendered frame may contain multiple physics steps. Unconsumed time stays in the accumulator.</p><pre class="code-block"><code><span class="comment">// Core sequence in Engine::Run</span>
+accumulator += frameTime;
+while (accumulator &gt;= fixedDt) {
+  physics-&gt;Update(fixedDt, gameObjects);
+  accumulator -= fixedDt;
+}
+Update(frameTime);
+Render(accumulator / fixedDt);</code></pre><p>The final ratio is the interpolation factor between previous and current physics positions. This separates the simulation step from the render rate. Game logic still runs once per rendered frame, so this is not a claim that the entire game is render-rate independent.</p>
+</section>
+<section id="collision" class="case-section">
+<h2>Reduce the collision search space</h2>
+<figure class="diagram reveal-figure" data-physics>
+<div class="figure-label">
+<span>FIG. 03 / Find the nearby pairs</span>
+<span>2D engine</span>
+</div>
+<div class="diagram-controls" role="group" aria-label="Collision comparison mode" hidden>
+<button type="button" data-mode="all" aria-pressed="false" aria-controls="case-physics">All pairs</button>
+<button type="button" data-mode="near" aria-pressed="true" aria-controls="case-physics">Shared cells</button>
+</div>
+<div id="case-physics">
+<svg class="physics-svg" data-mode="near" viewBox="0 0 480 265" role="img" aria-label="Eight colliders in a spatial grid. Blue connections show pairs that share a cell; grey connections in all-pairs mode show unnecessary checks." xmlns="http://www.w3.org/2000/svg">
+<path d="M20 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M75 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M130 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M185 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M240 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M295 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M350 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M405 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M460 20V240" stroke="#dce2ef" stroke-width="1"/>
+<path d="M20 20H460" stroke="#dce2ef" stroke-width="1"/>
+<path d="M20 75H460" stroke="#dce2ef" stroke-width="1"/>
+<path d="M20 130H460" stroke="#dce2ef" stroke-width="1"/>
+<path d="M20 185H460" stroke="#dce2ef" stroke-width="1"/>
+<path d="M20 240H460" stroke="#dce2ef" stroke-width="1"/>
+<rect class="cell-active" x="21" y="21" width="53" height="53"/>
+<rect class="cell-active" x="186" y="76" width="53" height="53"/>
+<rect class="cell-active" x="351" y="76" width="53" height="53"/>
+<rect class="cell-active" x="296" y="76" width="53" height="53"/>
+<line class="pair near" x1="54.5" y1="60.0" x2="79.0" y2="76.0"/>
+<line class="pair" x1="54.5" y1="60.0" x2="209.0" y2="63.0"/>
+<line class="pair" x1="54.5" y1="60.0" x2="235.5" y2="91.0"/>
+<line class="pair" x1="54.5" y1="60.0" x2="351.5" y2="65.5"/>
+<line class="pair" x1="54.5" y1="60.0" x2="359.5" y2="94.5"/>
+<line class="pair" x1="54.5" y1="60.0" x2="94.0" y2="205.0"/>
+<line class="pair" x1="54.5" y1="60.0" x2="234.0" y2="195.5"/>
+<line class="pair" x1="79.0" y1="76.0" x2="209.0" y2="63.0"/>
+<line class="pair" x1="79.0" y1="76.0" x2="235.5" y2="91.0"/>
+<line class="pair" x1="79.0" y1="76.0" x2="351.5" y2="65.5"/>
+<line class="pair" x1="79.0" y1="76.0" x2="359.5" y2="94.5"/>
+<line class="pair" x1="79.0" y1="76.0" x2="94.0" y2="205.0"/>
+<line class="pair" x1="79.0" y1="76.0" x2="234.0" y2="195.5"/>
+<line class="pair near" x1="209.0" y1="63.0" x2="235.5" y2="91.0"/>
+<line class="pair" x1="209.0" y1="63.0" x2="351.5" y2="65.5"/>
+<line class="pair" x1="209.0" y1="63.0" x2="359.5" y2="94.5"/>
+<line class="pair" x1="209.0" y1="63.0" x2="94.0" y2="205.0"/>
+<line class="pair" x1="209.0" y1="63.0" x2="234.0" y2="195.5"/>
+<line class="pair" x1="235.5" y1="91.0" x2="351.5" y2="65.5"/>
+<line class="pair" x1="235.5" y1="91.0" x2="359.5" y2="94.5"/>
+<line class="pair" x1="235.5" y1="91.0" x2="94.0" y2="205.0"/>
+<line class="pair" x1="235.5" y1="91.0" x2="234.0" y2="195.5"/>
+<line class="pair near" x1="351.5" y1="65.5" x2="359.5" y2="94.5"/>
+<line class="pair" x1="351.5" y1="65.5" x2="94.0" y2="205.0"/>
+<line class="pair" x1="351.5" y1="65.5" x2="234.0" y2="195.5"/>
+<line class="pair" x1="359.5" y1="94.5" x2="94.0" y2="205.0"/>
+<line class="pair" x1="359.5" y1="94.5" x2="234.0" y2="195.5"/>
+<line class="pair" x1="94.0" y1="205.0" x2="234.0" y2="195.5"/>
+<rect class="collider" x="40" y="47" width="29" height="26"/>
+<text x="54.5" y="64.0" text-anchor="middle">A</text>
+<rect class="collider" x="64" y="64" width="30" height="24"/>
+<text x="79.0" y="80.0" text-anchor="middle">B</text>
+<rect class="collider" x="197" y="48" width="24" height="30"/>
+<text x="209.0" y="67.0" text-anchor="middle">C</text>
+<rect class="collider" x="223" y="75" width="25" height="32"/>
+<text x="235.5" y="95.0" text-anchor="middle">D</text>
+<rect class="collider" x="334" y="55" width="35" height="21"/>
+<text x="351.5" y="69.5" text-anchor="middle">E</text>
+<rect class="collider" x="347" y="82" width="25" height="25"/>
+<text x="359.5" y="98.5" text-anchor="middle">F</text>
+<rect class="collider" x="82" y="193" width="24" height="24"/>
+<text x="94.0" y="209.0" text-anchor="middle">G</text>
+<rect class="collider" x="220" y="183" width="28" height="25"/>
+<text x="234.0" y="199.5" text-anchor="middle">H</text>
+</svg>
+<div class="diagram-result" role="status" data-all="28" data-near="3">3 candidate pairs instead of 28.</div>
+</div>
+<figcaption class="diagram-caption">
+<b>Only check objects that share a cell.</b> A small illustrative scene, using the engine’s broadphase rule. A shared cell is a candidate, not a confirmed collision.</figcaption>
+</figure>
+<p>The broadphase inserts each collider into every uniform-grid cell overlapped by its bounds. Only objects sharing a cell become candidates for an AABB test. A pair key prevents two large colliders from being checked repeatedly when they share several cells.</p>
+<p>The diagram uses eight illustrative colliders and computes the shared-cell pairs from their bounds. It demonstrates candidate reduction, not a measured speedup. Dense scenes can still produce many pairs.</p>
+<h3>Detection is only half the system</h3>
+<p>Static, dynamic, and trigger colliders have different behavior. Triggers report events without positional resolution. Dynamic collisions use reflection with restitution, while active-pair tracking emits enter, stay, and exit callbacks.</p>
+</section>
+<section id="ownership" class="case-section">
+<h2>Make ownership and lifetime explicit</h2>
+<p>The engine owns scene objects through <code>unique_ptr</code>. Each <code>GameObject</code> contains reusable components, including a transform. Components receive the systems they need through <code>UpdateContext</code> and <code>RenderContext</code>; there are no global system singletons.</p>
+<p>Spawns enter a pending queue. Destruction marks an object for removal. At the next frame boundary, the engine removes its physics pairs, sends exit callbacks to surviving partners, sweeps destroyed objects, and incorporates pending additions. This keeps callbacks from leaving collision pairs pointing at deleted objects.</p>
+<h3>Reuse the expensive resources</h3>
+<p>Texture and font managers own rendering resources. Text uses dirty-state tracking so it can reuse its texture until the content changes, and fonts are cached by size.</p>
+</section>
+<section id="layout" class="case-section">
+<h2>Component objects are a choice</h2>
+<p>This engine uses <strong>component objects, not a data-oriented ECS</strong>. A game object owns heap-allocated components, and behavior is reached through virtual calls. That is convenient for small games with entity-centric logic.</p>
+<figure class="diagram">
+<div class="figure-label">
+<span>Memory access / conceptual layouts</span>
+</div>
+<div class="diagram-stage">
+<div class="memory-layout">
+<span>Objects</span>
+<div class="memory-boxes scattered">
+<span>→ object</span>
+<span>→ object</span>
+<span>→ object</span>
+</div>
+</div>
+<div class="memory-layout">
+<span>SoA</span>
+<div class="memory-boxes">
+<span>x x x x</span>
+<span>y y y y</span>
+<span>v v v v</span>
+</div>
+</div>
+</div>
+<figcaption class="diagram-caption">The experiment contrasts scattered component objects with contiguous arrays of the data a movement system needs.</figcaption>
+</figure>
+<p>The separate <code>ecs_benchmark</code> compares three layouts for the same movement workload: heap-scattered objects, an array of structs, and parallel arrays of hot data. It explores cache locality without claiming that the engine itself has been converted to ECS.</p>
+<div class="callout">
+<p>For Pong and Breakout, component objects keep gameplay code straightforward. Moving a hot system to contiguous storage is a profiling decision, not a prerequisite for calling something an engine.</p>
+</div>
+<p>Image-file loading, audio, animation, tilemaps, and an integrated frame-time profiler remain on the repository roadmap.</p>
+</section>
+<section id="source" class="case-section">
+<h2>Run it and inspect the source</h2>
+<p>With a C++20 compiler, CMake, SDL2, and SDL2_ttf installed:</p><pre class="code-block"><code>cmake -S . -B build
+cmake --build build
+./build/Pong
+<span class="comment"># Or: ./build/Breakout</span></code></pre><ul class="source-list">
+<li>
+<a href="https://github.com/sathariels/2DGameEngine/blob/main/src/Engine.cpp">src/Engine.cpp ↗</a>
+<br>Main loop, ownership, deferred scene changes, and rendering.</li>
+<li>
+<a href="https://github.com/sathariels/2DGameEngine/blob/main/src/Physics.cpp">src/Physics.cpp ↗</a>
+<br>Spatial hashing, pair deduplication, AABB checks, and resolution.</li>
+<li>
+<a href="https://github.com/sathariels/2DGameEngine/blob/main/include/Engine.h">include/Engine.h ↗</a>
+<br>Engine configuration and default timestep.</li>
+<li>
+<a href="https://github.com/sathariels/2DGameEngine/blob/main/examples/Breakout.cpp">examples/Breakout.cpp ↗</a>
+<br>An example game exercising runtime object lifetime.</li>
+<li>
+<a href="https://github.com/sathariels/2DGameEngine/blob/main/experiments/README.md">experiments/README.md ↗</a>
+<br>The component-object versus ECS storage tradeoff.</li>
+<li>
+<a href="https://github.com/sathariels/2DGameEngine/blob/main/experiments/ecs_benchmark.cpp">experiments/ecs_benchmark.cpp ↗</a>
+<br>The standalone movement benchmark.</li>
+</ul>
+</section>
+</div>
+</div>
+<a class="next-project" href="/projects/shadow-index/">
+<div>
+<p class="eyebrow">Next project</p>
+<h3>Shadow Index</h3>
+</div>
+<span class="blue" aria-hidden="true">→</span>
+</a>
+</main>
+<footer class="footer wrap">
+<a href="/" class="footer-name">Nithilan Kumaran<span class="blue">.</span>
+</a>
+<span class="mono">Built to be understood.</span>
+<a href="#main">Back to top <span aria-hidden="true">↑</span>
+</a>
+<span class="copyright">© 2026</span>
+</footer>
+</body>
+</html>
