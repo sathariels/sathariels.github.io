@@ -28,8 +28,9 @@ Verified 2026-09-09. The existing portfolio, original résumé, and public proje
 
 | Portfolio content | Evidence |
 | --- | --- |
-| Name, education, Game Design minor, graduation, certifications, skills | Original résumé and existing homepage |
-| Neureal, Sentari AI, Carrier roles and dates | Original résumé and existing experience data |
+| Name, degree, graduation, certifications, skills | Original résumé and existing homepage |
+| Applications of Artificial Intelligence in Engineering minor | Owner correction, September 10, 2026 |
+| Neureal, Sentari AI, Carrier roles and dates | Original résumé and existing experience data, with owner title corrections below |
 | 5% gameplay latency reduction, 15% production defect reduction | Original résumé; no newly inferred metrics |
 | Meridian throughput: 838K, 5.3M, 10.3M ops/sec | Current Meridian README baseline; Apple M3, 8 threads, 4M in-process operations |
 | LRU reads mutate recency; striped mutexes; hash remixing | Meridian `src/cache/lru_cache.cpp` and `striped_cache.cpp` |
@@ -89,3 +90,7 @@ The owner corrected the current Neureal title to Software Engineering Intern. Th
 ## Repeating motion · September 9, 2026
 
 At the owner’s request, the pixel title and internal diagram sequences repeat on six-second cycles. Layout entrances still run once. Loops pause when offscreen or in background tabs; shared pause controls retain a per-tab preference across navigation. Reduced-motion users receive static diagrams. Illustrated data, graph selection, and reported metrics do not change between cycles.
+
+## Owner corrections · September 10, 2026
+
+The owner clarified the minor as Applications of Artificial Intelligence in Engineering and the Sentari AI role as Software Engineering Intern. The homepage education and experience sections use those exact names.
