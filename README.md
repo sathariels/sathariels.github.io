@@ -2,7 +2,7 @@
 
 An editorial portfolio for Nithilan Kumaran, centered on game engines, concurrent systems, recommendation infrastructure, and procedural narrative. The homepage supports a quick scan; four project case studies explain the implementation and its tradeoffs.
 
-The site is plain HTML, CSS, and a small progressively enhanced JavaScript file. It has no runtime dependencies, framework, or package installation step. All content and technical figures are available without JavaScript. A decorative blue pixel flower sits beside Contact on wide screens and in the homepage footer on narrower screens. Inter and IBM Plex Mono load with `font-display: swap` from Google Fonts, with system fallbacks.
+The site is plain HTML, CSS, and a small progressively enhanced JavaScript file. It has no runtime dependencies, framework, or package installation step. All content and technical figures are available without JavaScript. Three small blue pixel lilies accent Selected Work, About, and Contact. They sit in the margins on wide screens; on narrower screens, the first two use section spacing and the last sits in the footer. Inter and IBM Plex Mono load with `font-display: swap` from Google Fonts, with system fallbacks.
 
 ## Run locally
 
@@ -45,7 +45,7 @@ A private Sites deployment uses the same static public files in `dist/`, configu
 
 ## Accessibility and motion
 
-Semantic landmarks and headings, a skip link, visible focus outlines, native links and buttons, status announcements for the collision and graph interactions, and `prefers-reduced-motion` support. JS-only controls stay hidden if scripts are unavailable. Illustrations and the pixel heading loop in six-second cycles with a settled interval. The footer flower sways gently on a seven-second cycle and shares the same pause and visibility controls. Animations pause offscreen and in background tabs. Pause/resume controls stop all motion and remember the choice for the current browser tab across page navigation; controls are hidden when reduced motion is requested. The blue pixel heading is an original inline SVG with an accessible text equivalent. Technical content stays visible; there are no hover-only facts or autoplay sounds.
+Semantic landmarks and headings, a skip link, visible focus outlines, native links and buttons, status announcements for the collision and graph interactions, and `prefers-reduced-motion` support. JS-only controls stay hidden if scripts are unavailable. Illustrations and the pixel heading loop in six-second cycles with a settled interval. The Contact/footer lily sways gently on a seven-second cycle and shares the same pause and visibility controls; the other two lilies stay still. Animations pause offscreen and in background tabs. Pause/resume controls stop all motion and remember the choice for the current browser tab across page navigation; controls are hidden when reduced motion is requested. The blue pixel heading is an original inline SVG with an accessible text equivalent. Technical content stays visible; there are no hover-only facts or autoplay sounds.
 
 ## License
 

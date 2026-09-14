@@ -99,3 +99,24 @@ The owner clarified the minor as Applications of Artificial Intelligence in Engi
 ## Pixel flower · September 14, 2026
 
 At the owner’s request, an original blue pixel-art flower sprig adds a decorative accent near Contact. The transparent PNG was generated specifically for this portfolio. It sits in the outer right margin at widths of 1,360px and above, and in the homepage footer on narrower screens. Its gentle sway uses the existing shared pause preference, offscreen/background pausing, and reduced-motion behavior. The image is decorative, has an empty alt attribute, and loads lazily; it represents no project output or biographical claim.
+
+## Small lilies · September 14, 2026
+
+The owner approved three small blue pixel lilies near Selected Work, About, and Contact. A new original transparent lily asset replaces the displayed Contact flower and is reused at different sizes and orientations for the two additional accents. Selected Work and About stay static; only Contact retains the shared seven-second sway and pause controls. At widths below 1,360px, the first two lilies fit into existing section spacing; Contact retains its footer placement. All three remain decorative, non-interactive, and lazily loaded, with reserved image dimensions.
+
+
+Asset: `assets/pixel-lily.png` · 887 × 1,774 pixels, RGBA · generated with the built-in image tool, one request. The previous flower source is retained in `assets/pixel-flower.png`.
+
+Generation prompt:
+
+```text
+Use case: stylized-concept
+Asset type: ONE standalone transparent PNG decorative sprite for a clean technical portfolio.
+Primary request: a small elegant blue pixel-art lily sprig that remains unmistakably a lily when displayed at 45–72 pixels wide and 90–144 pixels tall.
+Scene/backdrop: genuinely transparent background with an alpha channel.
+Subject: one open lily bloom with six pointed recurved petals and a few fine blue stamens; a slender slightly curved stem with two narrow lance-shaped leaves.
+Style/medium: original crisp pixel art with stepped pixel edges on a consistent coarse grid, simple readable silhouette and restrained detail.
+Composition/framing: portrait 1:2 composition; single sprig centered, bloom near the top and stem reaching down, minimal transparent padding; entire flower and leaves visible.
+Color palette: cobalt blue centered on #2044ff with just one lighter blue; no green or other colors.
+Constraints: generate exactly one asset, no variants, preserve true transparency. No shadow, text, pot, soil, border, checkerboard pattern, background color or interface.
+```
