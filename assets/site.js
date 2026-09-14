@@ -64,7 +64,7 @@ for (const figure of document.querySelectorAll("[data-sage]")) {
 // Loop visible illustrations, with a shared pause preference across pages.
 // Offscreen/background animations pause; reduced motion keeps a static view.
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const figures = [...document.querySelectorAll(".reveal-figure, .hero-grid, .benchmark, .baseline-result")];
+const figures = [...document.querySelectorAll(".reveal-figure, .hero-grid, .benchmark, .baseline-result, .flower-accent")];
 const loopingFigures = new Set();
 const visibleFigures = new Set();
 const motionButtons = [];
@@ -73,7 +73,7 @@ try {
   motionPaused = sessionStorage.getItem("portfolio-motion-paused") === "true";
 } catch { /* Motion controls also work when browser storage is unavailable. */ }
 for (const figure of figures) {
-  if (!figure.matches(".hero-grid, .sage-diagram, .narrative, .split-diagram, .benchmark") && !figure.querySelector(".cache-flow")) continue;
+  if (!figure.matches(".hero-grid, .sage-diagram, .narrative, .split-diagram, .benchmark, .flower-accent") && !figure.querySelector(".cache-flow")) continue;
   loopingFigures.add(figure);
   const button = document.createElement("button");
   button.type = "button";
@@ -85,7 +85,11 @@ for (const figure of figures) {
     } catch { /* The in-memory preference remains usable. */ }
     updateMotionState();
   });
-  (figure.querySelector(".hero-figure") || figure).append(button);
+  // Keep the flower decorative; its shared motion control belongs in the footer.
+  const controlsHost = figure.matches(".flower-accent")
+    ? figure.parentElement
+    : figure.querySelector(".hero-figure") || figure;
+  controlsHost.append(button);
   motionButtons.push(button);
 }
 function updateMotionState() {

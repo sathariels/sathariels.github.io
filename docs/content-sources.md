@@ -63,7 +63,7 @@ Verified 2026-09-09. The existing portfolio, original résumé, and public proje
 
 ## Architecture and design
 
-Static homepage plus four case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, visible motion loops with pause/resume controls and reduced-motion support, and explicit source links. No raster assets are needed for these technical diagrams.
+Static homepage plus four case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, visible motion loops with pause/resume controls and reduced-motion support, and explicit source links. The technical diagrams use code-native geometry; the separate decorative flower is a raster asset.
 
 
 ## SageRec addition · September 9, 2026
@@ -94,3 +94,8 @@ At the owner’s request, the pixel title and internal diagram sequences repeat 
 ## Owner corrections · September 10, 2026
 
 The owner clarified the minor as Applications of Artificial Intelligence in Engineering and the Sentari AI role as Software Engineering Intern. The homepage education and experience sections use those exact names.
+
+
+## Pixel flower · September 14, 2026
+
+At the owner’s request, an original blue pixel-art flower sprig adds a decorative accent near Contact. The transparent PNG was generated specifically for this portfolio. It sits in the outer right margin at widths of 1,360px and above, and in the homepage footer on narrower screens. Its gentle sway uses the existing shared pause preference, offscreen/background pausing, and reduced-motion behavior. The image is decorative, has an empty alt attribute, and loads lazily; it represents no project output or biographical claim.

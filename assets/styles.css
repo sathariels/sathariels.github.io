@@ -911,7 +911,7 @@ h4 {
 .footer .mono {
   font-size: .75rem;
 }
-.footer > a:nth-last-child(2) {
+.footer > a[href="#main"] {
   margin-left: auto;
 }
 .copyright {
@@ -1442,7 +1442,7 @@ h4 {
     order: 3;
     width: 70%;
   }
-  .footer > a:nth-last-child(2) {
+  .footer > a[href="#main"] {
     margin-left: auto;
   }
   .copyright {
@@ -2253,6 +2253,97 @@ html[data-motion-paused=true] *::after {
     fill: #202322;
   }
   .motion-toggle {
+    display: none;
+  }
+}
+.footer-home {
+  position: relative;
+  flex-wrap: wrap;
+  padding-right: 90px;
+  min-height: 156px;
+}
+.flower-accent {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 64px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+.flower-accent img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  transform-origin: 55% 93%;
+}
+.footer-home > .motion-toggle {
+  margin: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .flower-accent.motion-active img {
+    animation: flower-sway 7s ease-in-out infinite;
+  }
+}
+@keyframes flower-sway {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+@media (min-width:1360px) {
+  .footer-home {
+    padding-right: 0;
+    min-height: 0;
+  }
+  .flower-accent {
+    top: auto;
+    bottom: calc(100% + 50px);
+    right: -88px;
+    width: 96px;
+    transform: none;
+  }
+}
+@media (max-width:760px) {
+  .footer-home {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 60px;
+    gap: 12px 24px;
+    padding-right: 0;
+    min-height: 0;
+  }
+  .footer-home > .footer-name {
+    grid-area: 1 / 1;
+  }
+  .footer-home > .mono {
+    grid-area: 2 / 1;
+    width: auto;
+  }
+  .footer-home > a[href="#main"] {
+    grid-area: 3 / 1;
+    margin-left: 0;
+    justify-self: start;
+  }
+  .footer-home > .copyright {
+    grid-area: 4 / 1;
+    margin-left: 0;
+  }
+  .footer-home > .motion-toggle {
+    grid-area: 5 / 1;
+    justify-self: start;
+  }
+  .flower-accent {
+    position: static;
+    grid-area: 1 / 2 / span 5 / 3;
+    width: 60px;
+    align-self: center;
+    transform: none;
+  }
+}
+@media print {
+  .flower-accent {
     display: none;
   }
 }
