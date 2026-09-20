@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jevcheck — Nithilan Kumaran</title>
+<meta name="description" content="Inside jevcheck: typed behavioral contracts, recorded baselines, model-identity checks, and repeatable comparisons for TypeSafe Jev upgrades.">
+<meta name="theme-color" content="#fcfcfa">
+<link rel="canonical" href="https://nithilan.dev/projects/jevcheck/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Nithilan Kumaran">
+<meta property="og:title" content="jevcheck — Nithilan Kumaran">
+<meta property="og:description" content="Inside jevcheck: typed behavioral contracts, recorded baselines, model-identity checks, and repeatable comparisons for TypeSafe Jev upgrades.">
+<meta property="og:url" content="https://nithilan.dev/projects/jevcheck/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jevcheck — Nithilan Kumaran">
+<meta name="twitter:description" content="Inside jevcheck: typed behavioral contracts, recorded baselines, model-identity checks, and repeatable comparisons for TypeSafe Jev upgrades.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;450;500;550;600;650;700;750;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script src="/assets/site.js" defer>
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+<div class="wrap nav-row">
+<a class="wordmark" href="/" aria-label="Nithilan Kumaran, home">
+<span class="monogram" aria-hidden="true">n<span>k</span>
+<i>
+</i>
+</span>
+<span>nithilan.dev</span>
+</a>
+<nav aria-label="Main navigation">
+<a href="/#work">Work</a>
+<a href="/#experience">Experience</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a>
+</nav>
+<a class="resume-link" href="/resume.pdf">Résumé <span aria-hidden="true">↗</span>
+</a>
+</div>
+</header>
+<main id="main" class="wrap">
+<header class="case-header">
+<a class="back-link" href="/#work">← All selected work</a>
+<p class="eyebrow"><span class="blue">Project 01</span> / AI evaluation &amp; developer tooling</p>
+<h1>jevcheck<span class="blue">.</span></h1>
+<p class="case-deck">A model upgrade can keep the same API and change the behavior underneath. I built a Python library and CLI that makes those changes inspectable before changing the production model pin.</p>
+<div class="case-meta"><div class="tags"><span>Python 3.11+</span><span>Pydantic</span><span>TypeSafe SDK</span><span>GitHub Actions</span></div><a class="text-link" href="https://github.com/sathariels/jevcheck">Explore the repository <span aria-hidden="true">↗</span></a></div>
+</header>
+<div class="case-layout"><nav class="case-toc" aria-label="On this page"><p class="eyebrow">In this case study</p><a href="#problem">Turn an upgrade into a test</a>
+<a href="#contract">Specify the behavior that matters</a>
+<a href="#compare">One evaluator, two sources of truth</a>
+<a href="#replay">Read the difference</a>
+<a href="#identity">Verify which model answered</a>
+<a href="#ci">Make the result useful in CI</a>
+<a href="#scope">Scope and open-source contribution</a>
+<a href="#source">Follow the implementation</a>
+</nav><div class="case-content">
+<section id="problem" class="case-section"><h2>Turn an upgrade into a test</h2>
+<p>An application can depend on more than an answer’s shape. A support workflow may need a billing ticket to remain classified as billing, with enough confidence to take the next step. A candidate model can satisfy the response schema while changing that decision.</p>
+<p>jevcheck tests those expectations for TypeSafe Jev’s System One API. It loads a contract, evaluates candidate answers, and reports unchanged cases, confidence regressions, and answer flips. The same checks run against live responses or local replay files.</p>
+<div class="callout"><p><strong>The question is compatibility with an explicit contract.</strong> The result tells you which tested behaviors changed and why. It does not rank a model’s general intelligence or prove that an upgrade is safe for every input.</p></div>
+</section>
+<section id="contract" class="case-section"><h2>Specify the behavior that matters</h2>
+<p>A JSON or JSONL contract ties a baseline model to named cases. Each case contains input state, typed questions, and expectations. Contract-wide defaults establish floors and tolerances; individual fields can override them.</p>
+<div class="table-scroll"><table class="technical-table"><caption>Three answer types, three comparison rules</caption><thead><tr><th scope="col">Answer</th><th scope="col">What the evaluator checks</th></tr></thead><tbody>
+<tr><td>Choice</td><td>An expected category, a confidence floor, and an allowed drop from baseline confidence.</td></tr>
+<tr><td>Noul</td><td>A yes/no threshold over a 0–1 value, optional absolute drift tolerance, and minimum values.</td></tr>
+<tr><td>Score</td><td>A change in the rounded score level, with a tolerance that can suppress that flip, plus confidence checks.</td></tr>
+</tbody></table></div>
+<p>Pydantic validates the boundary: duplicate case IDs, unknown expected fields, empty expectations, and rules for the wrong answer type are rejected. Candidate answers carry typed choice, noul, or score data. Probability maps must be finite, nonnegative, and sum to one within the declared tolerance.</p>
+<p>Some rules are deliberately more specific than a generic numeric difference. A score change within the same rounded level is not an answer flip, even when its absolute distance exceeds the score tolerance. Inclusive drift boundaries use a small epsilon so binary floating-point subtraction does not turn an exact decimal boundary into a failure.</p>
+</section>
+<section id="compare" class="case-section"><h2>One evaluator, two sources of truth</h2>
+<p><code>eval</code> compares a candidate with the expectations written in a fixture. The <code>record</code> and <code>compare</code> workflow adds another reference: what the baseline model actually answered.</p>
+<div class="pipeline" aria-label="Baseline responses become derived expectations; the existing evaluator compares the candidate"><div class="pipeline-step"><b>Record baseline</b><small>Answers by case ID</small></div><span class="pipeline-arrow" aria-hidden="true">→</span><div class="pipeline-step"><b>Derive expectations</b><small>Keep floors &amp; tolerances</small></div><span class="pipeline-arrow" aria-hidden="true">→</span><div class="pipeline-step"><b>Evaluate candidate</b><small>Reuse the comparison rules</small></div></div>
+<p>I kept one evaluation engine. <code>contract_from_baseline()</code> fills expected choices, values, and baseline confidence from the recorded answers while preserving the contract’s resolved floors and tolerances. It then passes the derived contract into the existing <code>evaluate()</code> function.</p>
+<p>This separates intended behavior from observed behavior without creating two competing implementations of the comparison rules. The original contract is not rewritten. A saved baseline can be reused, or <code>compare</code> can fetch both models live.</p>
+<p>Baseline data must be valid before it becomes the reference. Missing baseline cases, missing expected fields, and answer types that disagree with their questions are rejected as input errors. A missing answer on the candidate side is instead reported as a behavioral flip.</p>
+</section>
+<section id="replay" class="case-section"><h2>Read the difference</h2>
+<p>The support-triage fixtures make the distinction concrete. In the breaking replay, ticket 002 changes its intent from general to billing. Ticket 003 keeps the billing label, but its intent confidence falls from 0.92 to 0.71 and its urgency confidence falls from 0.91 to 0.71.</p>
+<figure class="diagram jev-diagram reveal-figure" data-jevcheck>
+<div class="figure-label"><span>FIG. 02 / Catch the behavioral change</span><span>jevcheck</span></div>
+<div class="jev-flow" aria-label="Recorded baseline, compare candidate, report differences"><span>Record</span><span>Compare</span><span>Report</span></div>
+<div class="diagram-controls" role="group" aria-label="Choose a recorded candidate replay" hidden>
+<button type="button" data-replay="unchanged" aria-pressed="false" aria-controls="case-jevcheck-replay">Compatible replay</button>
+<button type="button" data-replay="breaking" aria-pressed="true" aria-controls="case-jevcheck-replay">Breaking replay</button>
+</div>
+<div id="case-jevcheck-replay">
+<table class="jev-table"><caption>Support triage · intent answers</caption><thead><tr><th scope="col">Case</th><th scope="col">Baseline</th><th scope="col">Candidate</th></tr></thead><tbody>
+<tr><th scope="row">001</th><td>billing<small>0.93 confidence</small></td><td><span data-candidate>billing</span><small data-confidence>0.93 confidence</small><span class="jev-outcome" data-outcome>Unchanged</span></td></tr>
+<tr><th scope="row">002</th><td>general<small>0.88 confidence</small></td><td><span data-candidate>billing</span><small data-confidence>0.81 confidence</small><span class="jev-outcome" data-outcome>Answer flip</span></td></tr>
+<tr><th scope="row">003</th><td>billing<small>0.92 confidence</small></td><td><span data-candidate>billing</span><small data-confidence>0.71 confidence</small><span class="jev-outcome" data-outcome>Confidence drop</span></td></tr>
+</tbody></table>
+<p class="jev-verdict" data-jev-status role="status" aria-live="polite" aria-atomic="true">Breaking · exit 1. One unchanged case, one answer flip, one confidence regression.</p>
+</div>
+<figcaption class="diagram-caption"><b>The answer can stay the same and still fail.</b> <span data-jev-note>Ticket 003 keeps “billing,” but drops below its 0.85 confidence floor. Intent fields shown; its urgency confidence also regresses. Repository replay fixtures, not live model results.</span></figcaption>
+</figure>
+<p>Both fields on ticket 003 fail, but the report counts cases. A case inherits its most severe field outcome: answer flip, then confidence regression, then unchanged. The fixture therefore produces one unchanged case, one flip, and one regression across three cases.</p>
+<pre class="code-block"><code>jevcheck compare fixtures/support-triage.json \
+  --from fixtures/replay-baseline.json \
+  --to jev-1.14 \
+  --answers fixtures/replay-breaking.json</code></pre>
+<p class="source-note">This command uses local replay files and needs no API key. The fixture labels <code>jev-1.13</code> and <code>jev-1.14</code> are example identifiers, not verified live model versions. The comparison above was checked against the repository’s evaluator.</p>
+</section>
+<section id="identity" class="case-section"><h2>Verify which model answered</h2>
+<p>A useful comparison has to identify its inputs. For a concrete model pin, every response must report the exact requested model name. A missing identity or a different version fails the check; shorthand names are not silently expanded.</p>
+<p>Floating names containing <code>latest</code> or <code>preview</code> are rejected by default. Explicit opt-in permits an alias, but the response must resolve to a nonempty concrete name, which the report records. A response containing another floating alias still fails.</p>
+<p>The typed client adapts SDK responses, while the evaluation and comparison paths enforce response identity. These boundaries keep malformed data or the wrong model from being mistaken for a successful behavioral check.</p>
+</section>
+<section id="ci" class="case-section"><h2>Make the result useful in CI</h2>
+<p>The CLI turns a readable report into a release check through distinct exit codes. A composite GitHub Action installs a selected jevcheck package version and runs <code>eval</code>, <code>record</code>, or <code>compare</code>.</p>
+<div class="table-scroll"><table class="technical-table"><caption>CLI outcomes</caption><thead><tr><th scope="col">Exit</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr><td>0</td><td>Compatible comparison, or a successful baseline recording.</td></tr>
+<tr><td>1</td><td>A behavioral contract failed.</td></tr>
+<tr><td>2</td><td>Usage, input, or model-identity error.</td></tr>
+<tr><td>3</td><td>Operational failure, such as an API error or invalid API response.</td></tr>
+</tbody></table></div>
+<p>Replay files make the comparison path repeatable in CI without calling the model service. The repository includes tests for contract validation, pinning, answer adaptation, comparison behavior, CLI failures, and floating-point boundaries. Live evaluation remains available through the SDK-backed client.</p>
+<p>The checked-in Action uses environment variables and a Bash argument array to pass inputs to the CLI. It rejects conflicting baseline sources and candidate names instead of guessing which one the caller intended.</p>
+</section>
+<section id="scope" class="case-section"><h2>Scope and open-source contribution</h2>
+<p>jevcheck is an MIT-licensed Python library and command-line tool, with a composite GitHub Action. The reviewed source identifies the package as version 0.2.0 and alpha-stage software. Its current scope is TypeSafe Jev’s typed System One answers.</p>
+<p>I’ve submitted jevcheck to the Development &amp; Workflow section of <a href="https://github.com/hashgraph-online/awesome-ai-plugins">awesome-ai-plugins</a>. <a href="https://github.com/hashgraph-online/awesome-ai-plugins/pull/395">The listing contribution, PR #395</a>, was open when this case study was reviewed on September 20, 2026.</p>
+<p>The replay example demonstrates the implementation’s decisions; it is not a measured comparison of live models or evidence of production adoption. A passing contract covers the selected cases and rules. Broader evaluation still depends on the quality and coverage of those cases.</p>
+</section>
+<section id="source" class="case-section"><h2>Follow the implementation</h2>
+<p>Reviewed September 20, 2026. Implementation links are pinned to the inspected source snapshot.</p>
+<ul class="source-list"><li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/src/jevcheck/contract.py">src/jevcheck/contract.py ↗</a><br>Contract schema, defaults, typed expectations, JSON/JSONL loading, and replay files.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/src/jevcheck/compare.py">src/jevcheck/compare.py ↗</a><br>Baseline recording, answer-kind checks, and the derived-contract path.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/src/jevcheck/eval.py">src/jevcheck/eval.py ↗</a><br>Field comparisons, case severity, numeric boundaries, and reports.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/src/jevcheck/pinning.py">src/jevcheck/pinning.py ↗</a><br>Concrete identity and explicit floating-alias rules.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/src/jevcheck/answers.py">src/jevcheck/answers.py ↗</a><br>Typed answer adaptation and probability validation.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/src/jevcheck/cli.py">src/jevcheck/cli.py ↗</a><br>Command routing, readable output, and distinct exit codes.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/.github/actions/jevcheck/action.yml">.github/actions/jevcheck/action.yml ↗</a><br>Reusable GitHub Action and validated CLI argument construction.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/fixtures/replay-breaking.json">fixtures/replay-breaking.json ↗</a><br>Candidate answers used in the interactive example.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/fixtures/replay-baseline.json">fixtures/replay-baseline.json ↗</a><br>Recorded baseline values for the comparison.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/fixtures/support-triage.json">fixtures/support-triage.json ↗</a><br>Case questions, confidence floors, and tolerances.</li>
+<li><a href="https://github.com/sathariels/jevcheck/blob/2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92/tests/test_compare.py">tests/test_compare.py ↗</a><br>Regression tests for baseline comparison and failure handling.</li>
+</ul></section></div></div>
+<a class="next-project" href="/projects/meridian/"><div><p class="eyebrow">Next project</p><h3>Meridian</h3></div><span class="blue" aria-hidden="true">→</span></a>
+</main><footer class="footer wrap">
+<a href="/" class="footer-name">Nithilan Kumaran<span class="blue">.</span>
+</a>
+<span class="mono">Built to be understood.</span>
+<a href="#main">Back to top <span aria-hidden="true">↑</span>
+</a>
+<span class="copyright">© 2026</span>
+</footer>
+</body>
+</html>

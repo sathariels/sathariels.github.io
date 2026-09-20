@@ -63,7 +63,7 @@ Verified 2026-09-09. The existing portfolio, original résumé, and public proje
 
 ## Architecture and design
 
-Static homepage plus four case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, visible motion loops with pause/resume controls and reduced-motion support, and explicit source links. The technical diagrams use code-native geometry; the separate decorative flower is a raster asset.
+Static homepage plus five case-study routes. The established GitHub Pages structure and original résumé remain usable. White/off-white, deep and bright blue, one-pixel rules, Inter and IBM Plex Mono, numbered figures, visible motion loops with pause/resume controls and reduced-motion support, and explicit source links. The technical diagrams use code-native geometry; the separate decorative flower is a raster asset.
 
 
 ## SageRec addition · September 9, 2026
@@ -120,3 +120,21 @@ Composition/framing: portrait 1:2 composition; single sprig centered, bloom near
 Color palette: cobalt blue centered on #2044ff with just one lighter blue; no green or other colors.
 Constraints: generate exactly one asset, no variants, preserve true transparency. No shadow, text, pot, soil, border, checkerboard pattern, background color or interface.
 ```
+
+
+## jevcheck addition · September 20, 2026
+
+- Public source: https://github.com/sathariels/jevcheck
+- Source snapshot reviewed: `2bf9fa62c5719ac1d68fcb3f38fb11893ad5ff92`. Case-study implementation links are pinned to this snapshot.
+- Typed contract structure, actionable rules, field applicability, duplicate IDs, JSON/JSONL loading: `src/jevcheck/contract.py`.
+- `record`, baseline-kind validation, derived expectations, preserved floors/tolerances, shared evaluation: `src/jevcheck/compare.py` and `docs/adr-009-two-model-compare.md`.
+- Choice, noul, score, severity aggregation, inclusive epsilon boundaries: `src/jevcheck/eval.py`. Score tolerance suppresses rounded-level flips; it is not a maximum absolute-distance rule.
+- Concrete response identity and explicitly opted-in aliases: `src/jevcheck/pinning.py`; enforcement is in evaluation/comparison, not a promise that every standalone client call checks identity.
+- Answer normalization, probability validation, and SDK client boundary: `src/jevcheck/answers.py`, `src/jevcheck/client.py`.
+- CLI codes 0/1/2/3: `src/jevcheck/cli.py`. Composite Action versioned installation and argument handling: `.github/actions/jevcheck/action.yml`.
+- Interactive figure: actual `fixtures/support-triage.json`, `replay-baseline.json`, `replay-unchanged.json`, and `replay-breaking.json` values. It displays intent fields from three cases, while summaries count each whole case by maximum severity. The breaking third case also has urgency regression (0.91 to 0.71).
+- Verification: executed the repository's `compare()` against both replay fixtures locally. Compatible: three unchanged cases. Breaking: one unchanged, one flip (ticket-002 general to billing), one confidence regression (ticket-003 intent 0.92 to 0.71 and urgency 0.91 to 0.71). No live model calls or API credentials used. Browser controls display these fixed examples; they do not execute Python or call a model.
+- The fixture model names `jev-1.13` and `jev-1.14` are unverified example labels. No live-model benchmark, adoption numbers, production deployment, or general model-safety claim is made.
+- Version 0.2.0 and alpha classifier: `pyproject.toml`; MIT: `LICENSE`.
+- Community contribution: https://github.com/hashgraph-online/awesome-ai-plugins/pull/395 was OPEN with no merged timestamp on September 20, 2026. The user's linked `sathariels/awesome-ai-plugins` is a fork. The case study links the upstream listing PR and describes it as submitted, not merged. No maintainer endorsement or scanner score is claimed.
+- Selected Work now leads with jevcheck and contains five full case studies. Project/figure numbers, the case-study navigation loop, homepage metadata, and sitemap were updated together. Existing personal information and lily accents remain unchanged.

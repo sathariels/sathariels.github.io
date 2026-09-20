@@ -61,6 +61,45 @@ for (const figure of document.querySelectorAll("[data-sage]")) {
   });
 }
 
+// Display the repository's two replay examples; this does not call a model.
+const jevReplays = {
+  unchanged: {
+    rows: [["billing", "0.93", "Unchanged"], ["general", "0.88", "Unchanged"], ["billing", "0.92", "Unchanged"]],
+    summary: "Compatible · exit 0. All three cases are unchanged within the contract’s rules.",
+    note: "All expected fields pass against the recorded baseline. Intent fields shown. Repository replay fixtures, not live model results."
+  },
+  breaking: {
+    rows: [["billing", "0.93", "Unchanged"], ["billing", "0.81", "Answer flip"], ["billing", "0.71", "Confidence drop"]],
+    summary: "Breaking · exit 1. One unchanged case, one answer flip, one confidence regression.",
+    note: "Ticket 003 keeps “billing,” but drops below its 0.85 confidence floor. Intent fields shown; its urgency confidence also regresses. Repository replay fixtures, not live model results."
+  }
+};
+for (const figure of document.querySelectorAll("[data-jevcheck]")) {
+  const controls = figure.querySelector(".diagram-controls");
+  const rows = [...figure.querySelectorAll(".jev-table tbody tr")];
+  const status = figure.querySelector("[data-jev-status]");
+  const note = figure.querySelector("[data-jev-note]");
+  if (!controls || rows.length !== 3 || !status || !note) continue;
+  controls.hidden = false;
+  controls.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-replay]");
+    if (!button || !controls.contains(button)) return;
+    const replay = jevReplays[button.dataset.replay];
+    if (!replay) return;
+    for (const option of controls.querySelectorAll("button")) {
+      option.setAttribute("aria-pressed", String(option === button));
+    }
+    rows.forEach((row, i) => {
+      const [answer, confidence, outcome] = replay.rows[i];
+      row.querySelector("[data-candidate]").textContent = answer;
+      row.querySelector("[data-confidence]").textContent = `${confidence} confidence`;
+      row.querySelector("[data-outcome]").textContent = outcome;
+    });
+    status.textContent = replay.summary;
+    note.textContent = replay.note;
+  });
+}
+
 // Loop visible illustrations, with a shared pause preference across pages.
 // Offscreen/background animations pause; reduced motion keeps a static view.
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -73,7 +112,7 @@ try {
   motionPaused = sessionStorage.getItem("portfolio-motion-paused") === "true";
 } catch { /* Motion controls also work when browser storage is unavailable. */ }
 for (const figure of figures) {
-  if (!figure.matches(".hero-grid, .sage-diagram, .narrative, .split-diagram, .benchmark, .flower-accent") && !figure.querySelector(".cache-flow")) continue;
+  if (!figure.matches(".hero-grid, .sage-diagram, .jev-diagram, .narrative, .split-diagram, .benchmark, .flower-accent") && !figure.querySelector(".cache-flow")) continue;
   loopingFigures.add(figure);
   const button = document.createElement("button");
   button.type = "button";

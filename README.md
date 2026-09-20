@@ -1,6 +1,6 @@
 # nithilan.dev
 
-An editorial portfolio for Nithilan Kumaran, centered on game engines, concurrent systems, recommendation infrastructure, and procedural narrative. The homepage supports a quick scan; four project case studies explain the implementation and its tradeoffs.
+An editorial portfolio for Nithilan Kumaran, centered on game engines, concurrent systems, recommendation infrastructure, model-upgrade evaluation, and procedural narrative. The homepage supports a quick scan; five project case studies explain the implementation and its tradeoffs.
 
 The site is plain HTML, CSS, and a small progressively enhanced JavaScript file. It has no runtime dependencies, framework, or package installation step. All content and technical figures are available without JavaScript. Three small blue pixel lilies accent Selected Work, About, and Contact. They sit in the margins on wide screens; on narrower screens, the first two use section spacing and the last sits in the footer. Inter and IBM Plex Mono load with `font-display: swap` from Google Fonts, with system fallbacks.
 
@@ -17,6 +17,7 @@ Open [localhost:8000](http://localhost:8000). Use HTTP rather than opening HTML 
 ## Edit
 
 - `index.html`: homepage, experience, skills, selected writing, and contact.
+- `projects/jevcheck/index.html`: typed behavioral contracts, baseline comparison, identity checks, and CI reporting.
 - `projects/meridian/index.html`: cache concurrency, routing, benchmark context, and replication.
 - `projects/sagerec/index.html`: train-only CSR construction, seeded sampling, Python bindings, and the recorded MF baseline.
 - `projects/2d-game-engine/index.html`: engine loop, collision broadphase, object lifetime, and layout tradeoffs.
