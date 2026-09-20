@@ -49,7 +49,9 @@
 <a class="back-link" href="/#work">← All selected work</a>
 <p class="eyebrow"><span class="blue">Project 01</span> / AI evaluation &amp; developer tooling</p>
 <h1>jevcheck<span class="blue">.</span></h1>
-<p class="case-deck">A model upgrade can keep the same API and change the behavior underneath. I built a Python library and CLI that makes those changes inspectable before changing the production model pin.</p>
+<p class="case-deck">Behavioral contracts for TypeSafe Jev model upgrades. I built a Python library and CLI to record baseline answers, compare candidate models, and fail CI when the contract breaks.</p>
+<div class="project-install"><code>pip install jevcheck</code><a class="text-link" href="https://pypi.org/project/jevcheck/">View on PyPI <span aria-hidden="true">↗</span></a></div>
+<p class="project-proof">Listed in Hashgraph Online’s <a href="https://github.com/hashgraph-online/awesome-ai-plugins#development--workflow">Awesome AI Plugins</a> catalog.</p>
 <div class="case-meta"><div class="tags"><span>Python 3.11+</span><span>Pydantic</span><span>TypeSafe SDK</span><span>GitHub Actions</span></div><a class="text-link" href="https://github.com/sathariels/jevcheck">Explore the repository <span aria-hidden="true">↗</span></a></div>
 </header>
 <div class="case-layout"><nav class="case-toc" aria-label="On this page"><p class="eyebrow">In this case study</p><a href="#problem">Turn an upgrade into a test</a>
@@ -126,8 +128,8 @@
 <p>The checked-in Action uses environment variables and a Bash argument array to pass inputs to the CLI. It rejects conflicting baseline sources and candidate names instead of guessing which one the caller intended.</p>
 </section>
 <section id="scope" class="case-section"><h2>Scope and open-source contribution</h2>
-<p>jevcheck is an MIT-licensed Python library and command-line tool, with a composite GitHub Action. The reviewed source identifies the package as version 0.2.0 and alpha-stage software. Its current scope is TypeSafe Jev’s typed System One answers.</p>
-<p>I’ve submitted jevcheck to the Development &amp; Workflow section of <a href="https://github.com/hashgraph-online/awesome-ai-plugins">awesome-ai-plugins</a>. <a href="https://github.com/hashgraph-online/awesome-ai-plugins/pull/395">The listing contribution, PR #395</a>, was open when this case study was reviewed on September 20, 2026.</p>
+<p>jevcheck is an MIT-licensed Python library and command-line tool, with a composite GitHub Action. <a href="https://pypi.org/project/jevcheck/0.2.0/">Version 0.2.0 is published on PyPI</a> and classified as alpha-stage software. Its current scope is TypeSafe Jev’s typed System One answers.</p>
+<p>Hashgraph Online’s <a href="https://github.com/hashgraph-online/awesome-ai-plugins#development--workflow">Awesome AI Plugins catalog</a> includes jevcheck in Development &amp; Workflow. Maintainer <code>kantorcodes</code> merged <a href="https://github.com/hashgraph-online/awesome-ai-plugins/pull/395">the listing contribution, PR #395</a>, on September 20, 2026.</p>
 <p>The replay example demonstrates the implementation’s decisions; it is not a measured comparison of live models or evidence of production adoption. A passing contract covers the selected cases and rules. Broader evaluation still depends on the quality and coverage of those cases.</p>
 </section>
 <section id="source" class="case-section"><h2>Follow the implementation</h2>

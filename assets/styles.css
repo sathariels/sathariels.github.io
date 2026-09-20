@@ -2256,6 +2256,33 @@ html[data-motion-paused=true] *::after {
     display: none;
   }
 }
+.project-install {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 20px 0 14px;
+}
+.project-install code {
+  padding: 8px 12px;
+  background: var(--blue-wash);
+  color: var(--deep);
+  font: .9rem/1.6 var(--mono);
+}
+.project-install .text-link {
+  font-size: .875rem;
+}
+.project .project-proof,
+.project-proof {
+  color: var(--muted);
+  font-size: .875rem;
+  line-height: 1.65;
+}
+.project-proof a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .jev-flow {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

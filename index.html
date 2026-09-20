@@ -186,7 +186,9 @@
 <p class="eyebrow"><span class="blue">01</span> AI evaluation / Developer tooling</p>
 <h3 id="jevcheck-title">jevcheck</h3>
 <h4>Does a model upgrade still honor the contract?</h4>
-<p>A Python library and CLI for testing TypeSafe Jev model upgrades. I built behavioral contracts, baseline recording, and comparisons that flag changed answers and confidence regressions before a model pin changes.</p>
+<p>Behavioral contracts for TypeSafe Jev model upgrades. I built a Python library and CLI to pin expected behavior, record a baseline, compare candidate models, and fail CI when answers change or confidence regresses.</p>
+<div class="project-install"><code>pip install jevcheck</code><a class="text-link" href="https://pypi.org/project/jevcheck/">PyPI <span aria-hidden="true">↗</span></a></div>
+<p class="project-proof">Listed in Hashgraph Online’s <a href="https://github.com/hashgraph-online/awesome-ai-plugins#development--workflow">Awesome AI Plugins</a> catalog.</p>
 <div class="tags"><span>Python</span><span>Pydantic</span><span>Model evaluation</span><span>GitHub Actions</span></div>
 <div class="project-actions"><a class="text-link" href="/projects/jevcheck/" aria-label="Read the jevcheck case study">Read the case study <span aria-hidden="true">→</span></a><a class="text-link" href="https://github.com/sathariels/jevcheck">Source <span aria-hidden="true">↗</span></a></div>
 <div class="technical-note"><strong>The decision:</strong> turn recorded baseline answers into expectations, then reuse the same evaluator. Keep model identity, behavioral changes, and operational errors distinct.</div>
