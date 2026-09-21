@@ -2373,7 +2373,8 @@ html[data-motion-paused=true] *::after {
   image-rendering: pixelated;
 }
 .lily-work,
-.lily-about {
+.lily-about,
+.lily-experience {
   position: absolute;
   top: 12px;
 }
@@ -2386,6 +2387,26 @@ html[data-motion-paused=true] *::after {
   left: 4px;
   width: 32px;
   transform: rotate(5deg);
+}
+.project-with-lily {
+  padding-top: 72px;
+}
+.lily-transition {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+}
+.lily-sage {
+  transform: rotate(-7deg);
+}
+.lily-shadow {
+  transform: scaleX(-1) rotate(6deg);
+}
+.lily-experience {
+  left: 4px;
+  width: 32px;
+  transform: scaleX(-1) rotate(-4deg);
 }
 .footer-home {
   position: relative;
@@ -2420,6 +2441,25 @@ html[data-motion-paused=true] *::after {
   }
 }
 @media (min-width:1360px) {
+  .project-with-lily {
+    padding-top: 56px;
+  }
+  .lily-sage {
+    top: 76px;
+    left: -72px;
+    right: auto;
+    width: 52px;
+  }
+  .lily-shadow {
+    top: 94px;
+    right: -76px;
+    width: 56px;
+  }
+  .lily-experience {
+    top: 90px;
+    left: -70px;
+    width: 48px;
+  }
   .lily-work {
     top: 115px;
     right: -76px;
@@ -2444,13 +2484,15 @@ html[data-motion-paused=true] *::after {
 }
 @media (max-width:760px) {
   .lily-work,
-  .lily-about {
+  .lily-about,
+  .lily-experience {
     top: 4px;
   }
   .lily-work {
     width: 26px;
   }
-  .lily-about {
+  .lily-about,
+  .lily-experience {
     width: 24px;
   }
   .footer-home {
@@ -2490,6 +2532,9 @@ html[data-motion-paused=true] *::after {
   }
 }
 @media print {
+  .project-with-lily {
+    padding-top: 24px;
+  }
   .lily-accent {
     display: none;
   }

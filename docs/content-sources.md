@@ -139,3 +139,8 @@ Constraints: generate exactly one asset, no variants, preserve true transparency
 - Community contribution: https://github.com/hashgraph-online/awesome-ai-plugins/pull/395 was initially open during the implementation review. A later check confirmed it was merged by `kantorcodes` at `2026-09-20T22:19:09Z`, merge commit `61fed274a6e65feacfe3a358cc7a1e717784728a`. The upstream README lists jevcheck in Development & Workflow. The homepage and case study now describe the accepted listing. The listing is not presented as a security audit or a production-adoption claim.
 - PyPI publication verified at https://pypi.org/project/jevcheck/ and https://pypi.org/project/jevcheck/0.2.0/: version 0.2.0, released September 20, 2026, Python >=3.11, alpha classifier, wheel and source distribution available. Added the install command and package links alongside the product description.
 - Selected Work now leads with jevcheck and contains five full case studies. Project/figure numbers, the case-study navigation loop, homepage metadata, and sitemap were updated together. Existing personal information and lily accents remain unchanged.
+
+
+## More lilies · September 20, 2026
+
+At the owner’s request, three more small accents reuse the existing transparent lily asset near SageRec, Shadow Index, and Experience, bringing the homepage total to six. The new lilies stay static, alternate margin placement on wide screens, and occupy reserved section spacing on narrower screens. Only Contact retains the existing sway. All remain decorative with empty alt text, hidden from assistive technology, non-interactive, and lazily loaded. No additional image downloads or dependencies are introduced.
