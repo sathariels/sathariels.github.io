@@ -103,7 +103,6 @@ for (const figure of document.querySelectorAll("[data-jevcheck]")) {
 // Loop visible illustrations, with a shared pause preference across pages.
 // Offscreen/background animations pause; reduced motion keeps a static view.
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const fallingLilies = document.querySelector(".falling-lilies");
 const figures = [...document.querySelectorAll(".reveal-figure, .hero-grid, .benchmark, .baseline-result, .flower-accent")];
 const loopingFigures = new Set();
 const visibleFigures = new Set();
@@ -134,12 +133,6 @@ for (const figure of figures) {
 }
 function updateMotionState() {
   document.documentElement.dataset.motionPaused = String(motionPaused);
-  // The fixed edge decoration shares the existing controls, without adding a
-  // button inside an aria-hidden element or observing individual moving images.
-  if (fallingLilies) {
-    fallingLilies.classList.toggle("motion-active", !reducedMotion.matches && !motionPaused);
-    fallingLilies.classList.toggle("motion-paused", document.hidden);
-  }
   for (const button of motionButtons) {
     button.hidden = reducedMotion.matches;
     button.textContent = motionPaused ? "Resume motion ▶" : "Pause motion Ⅱ";

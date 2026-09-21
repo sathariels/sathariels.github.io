@@ -48,8 +48,6 @@ A private Sites deployment uses the same static public files in `dist/`, configu
 
 Semantic landmarks and headings, a skip link, visible focus outlines, native links and buttons, status announcements for the collision and graph interactions, and `prefers-reduced-motion` support. JS-only controls stay hidden if scripts are unavailable. Illustrations and the pixel heading loop in six-second cycles with a settled interval. The Contact/footer lily sways gently on a seven-second cycle and shares the same pause and visibility controls; the other five lilies stay still. Animations pause offscreen and in background tabs. Pause/resume controls stop all motion and remember the choice for the current browser tab across page navigation; controls are hidden when reduced motion is requested. The blue pixel heading is an original inline SVG with an accessible text equivalent. Technical content stays visible; there are no hover-only facts or autoplay sounds.
 
-The homepage also includes four small falling lilies in the outer edges, reduced to two on phones. Their staggered 28–38 second loops share the existing motion controls and pause in background tabs. Falling lilies are hidden when motion is paused, reduced motion is requested, JavaScript is unavailable, or the page is printed. They reuse the existing image and do not intercept pointer input.
-
 ## License
 
 [MIT](LICENSE). Personal details, résumé, and writing remain Nithilan's.
