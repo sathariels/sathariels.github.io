@@ -108,6 +108,7 @@ const loopingFigures = new Set();
 const visibleFigures = new Set();
 const motionButtons = [];
 let motionPaused = false;
+let finishIntro = () => {};
 try {
   motionPaused = sessionStorage.getItem("portfolio-motion-paused") === "true";
 } catch { /* Motion controls also work when browser storage is unavailable. */ }
@@ -133,6 +134,7 @@ for (const figure of figures) {
 }
 function updateMotionState() {
   document.documentElement.dataset.motionPaused = String(motionPaused);
+  if (motionPaused || reducedMotion.matches || document.hidden) finishIntro();
   for (const button of motionButtons) {
     button.hidden = reducedMotion.matches;
     button.textContent = motionPaused ? "Resume motion ▶" : "Pause motion Ⅱ";
@@ -164,3 +166,38 @@ if ("IntersectionObserver" in window) {
 updateMotionState();
 reducedMotion.addEventListener("change", updateMotionState);
 document.addEventListener("visibilitychange", updateMotionState);
+
+// A short, optional opening scene. Content remains ordinary HTML; no scroll
+// locking, simulated loading, or dependency on the animation finishing.
+(() => {
+  const hero = document.querySelector(".hero");
+  const controls = document.querySelector(".intro-controls");
+  if (!hero || !controls) return;
+  const seenKey = "portfolio-intro-seen-v1";
+  let seen = false;
+  try { seen = sessionStorage.getItem(seenKey) === "true"; } catch {}
+  if (seen || motionPaused || reducedMotion.matches || document.hidden || location.hash || window.scrollY > 64) return;
+  try { sessionStorage.setItem(seenKey, "true"); } catch {}
+
+  let timer;
+  const skip = controls.querySelector("button");
+  const onScroll = () => { if (window.scrollY > 64) finishIntro(); };
+  const onKey = event => { if (event.key === "Escape" || event.key === "Tab") finishIntro(); };
+  const onClick = event => { if (event.target.closest("a, button")) finishIntro(); };
+  finishIntro = () => {
+    clearTimeout(timer);
+    hero.classList.remove("intro-playing");
+    if (document.activeElement === skip) document.querySelector("#hero-title").focus({preventScroll: true});
+    controls.hidden = true;
+    window.removeEventListener("scroll", onScroll);
+    document.removeEventListener("keydown", onKey);
+    document.removeEventListener("click", onClick);
+    finishIntro = () => {};
+  };
+  hero.classList.add("intro-playing");
+  controls.hidden = false;
+  window.addEventListener("scroll", onScroll, {passive: true});
+  document.addEventListener("keydown", onKey);
+  document.addEventListener("click", onClick);
+  timer = setTimeout(() => finishIntro(), 5500);
+})();

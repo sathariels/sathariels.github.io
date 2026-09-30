@@ -144,3 +144,8 @@ Constraints: generate exactly one asset, no variants, preserve true transparency
 ## More lilies · September 20, 2026
 
 At the owner’s request, three more small accents reuse the existing transparent lily asset near SageRec, Shadow Index, and Experience, bringing the homepage total to six. The new lilies stay static, alternate margin placement on wide screens, and occupy reserved section spacing on narrower screens. Only Contact retains the existing sway. All remain decorative with empty alt text, hidden from assistive technology, non-interactive, and lazily loaded. No additional image downloads or dependencies are introduced.
+
+
+## Opening sequence · September 30, 2026
+
+The owner supplied a video showing a portfolio assembling with labeled cursors and approved a brief adaptation. The homepage now has an original 5.5-second opening sequence using its existing pixel name, engine illustration, and lily image. Decorative Type, Draw, and Finish cursors reveal existing content without impersonating collaborators or calling AI services. It runs once per tab when session storage is available, supports skipping and reduced motion, and leaves the site fully readable without scripts. No video footage or third-party assets were copied.
