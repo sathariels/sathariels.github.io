@@ -109,6 +109,7 @@ const visibleFigures = new Set();
 const motionButtons = [];
 let motionPaused = false;
 let finishIntro = () => {};
+let settleScrollBuilds = () => {};
 try {
   motionPaused = sessionStorage.getItem("portfolio-motion-paused") === "true";
 } catch { /* Motion controls also work when browser storage is unavailable. */ }
@@ -134,7 +135,10 @@ for (const figure of figures) {
 }
 function updateMotionState() {
   document.documentElement.dataset.motionPaused = String(motionPaused);
-  if (motionPaused || reducedMotion.matches || document.hidden) finishIntro();
+  if (motionPaused || reducedMotion.matches || document.hidden) {
+    finishIntro();
+    settleScrollBuilds();
+  }
   for (const button of motionButtons) {
     button.hidden = reducedMotion.matches;
     button.textContent = motionPaused ? "Resume motion ▶" : "Pause motion Ⅱ";
@@ -200,4 +204,72 @@ document.addEventListener("visibilitychange", updateMotionState);
   document.addEventListener("keydown", onKey);
   document.addEventListener("click", onClick);
   timer = setTimeout(() => finishIntro(), 5500);
+})();
+
+// Assemble each homepage block once as it enters view. Nothing is hidden while
+// waiting for the observer: no-JS, find-in-page, and fast scrolling stay usable.
+(() => {
+  if (!document.querySelector(".hero") || !("IntersectionObserver" in window)) return;
+  const blocks = [...document.querySelectorAll(
+    ".section-heading, .project-copy, .project-visual, .small-work, .subsection-head, .experience-row, .about-copy, .skills, .writing-list, .contact"
+  )];
+  const pending = new Set(blocks);
+  const active = new Map();
+  const cursorTemplate = document.querySelector(".cursor-type");
+  let anchorTarget = null;
+  try { anchorTarget = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch {}
+  const finish = block => {
+    clearTimeout(active.get(block));
+    active.delete(block);
+    pending.delete(block);
+    block.classList.remove("scroll-building");
+    block.querySelector(".scroll-build-cursor")?.remove();
+    observer.unobserve(block);
+  };
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      const block = entry.target;
+      if (!entry.isIntersecting) {
+        if (active.has(block)) finish(block);
+        continue;
+      }
+      if (!pending.has(block) || active.has(block)) continue;
+      if (motionPaused || reducedMotion.matches || document.hidden || block.contains(document.activeElement)) {
+        finish(block);
+        continue;
+      }
+      if (cursorTemplate) {
+        const cursor = cursorTemplate.cloneNode(true);
+        cursor.className = "build-cursor scroll-build-cursor";
+        cursor.querySelector("span").textContent = block.matches(".project-visual") ? "Draw" : "Type";
+        block.append(cursor);
+      }
+      block.classList.add("scroll-building");
+      active.set(block, setTimeout(() => finish(block), 1400));
+    }
+  }, {threshold: 0, rootMargin: "0px 0px -48px 0px"});
+
+  for (const block of blocks) {
+    block.classList.add("scroll-build");
+    if (block.matches(".project-visual")) block.classList.add("scroll-build-visual");
+    [...block.children].forEach((part, index) => {
+      part.classList.add("scroll-build-part");
+      part.style.setProperty("--build-step", Math.min(index, 5));
+    });
+    // Preserve restored positions and direct section links on initial load.
+    if (block.getBoundingClientRect().top < window.innerHeight ||
+        (anchorTarget && (anchorTarget.contains(block) || block.contains(anchorTarget)))) finish(block);
+    else observer.observe(block);
+  }
+  settleScrollBuilds = () => {
+    for (const block of [...active.keys()]) finish(block);
+  };
+  document.addEventListener("focusin", event => {
+    const block = event.target.closest(".scroll-build");
+    if (block) finish(block);
+  });
+  document.addEventListener("pointerdown", event => {
+    const block = event.target.closest(".scroll-build");
+    if (block) finish(block);
+  });
 })();

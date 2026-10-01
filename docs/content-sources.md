@@ -149,3 +149,8 @@ At the owner’s request, three more small accents reuse the existing transparen
 ## Opening sequence · September 30, 2026
 
 The owner supplied a video showing a portfolio assembling with labeled cursors and approved a brief adaptation. The homepage now has an original 5.5-second opening sequence using its existing pixel name, engine illustration, and lily image. Decorative Type, Draw, and Finish cursors reveal existing content without impersonating collaborators or calling AI services. It runs once per tab when session storage is available, supports skipping and reduced motion, and leaves the site fully readable without scripts. No video footage or third-party assets were copied.
+
+
+## Scroll assembly · September 30, 2026
+
+At the owner’s request, the homepage opening motif continues into Selected Work, individual project copy and diagrams, Experience, About, skills, writing, and Contact. Each block assembles once per page load in a 1.4-second sequence, reusing the original decorative cursor. Pending content remains visible, direct anchor destinations bypass the effect, and motion preferences and interactions settle active builds immediately. No added assets or dependencies.
