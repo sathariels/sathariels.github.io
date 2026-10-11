@@ -211,7 +211,7 @@ document.addEventListener("visibilitychange", updateMotionState);
 (() => {
   if (!document.querySelector(".hero") || !("IntersectionObserver" in window)) return;
   const blocks = [...document.querySelectorAll(
-    ".section-heading, .project-copy, .project-visual, .small-work, .subsection-head, .experience-row, .about-copy, .skills, .writing-list, .contact"
+    ".section-heading, .oss-summary, .oss-card, .project-copy, .project-visual, .small-work, .subsection-head, .experience-row, .about-copy, .skills, .writing-list, .contact"
   )];
   const pending = new Set(blocks);
   const active = new Map();

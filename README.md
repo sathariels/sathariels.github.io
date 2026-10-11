@@ -1,6 +1,6 @@
 # nithilan.dev
 
-An editorial portfolio for Nithilan Kumaran, centered on game engines, concurrent systems, recommendation infrastructure, model-upgrade evaluation, and procedural narrative. The homepage supports a quick scan; five project case studies explain the implementation and its tradeoffs.
+An editorial portfolio for Nithilan Kumaran, centered on game engines, concurrent systems, recommendation infrastructure, model-upgrade evaluation, and procedural narrative. The homepage includes a dated open-source section with four featured repositories and an expandable record of all 22 external pull requests verified on October 11, 2026. It supports a quick scan; five project case studies explain the implementation and its tradeoffs.
 
 The site is plain HTML, CSS, and a small progressively enhanced JavaScript file. It has no runtime dependencies, framework, or package installation step. All content and technical figures are available without JavaScript. Seven small blue pixel lilies accent the introduction, Selected Work, SageRec, Shadow Index, Experience, About, and Contact. They sit in the margins on wide screens; on narrower screens, they use section spacing and the footer. Inter and IBM Plex Mono load with `font-display: swap` from Google Fonts, with system fallbacks.
 

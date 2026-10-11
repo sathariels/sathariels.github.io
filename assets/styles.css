@@ -2764,3 +2764,64 @@ html[data-motion-paused=true] *::after {
   .scroll-build::after,
   .scroll-build-cursor { display: none !important; }
 }
+
+/* Open-source work: outcomes first, with an auditable contribution record. */
+.oss-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.oss-stats { display: flex; align-items: flex-start; gap: 40px; margin: 0; }
+.oss-stats > div { display: flex; flex-direction: column-reverse; }
+.oss-stats dt { font: .75rem/1.5 var(--mono); color: var(--muted); }
+.oss-stats dd { margin: 0 0 4px; font-size: 2rem; letter-spacing: -.06em; color: var(--blue); }
+.oss-verified { font-size: .8rem; line-height: 1.65; color: var(--muted); max-width: 300px; }
+.oss-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+.oss-card { padding: 32px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.oss-card-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.oss-card h3 { font-size: 1.8rem; margin: 20px 0 14px; }
+.oss-card h3 span { font-size: 1rem; color: var(--blue); }
+.oss-card > p { color: var(--muted); font-size: .95rem; }
+.oss-card .oss-outcome { color: var(--ink); font-size: 1.08rem; font-weight: 550; line-height: 1.45; margin-bottom: 12px; }
+.oss-card code { font-size: .85em; overflow-wrap: anywhere; }
+.oss-status { display: inline-block; flex: none; padding: 3px 8px; font: .7rem/1.5 var(--mono); border: 1px solid var(--line); white-space: nowrap; }
+.oss-merged { color: #315542; background: #edf4ef; border-color: #d2e3d8; }
+.oss-open { color: var(--deep); background: var(--blue-wash); border-color: #c8d4f2; }
+.oss-closed { color: var(--muted); background: var(--faint); }
+.oss-pr-links { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 20px; font-size: .8rem; color: var(--blue); }
+.oss-pr-links a, .oss-note a, .oss-records a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: #b8c6e8; }
+.oss-card .oss-note { margin-top: 18px; font-size: .8rem; }
+.oss-archive { margin-top: 28px; border: 1px solid var(--line); padding: 0 24px; }
+.oss-archive summary { padding: 20px 0; cursor: pointer; font-weight: 550; }
+.oss-archive-hint { margin-left: 12px; font-size: .8rem; color: var(--muted); font-weight: 400; }
+.oss-archive-intro { color: var(--muted); font-size: .9rem; max-width: 750px; margin: 4px 0 24px; }
+.oss-repo { margin-bottom: 28px; }
+.oss-repo h4 { font: 500 .85rem/1.5 var(--mono); color: var(--deep); overflow-wrap: anywhere; margin-bottom: 12px; }
+.oss-records { list-style: none; padding: 0; margin: 0; }
+.oss-records li { display: flex; justify-content: space-between; align-items: start; gap: 20px; border-top: 1px solid var(--line); padding: 12px 0; font-size: .875rem; }
+.oss-pr-number { font: .8rem var(--mono); color: var(--blue); margin-right: 8px; }
+.oss-all-link { margin-top: 22px; }
+@media (max-width:1000px) {
+  .oss-grid { gap: 0 30px; }
+  .oss-stats { gap: 24px; }
+  .oss-summary { align-items: start; }
+}
+@media (max-width:760px) {
+  .nav-row nav { flex-wrap: wrap; gap: 8px; }
+  .oss-grid { grid-template-columns: 1fr; }
+  .oss-summary { flex-direction: column; gap: 18px; }
+  .oss-stats { width: 100%; justify-content: space-between; gap: 16px; }
+  .oss-stats dt { max-width: 100px; }
+  .oss-archive { padding: 0 16px; }
+  .oss-archive-hint { display: block; margin: 8px 0 0 18px; }
+  .oss-records li { flex-direction: column; gap: 8px; }
+}
+
+@media (min-width:761px) and (max-width:1000px) {
+  .nav-row { gap: 16px; }
+  .nav-row nav { gap: 14px; margin-right: 0; }
+}
+.nav-row nav a { white-space: nowrap; }

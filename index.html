@@ -37,6 +37,7 @@
 </a>
 <nav aria-label="Main navigation">
 <a href="/#work">Work</a>
+<a href="/#open-source">Open source</a>
 <a href="/#experience">Experience</a>
 <a href="/#about">About</a>
 <a href="/#contact">Contact</a>
@@ -585,6 +586,91 @@
 </div>
 </article>
 </section>
+<section id="open-source" class="section wrap oss-section" aria-labelledby="oss-title">
+<div class="section-heading oss-heading">
+<div><p class="eyebrow"><span class="blue">02</span> Open source</p>
+<h2 id="oss-title">Working in other<br>people’s code.</h2></div>
+<p>Contributions to developer tools and inference systems: tracing a bug, agreeing on the behavior, and getting the fix through review.</p>
+</div>
+<div class="oss-summary">
+<dl class="oss-stats"><div><dt>Merged PRs</dt><dd>15</dd></div><div><dt>Open PRs</dt><dd>4</dd></div><div><dt>External repositories</dt><dd>8</dd></div></dl>
+<p class="oss-verified">Verified <time datetime="2026-10-11">October 11, 2026</time>.<br>22 pull requests total, including 3 closed without merging.</p>
+</div>
+<div class="oss-grid">
+<article class="oss-card" aria-labelledby="oss-rea-title">
+<div class="oss-card-top"><p class="eyebrow">Developer tooling · TypeScript</p><span class="oss-status oss-merged">3 merged</span></div>
+<h3 id="oss-rea-title"><a href="https://github.com/morluto/rea">REA <span aria-hidden="true">↗</span></a></h3>
+<p class="oss-outcome">Live capture progress and more complete browser link discovery.</p>
+<p>Contributed progress updates for long-running process captures over CLI stderr and MCP, keeping the final evidence output intact. Fixed missing SVG links, then followed up with namespace-aware link discovery for XHTML.</p>
+<div class="oss-pr-links"><a href="https://github.com/morluto/rea/pull/1483">Live progress #1483 ↗</a><a href="https://github.com/morluto/rea/pull/1602">SVG links #1602 ↗</a><a href="https://github.com/morluto/rea/pull/1683">XHTML follow-up #1683 ↗</a></div>
+</article>
+<article class="oss-card" aria-labelledby="oss-laya-title">
+<div class="oss-card-top"><p class="eyebrow">Inference · Python / TypeScript</p><span class="oss-status oss-merged">9 merged · 1 open</span></div>
+<h3 id="oss-laya-title"><a href="https://github.com/NandhaKishorM/laya">Laya <span aria-hidden="true">↗</span></a></h3>
+<p class="oss-outcome">Safer model routing, consistent hooks, and more reliable CI.</p>
+<p>Added an embedding shortlist for large label sets, fixed language detection across structured inputs, and made invalid model paths fail explicitly. Other merged work covers TypeScript batch hooks, router typo warnings, CI concurrency, and documentation.</p>
+<div class="oss-pr-links"><a href="https://github.com/NandhaKishorM/laya/pull/106">Label shortlist #106 ↗</a><a href="https://github.com/NandhaKishorM/laya/pull/930">Model validation #930 ↗</a><a href="https://github.com/NandhaKishorM/laya/pull/936">Batch hooks #936 ↗</a></div>
+<p class="oss-note">The proposed multilingual routing change, <a href="https://github.com/NandhaKishorM/laya/pull/600">#600</a>, remains open.</p>
+</article>
+<article class="oss-card" aria-labelledby="oss-pyrefly-title">
+<div class="oss-card-top"><p class="eyebrow">Meta · Python type checking</p><span class="oss-status oss-open">Open PR</span></div>
+<h3 id="oss-pyrefly-title"><a href="https://github.com/facebook/pyrefly">Pyrefly <span aria-hidden="true">↗</span></a></h3>
+<p class="oss-outcome">An explicit choice when migrating an error baseline.</p>
+<p>Submitted a change to <code>pyrefly init</code> that asks before creating a new baseline when migrating from BasedPyright. Accepting creates a Pyrefly baseline; declining leaves the configuration unchanged and explains how to set one up later.</p>
+<div class="oss-pr-links"><a href="https://github.com/facebook/pyrefly/pull/5127">Baseline migration #5127 ↗</a></div>
+</article>
+<article class="oss-card" aria-labelledby="oss-aws-title">
+<div class="oss-card-top"><p class="eyebrow">AWS Labs · LLM inference</p><span class="oss-status oss-open">Open PR</span></div>
+<h3 id="oss-aws-title"><a href="https://github.com/awslabs/keys_values">keys_values <span aria-hidden="true">↗</span></a></h3>
+<p class="oss-outcome">KV-cache buffers that grow with the sequence.</p>
+<p>Proposed opt-in buffer growth for the <code>lastrec-default</code> cache during warm-up. Buffers start at 16 slots and double up to the configured limit, avoiding a full allocation for short sequences while preserving the default behavior.</p>
+<div class="oss-pr-links"><a href="https://github.com/awslabs/keys_values/pull/161">Growing buffers #161 ↗</a></div>
+</article>
+</div>
+<details class="oss-archive">
+<summary>Explore all 22 pull requests <span class="oss-archive-hint">Merged, open, and closed</span></summary>
+<p class="oss-archive-intro">The full record across external repositories, including smaller fixes, catalog contributions, and early practice. Statuses are a snapshot from October 11, 2026.</p>
+<div class="oss-repo"><h4><a href="https://github.com/morluto/rea">morluto/rea</a></h4><ul class="oss-records">
+<li><a href="https://github.com/morluto/rea/pull/1483"><span class="oss-pr-number">#1483</span> Live process-capture progress in the CLI and MCP.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/morluto/rea/pull/1602"><span class="oss-pr-number">#1602</span> Discover SVG xlink:href links in browser snapshots.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/morluto/rea/pull/1683"><span class="oss-pr-number">#1683</span> Resolve SVG and XLink namespaces in XHTML.</a><span class="oss-status oss-merged">Merged</span></li>
+</ul></div>
+<div class="oss-repo"><h4><a href="https://github.com/NandhaKishorM/laya">NandhaKishorM/laya</a></h4><ul class="oss-records">
+<li><a href="https://github.com/NandhaKishorM/laya/pull/106"><span class="oss-pr-number">#106</span> Opt-in embedding shortlist for large choice sets.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/129"><span class="oss-pr-number">#129</span> Windows model-initialization workaround; superseded by #195.</a><span class="oss-status oss-closed">Closed · not merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/406"><span class="oss-pr-number">#406</span> Detect language across all string values in structured inputs.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/548"><span class="oss-pr-number">#548</span> Separate CI runs for each push, with a regression guard.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/600"><span class="oss-pr-number">#600</span> Proposed multilingual routing for undecided ASCII text.</a><span class="oss-status oss-open">Open</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/917"><span class="oss-pr-number">#917</span> Per-call batch hooks; closed in favor of the broader #912.</a><span class="oss-status oss-closed">Closed · not merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/929"><span class="oss-pr-number">#929</span> Explain default-hook composition in batch routing.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/930"><span class="oss-pr-number">#930</span> Reject unpublished model paths instead of silently auto-routing.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/936"><span class="oss-pr-number">#936</span> Forward per-call hook options in TypeScript batch predictions.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/1055"><span class="oss-pr-number">#1055</span> Warn on near-miss built-in model names; preserve atomic registration.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/1056"><span class="oss-pr-number">#1056</span> Repair a TypeScript hook-timeout template literal that broke parsing.</a><span class="oss-status oss-merged">Merged</span></li>
+<li><a href="https://github.com/NandhaKishorM/laya/pull/1067"><span class="oss-pr-number">#1067</span> Document CPU int8 quantization constraints and tradeoffs.</a><span class="oss-status oss-merged">Merged</span></li>
+</ul></div>
+<div class="oss-repo"><h4><a href="https://github.com/facebook/pyrefly">facebook/pyrefly</a></h4><ul class="oss-records">
+<li><a href="https://github.com/facebook/pyrefly/pull/5127"><span class="oss-pr-number">#5127</span> Ask before creating a baseline during BasedPyright migration.</a><span class="oss-status oss-open">Open</span></li>
+</ul></div>
+<div class="oss-repo"><h4><a href="https://github.com/awslabs/keys_values">awslabs/keys_values</a></h4><ul class="oss-records">
+<li><a href="https://github.com/awslabs/keys_values/pull/161"><span class="oss-pr-number">#161</span> Opt-in growth for lastrec KV-cache buffers during warm-up.</a><span class="oss-status oss-open">Open</span></li>
+</ul></div>
+<div class="oss-repo"><h4><a href="https://github.com/hashgraph-online/awesome-ai-plugins">hashgraph-online/awesome-ai-plugins</a></h4><ul class="oss-records">
+<li><a href="https://github.com/hashgraph-online/awesome-ai-plugins/pull/393"><span class="oss-pr-number">#393</span> Initial catalog submission; replaced by #395.</a><span class="oss-status oss-closed">Closed · not merged</span></li>
+<li><a href="https://github.com/hashgraph-online/awesome-ai-plugins/pull/395"><span class="oss-pr-number">#395</span> Add jevcheck to the Development &amp; Workflow catalog.</a><span class="oss-status oss-merged">Merged</span></li>
+</ul></div>
+<div class="oss-repo"><h4><a href="https://github.com/kaustavb4/fem-visualizer">kaustavb4/fem-visualizer</a></h4><ul class="oss-records">
+<li><a href="https://github.com/kaustavb4/fem-visualizer/pull/1"><span class="oss-pr-number">#1</span> Untrack build artifacts and improve local setup instructions.</a><span class="oss-status oss-open">Open</span></li>
+</ul></div>
+<div class="oss-repo"><h4><a href="https://github.com/gudarzi/QtSnake">gudarzi/QtSnake</a></h4><ul class="oss-records">
+<li><a href="https://github.com/gudarzi/QtSnake/pull/4"><span class="oss-pr-number">#4</span> Add an on-screen score counter to a PySide6 game.</a><span class="oss-status oss-merged">Merged</span></li>
+</ul></div>
+<div class="oss-repo"><h4><a href="https://github.com/firstcontributions/first-contributions">firstcontributions/first-contributions</a></h4><ul class="oss-records">
+<li><a href="https://github.com/firstcontributions/first-contributions/pull/84958"><span class="oss-pr-number">#84958</span> First pull-request practice: add a contributor entry.</a><span class="oss-status oss-merged">Merged</span></li>
+</ul></div>
+</details>
+<a class="text-link oss-all-link" href="https://github.com/search?q=is%3Apr+author%3Asathariels+-user%3Asathariels&amp;type=pullrequests">See current activity on GitHub <span aria-hidden="true">↗</span></a>
+</section>
 <section id="experience" class="section section-with-lily wrap" aria-labelledby="experience-title">
 <div class="lily-accent lily-experience" aria-hidden="true">
 <img src="/assets/pixel-lily.png" width="887" height="1774" alt="" loading="lazy" decoding="async">
@@ -592,7 +678,7 @@
 <div class="subsection-head">
 <h2 id="experience-title">Built with teams.</h2>
 <p class="eyebrow">
-<span class="blue">02</span> Experience</p>
+<span class="blue">03</span> Experience</p>
 </div>
 <article class="experience-row">
 <div class="experience-date">May 2026 — Present</div>
@@ -653,7 +739,7 @@
 <div class="about-grid">
 <div class="about-copy">
 <p class="eyebrow">
-<span class="blue">03</span> About the engineer</p>
+<span class="blue">04</span> About the engineer</p>
 <h2 id="about-title">Curious about<br>what’s underneath.</h2>
 <p>I like making games, but I also just like building things. I take a system apart to understand how it works, write my own version, and find out where it gets slow.</p>
 <p>That thread runs through my work: engine internals, cache behavior, procedural worlds, and the tools that make development less painful.</p>
@@ -718,7 +804,7 @@
 <section id="contact" class="contact wrap" aria-labelledby="contact-title">
 <div>
 <p class="eyebrow">
-<span class="blue">04</span> Get in touch</p>
+<span class="blue">05</span> Get in touch</p>
 <h2 id="contact-title">Let’s build something<br>worth understanding.</h2>
 <p>Gameplay, systems, engines, or backend performance.<br>Email is the best way to reach me.</p>
 </div>
